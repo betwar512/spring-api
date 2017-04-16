@@ -28,7 +28,6 @@ public class UserServiceImpl implements UserService {
 	@Transactional(readOnly=true)
 	public List<User> getAll(){
 		List<User> result=this.userDao.get();
-		result.forEach(t->System.out.println(t.getDomain().getName()));
 		return result;
 	}
 	

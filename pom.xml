@@ -13,6 +13,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		    <maven.compiler.source>1.8</maven.compiler.source>
             <maven.compiler.target>1.8</maven.compiler.target>
 		    <springframework.version>4.3.1.RELEASE</springframework.version>
+		     <org.springframework.security.version>4.2.2.RELEASE</org.springframework.security.version>
 		    <jackson.version>2.7.5</jackson.version>
 	</properties>
 	
@@ -47,6 +48,27 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		    <artifactId>spring-context</artifactId>
 		    <version>${springframework.version}</version>
 	     </dependency>
+	
+  <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>${org.springframework.security.version}</version>
+		</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-web</artifactId>
+    <version>${org.springframework.security.version}</version>
+</dependency>
+
+<dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-config</artifactId>
+        <version>${org.springframework.security.version}</version>
+    </dependency>
+	
 	     <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
