@@ -17,7 +17,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	</properties>
 	
 	 <build>  
-  <finalName>TestProjectSpring</finalName>  
+  <finalName>endpoint</finalName>  
   <plugins>  
    <plugin>  
     <artifactId>maven-compiler-plugin</artifactId>  

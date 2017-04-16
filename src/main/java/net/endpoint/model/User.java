@@ -2,16 +2,18 @@ package net.endpoint.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class User {
 
 	
-		private long        id;
-		private String    name;
+		private long         id;
+		private String     name;
 		private String password;
-		private String   email;
-		private Domain  domain;
-		private Date createdAt;
-		private Date updatedAt;
+		private String    email;
+		private Domain   domain;
+		private Date  createdAt;
+		private Date  updatedAt;
 		
 		
 		
@@ -33,6 +35,7 @@ public class User {
 		public void setEmail(String email) {
 			this.email = email;
 		}
+		@JsonIgnore
 		public Domain getDomain() {
 			return domain;
 		}
