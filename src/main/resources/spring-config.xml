@@ -14,15 +14,4 @@
  <context:component-scan base-package="net.endpoint" />  
  <mvc:resources mapping="/resources/**" location="/resources/" />
 <import resource="classpath:persistance.xml"/>
-
-	 <!-- Dao mapping -->
-	 <bean id="myUserDao" class="net.endpoint.dao.UserDaoImpl">
-	 <property name="sessionFactory" ref="mySessionFactory"></property>
-	 </bean>
-<!-- Service mapping -->
-	 <bean id="myUserService" class="net.endpoint.service.UserServiceImpl">
-	 <property name="transactionManager" ref="transactionManager"/>
-	 <property name="userDao" ref="myUserDao"></property>
-	 </bean>
-
 </beans>
