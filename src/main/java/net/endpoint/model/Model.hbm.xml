@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 25 April 2011 7:52:33 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="net.endpoint.model.User" table="virtual_users">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+		<property name="name" column="name" type="string"/>
+		<property name="password" column="password" type="string"/>
+		<property name="email" column="email" type="string"/>
+		<property name="createdAt" column="created_at" type="timestamp"/>
+		<property name="updatedAt" column="updated_at" type="timestamp"/>
+		<many-to-one name="domain" column="domain_id" class="net.endpoint.model.Domain" fetch="select"/>
+	</class>
+	<!-- Domain -->
+	<class name="net.endpoint.model.Domain" table="virtual_domain">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+		<property name="name" column="name" type="string"/>
+	</class>
+</hibernate-mapping>
