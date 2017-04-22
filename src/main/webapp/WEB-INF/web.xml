@@ -5,7 +5,8 @@
      version="2.5">  
       
     <display-name>Endpoint Custom Test</display-name>  
-      
+  <!-- <url-pattern>-->
+      <!-- 
      <servlet>  
       <servlet-name>mvc-dispatcher</servlet-name>  
       <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
@@ -19,19 +20,19 @@
      <servlet-mapping>  
       <servlet-name>mvc-dispatcher</servlet-name>  
       <url-pattern>/</url-pattern>  
-     </servlet-mapping>  
+     </servlet-mapping>  -->
       
-        <listener>
+    <!--   <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
  
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:security.xml</param-value>
-    </context-param> 
+    </context-param> -->
      
     <!-- Spring Security  Filter -->
-    <filter>
+ <!--    <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
@@ -39,7 +40,5 @@
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
-      
-      
+    </filter-mapping>-->
     </web-app>  

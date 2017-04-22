@@ -1,12 +1,14 @@
 package net.endpoint.dao;
 
 import java.util.List;
-
 import org.hibernate.SessionFactory;
-
-
 import net.endpoint.model.User;
 
+/**
+ * 
+ * @author Betwar
+ *
+ */
 public class UserDaoImpl implements UserDao {
 
 	
@@ -18,16 +20,38 @@ public class UserDaoImpl implements UserDao {
 	
 	
 	@Override
-	public List<User> get() {
-		
-		return list();
+	public List<User> getAll() {
+		@SuppressWarnings("unchecked")
+		List<User>	result=this.sessionFactory.getCurrentSession().createQuery("from User user").list();
+		return result;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<User> list(){	
-	List<User>	result=this.sessionFactory.getCurrentSession().createQuery("from User user").list();
+
+	@Override
+	public User get(long id) {
+		User user = this.sessionFactory.getCurrentSession().get(User.class,id);
+		return user;
+	}
+
+
+	@Override
+	public void create(User user) {
 	
-	return result;
+		this.sessionFactory.getCurrentSession().saveOrUpdate(user);
+	}
+
+
+	@Override
+	public void update(long id) {
+		
+		
+	}
+
+
+	@Override
+	public void delete(long id) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

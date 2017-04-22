@@ -27,8 +27,14 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional(readOnly=true)
 	public List<User> getAll(){
-		List<User> result=this.userDao.get();
+		List<User> result=this.userDao.getAll();
 		return result;
+	}
+
+
+	@Transactional(readOnly=true)
+	public User get(long id) {
+		return userDao.get(id);
 	}
 	
 	
