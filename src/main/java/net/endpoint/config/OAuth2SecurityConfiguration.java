@@ -1,6 +1,8 @@
 package net.endpoint.config;
 
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
@@ -16,20 +19,42 @@ import org.springframework.security.oauth2.provider.approval.TokenStoreUserAppro
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
+import net.endpoint.dao.UserDao;
+import net.endpoint.util.CustomEncoder;
+
+/**
+ * 
+ * @author A.H.Safaie 
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
- 
-	
+		
+		@Autowired
+		DataSource dataSource;
+
 	   @Autowired
 	    private ClientDetailsService clientDetailsService;
 	
+	   /**
+	    * <p>User Auth taking place here ,Usinf custom query to handle Authintification for grandt_type : password </p>
+	    * @param auth
+	    * @throws Exception
+	    */
 	   @Autowired
 	   protected void globalUserDetails(AuthenticationManagerBuilder auth)  throws Exception {
-		  auth.inMemoryAuthentication()
-	        .withUser("admin").password("123456").roles("ADMIN").and()
-	        .withUser("bob").password("abc123").roles("USER");
+		   auth.jdbcAuthentication()
+		       .passwordEncoder(new CustomEncoder()) //Use custom encoder to read Dovcote encoded pass 
+		       .dataSource(dataSource)
+			   .usersByUsernameQuery(
+				"select name as username,password,domain_id as enabled from virtual_users where name=?")
+			   .authoritiesByUsernameQuery(
+				"select user_name as username,role from user_role where user_name=?");
+
+		  
 	    }
 	  
 	  
@@ -45,14 +70,9 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	  
 	    @Bean
 	    public TokenStore tokenStore() {
-	        return new InMemoryTokenStore();//new JdbcTokenStore(dataSource());
+	        return new JdbcTokenStore(this.dataSource);//new InMemoryTokenStore();
 	    }
-	  
-	  
-	  
-	  
-	  
-	 
+
 	    @Override
 	    @Bean
 	    public AuthenticationManager authenticationManagerBean() 

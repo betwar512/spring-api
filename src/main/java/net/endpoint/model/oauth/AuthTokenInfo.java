@@ -1,4 +1,4 @@
-package net.endpoint.model;
+package net.endpoint.model.oauth;
 
 public class AuthTokenInfo {
 

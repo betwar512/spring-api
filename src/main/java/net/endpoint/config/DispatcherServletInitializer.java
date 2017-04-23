@@ -16,29 +16,23 @@ import net.endpoint.config.filter.CORSFilter;
 
 @Configuration
 @EnableAuthorizationServer
-public class MyAppInitializer extends AuthorizationServerConfigurerAdapter implements WebApplicationInitializer {
+public class DispatcherServletInitializer  extends AuthorizationServerConfigurerAdapter implements WebApplicationInitializer {
 //
-    public void onStartup(ServletContext servletContext) {
+    public void onStartup(ServletContext servletContext) {      
       XmlWebApplicationContext appContext = new XmlWebApplicationContext();
       appContext.setConfigLocation("classpath:spring-config.xml");
       //Adding the listener for the rootContext
-     servletContext.addFilter("securityFilter", 
-              new DelegatingFilterProxy("springSecurityFilterChain"))
-             .addMappingForUrlPatterns(null, false, "/*");
+     servletContext.addFilter("securityFilter",new DelegatingFilterProxy("springSecurityFilterChain"))
+                   .addMappingForUrlPatterns(null, false, "/*");
      servletContext.addFilter("CORSFilter", CORSFilter.class);
-      
-      servletContext.addListener(new ContextLoaderListener(appContext));
-
-      
+     servletContext.addListener(new ContextLoaderListener(appContext));
+     //Dispatcher
       ServletRegistration.Dynamic dispatcher =
     		  servletContext.addServlet("dispatcher", new DispatcherServlet(appContext));
       dispatcher.setLoadOnStartup(1);
       dispatcher.addMapping("/");
-      
-      
+          
     }
     
-
-
   
  }

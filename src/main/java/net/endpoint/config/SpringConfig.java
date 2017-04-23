@@ -7,4 +7,8 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan({ "net.endpoint.controller" })
 public class SpringConfig {
 
+	
+	
+	
+	
 }

@@ -2,6 +2,7 @@ package net.endpoint.config;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.codec.digest.Crypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,10 @@ import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -22,6 +27,10 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import net.endpoint.dao.UserDao;
+import net.endpoint.util.CustomEncoder;
  
 @Configuration
 @EnableAuthorizationServer
@@ -29,9 +38,13 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
 	 private static String REALM="MY_OAUTH_REALM";
 
+	 
 	     @Autowired
 	      private TokenStore tokenStore;
 
+	     @Autowired
+	     DataSource dataSource;
+	 
 	     @Autowired
 	     private UserApprovalHandler userApprovalHandler;
 	 
@@ -44,26 +57,31 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	    public void configure(
 	      AuthorizationServerSecurityConfigurer oauthServer) 
 	      throws Exception {
-	        oauthServer.allowFormAuthenticationForClients();//.realm(REALM+"/client");
+	    		
+	    	//oauthServer.passwordEncoder(passwordEncoder());
+	        oauthServer.realm(REALM+"/client");//allowFormAuthenticationForClients();
 	    }
 	 
 	    @Override
 	    public void configure(ClientDetailsServiceConfigurer clients) 
 	      throws Exception {
-	        clients.inMemory()//jdbc(dataSource())
-	          .withClient("client-app")
-	          .authorizedGrantTypes("password", "authorization_code", "client_credentials","refresh_token", "implicit")
-	          .authorities("ROLE_CLIENT", "ADMIN")
-	          .scopes("read", "write", "trust")
-              .autoApprove(true);
-//	          .and()
+	        clients.jdbc(dataSource);
 //	          .withClient("client-app")
+//	          .authorizedGrantTypes("password", "authorization_code", "client_credentials","refresh_token", "implicit")
+//	          .authorities("ROLE_CLIENT", "ADMIN")
+//	          .scopes("read", "write", "trust")
 //	          .secret("secret")
-//	          .authorizedGrantTypes(
-//	            "password","authorization_code", "refresh_token")
-//	          .scopes("read", "write", "trust");
+//              .autoApprove(true);
+
 	    }
 	 
+	    
+	    @Bean
+		public PasswordEncoder passwordEncoder(){
+			PasswordEncoder encoder = new CustomEncoder();
+			return encoder;
+		}
+	    
 	    @Override
 	    public void configure(
 	      AuthorizationServerEndpointsConfigurer endpoints) 
@@ -77,44 +95,44 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 
 //	    @Bean
 //	    public TokenStore tokenStore() {
-//	        return new JdbcTokenStore(dataSource());
+//	        return new JdbcTokenStore(dataSource);
 //	    }
 	 
 	    @Value("classpath:schema.sql")
 	    private Resource schemaScript;
 	     
-	    @Bean
-	    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
-	        DataSourceInitializer initializer = new DataSourceInitializer();
-	        initializer.setDataSource(dataSource);
-	        initializer.setDatabasePopulator(databasePopulator());
-	        return initializer;
-	    }
-	     
-	    private DatabasePopulator databasePopulator() {
-	        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-	        populator.addScript(schemaScript);
-	        return populator;
-	    }
-	     
-	    @Bean
-	    public DataSource dataSource() {
-	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-	        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-	        dataSource.setUrl("jdbc:mysql://52.63.208.154:3306/test");
-	        dataSource.setUsername("root");
-	        dataSource.setPassword("Solmaz662M");
-	        return dataSource;
-	    }
-	    
-//	    @Primary
 //	    @Bean
-//	    public RemoteTokenServices tokenService() {
-//	        RemoteTokenServices tokenService = new RemoteTokenServices();
-//	        tokenService.setCheckTokenEndpointUrl(
-//	          "http://localhost:8080/oauth/check_token");
-//	        tokenService.setClientId("client-app");
-//	        tokenService.setClientSecret("secret");
-//	        return tokenService;
-//	    }   
+//	    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
+//	        DataSourceInitializer initializer = new DataSourceInitializer();
+//	        initializer.setDataSource(dataSource);
+//	        initializer.setDatabasePopulator(databasePopulator());
+//	        return initializer;
+//	    }
+	     
+//	    private DatabasePopulator databasePopulator() {
+//	        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+//	        populator.addScript(schemaScript);
+//	        return populator;
+//	    }
+	     
+//	    @Bean
+//	    public DataSource dataSource() {
+//	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//	        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+//	        dataSource.setUrl("jdbc:mysql://52.63.208.154:3306/test");
+//	        dataSource.setUsername("root");
+//	        dataSource.setPassword("Solmaz662M");
+//	        return dataSource;
+//	    }
+	    
+	    @Primary
+	    @Bean
+	    public RemoteTokenServices tokenService() {
+	        RemoteTokenServices tokenService = new RemoteTokenServices();
+	        tokenService.setCheckTokenEndpointUrl(
+	          "http://localhost:8080/oauth/check_token");
+	        tokenService.setClientId("client-app");
+	        tokenService.setClientSecret("secret");
+	        return tokenService;
+	    }   
 }
