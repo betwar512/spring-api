@@ -1,8 +1,6 @@
 package net.endpoint.config.security;
 
 import javax.sql.DataSource;
-
-import org.apache.commons.codec.digest.Crypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -79,15 +77,26 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	          .userApprovalHandler(userApprovalHandler)
 	          .authenticationManager(authenticationManager);
 	    }
-	 
+	 	 
+	    @Value("classpath:schema.sql")
+	    private Resource schemaScript;
+	 	    
+	    @Primary
+	    @Bean
+	    public RemoteTokenServices tokenService() {
+	        RemoteTokenServices tokenService = new RemoteTokenServices();
+	        tokenService.setCheckTokenEndpointUrl(
+	          "http://localhost:8080/oauth/check_token");
+	        tokenService.setClientId("client-app");
+	        tokenService.setClientSecret("secret");
+	        return tokenService;
+	    }
+	    
 //	    @Bean
 //	    public TokenStore tokenStore() {
 //	        return new JdbcTokenStore(dataSource);
 //	    }
-	 
-	    @Value("classpath:schema.sql")
-	    private Resource schemaScript;
-	     
+	    
 //	    @Bean
 //	    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
 //	        DataSourceInitializer initializer = new DataSourceInitializer();
@@ -112,14 +121,4 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 //	        return dataSource;
 //	    }
 	    
-	    @Primary
-	    @Bean
-	    public RemoteTokenServices tokenService() {
-	        RemoteTokenServices tokenService = new RemoteTokenServices();
-	        tokenService.setCheckTokenEndpointUrl(
-	          "http://localhost:8080/oauth/check_token");
-	        tokenService.setClientId("client-app");
-	        tokenService.setClientSecret("secret");
-	        return tokenService;
-	    }   
 }

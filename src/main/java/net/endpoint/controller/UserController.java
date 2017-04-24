@@ -34,6 +34,7 @@ public class UserController {
 		@RequestMapping(value="/create",method = RequestMethod.POST)
 		public void create(@RequestBody User user){
 
+			
 		}
 		
 		public void update(){}

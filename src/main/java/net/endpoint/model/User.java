@@ -2,17 +2,37 @@ package net.endpoint.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
+@Table(name="virtual_users")
 public class User {
 
-	
+		@Id
+		@GeneratedValue
 		private long         id;
 		private String     name;
 		private String password;
 		private String    email;
+		@ManyToOne
+		@JoinColumn(name="domain_id",nullable=false)
 		private Domain   domain;
+		@Column(name="created_at")
+		@Type(type = "date")
 		private Date  createdAt;
+		@Column(name="updated_at")
+		@Type(type = "date")
 		private Date  updatedAt;
 		
 		

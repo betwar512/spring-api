@@ -1,8 +1,16 @@
 package net.endpoint.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="virtual_domain")
 public class Domain {
 
-	
+	@Id
+	@GeneratedValue
 	private long id;
 	private String name;
 	
