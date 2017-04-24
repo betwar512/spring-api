@@ -1,4 +1,4 @@
-package net.endpoint.config;
+package net.endpoint.config.security;
 
 
 import javax.sql.DataSource;

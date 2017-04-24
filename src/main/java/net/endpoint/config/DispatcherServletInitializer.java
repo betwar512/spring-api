@@ -2,6 +2,8 @@ package net.endpoint.config;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
+
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -16,6 +18,7 @@ import net.endpoint.config.filter.CORSFilter;
 
 @Configuration
 @EnableAuthorizationServer
+@ComponentScan({ "net.endpoint.controller" })
 public class DispatcherServletInitializer  extends AuthorizationServerConfigurerAdapter implements WebApplicationInitializer {
 //
     public void onStartup(ServletContext servletContext) {      

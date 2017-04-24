@@ -1,4 +1,4 @@
-package net.endpoint.config;
+package net.endpoint.config.security;
 
 import javax.sql.DataSource;
 
@@ -10,15 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
-import org.springframework.jdbc.datasource.init.DatabasePopulator;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
-import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -27,9 +20,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-
-import net.endpoint.dao.UserDao;
 import net.endpoint.util.CustomEncoder;
  
 @Configuration
@@ -52,30 +42,27 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 		  @Qualifier("authenticationManagerBean")
 		  private AuthenticationManager authenticationManager;
 		 
+		    @Override
+		    public void configure(ClientDetailsServiceConfigurer clients) 
+		      throws Exception {
+		        clients.jdbc(dataSource);
+//		          .withClient("client-app")
+//		          .authorizedGrantTypes("password", "authorization_code", "client_credentials","refresh_token", "implicit")
+//		          .authorities("ROLE_CLIENT", "ADMIN")
+//		          .scopes("read", "write", "trust")
+//		          .secret("secret")
+//	              .autoApprove(true);
+
+		    }
 	 
 	    @Override
 	    public void configure(
 	      AuthorizationServerSecurityConfigurer oauthServer) 
 	      throws Exception {
 	    		
-	    	//oauthServer.passwordEncoder(passwordEncoder());
 	        oauthServer.realm(REALM+"/client");//allowFormAuthenticationForClients();
 	    }
-	 
-	    @Override
-	    public void configure(ClientDetailsServiceConfigurer clients) 
-	      throws Exception {
-	        clients.jdbc(dataSource);
-//	          .withClient("client-app")
-//	          .authorizedGrantTypes("password", "authorization_code", "client_credentials","refresh_token", "implicit")
-//	          .authorities("ROLE_CLIENT", "ADMIN")
-//	          .scopes("read", "write", "trust")
-//	          .secret("secret")
-//              .autoApprove(true);
-
-	    }
-	 
-	    
+	     
 	    @Bean
 		public PasswordEncoder passwordEncoder(){
 			PasswordEncoder encoder = new CustomEncoder();
