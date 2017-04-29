@@ -9,5 +9,7 @@
  <!--    <mapping resource="Model.hbm.xml"/> -->
  <mapping class="net.endpoint.model.User"/>
  <mapping class="net.endpoint.model.Domain"/>
+ <mapping class="net.endpoint.model.Account"/>
+  <mapping class="net.endpoint.model.SecurityRole"/>
   </session-factory>
 </hibernate-configuration>

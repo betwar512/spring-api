@@ -1,6 +1,8 @@
 package net.endpoint.controller;
 
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +26,14 @@ public class UserController {
 			this.userService = userService;
 		}
 
-		@RequestMapping(method = RequestMethod.GET)
-		public User get(@RequestParam(value="id") String id){
-			long idLong = Long.parseLong(id);
-			User   user = this.userService.get(idLong);
-		    return user;
+		@RequestMapping(value="/api/user",method = RequestMethod.GET)
+		public User get(Principal principal){
+			
+			String name=  principal.getName();
+			System.out.println("name"+name);
+			 return userService.findByName(name);
+			
+	
 		}
 		
 		@RequestMapping(value="/create",method = RequestMethod.POST)

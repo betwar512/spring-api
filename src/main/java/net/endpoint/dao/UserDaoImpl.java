@@ -3,14 +3,10 @@ package net.endpoint.dao;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
+
 
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+
 
 import net.endpoint.model.User;
 
@@ -53,13 +49,21 @@ public class UserDaoImpl implements UserDao {
 //	   Root<User> root=	cr.from(User.class);
 //	    cr.where(cb.equal(root.get(user_.getName()), name));
 	EntityManagerFactory em = this.sessionFactory.getCurrentSession().getEntityManagerFactory();
-      User user =	em.createEntityManager().createQuery(
-		    "select u " +
-		    "from User u " +
-		    "where by u.name = :username", User.class ).setParameter("username", name).getSingleResult();
+	
+	
+	 @SuppressWarnings("unchecked")
+	List<User> users	=this.sessionFactory.getCurrentSession()
+			.createQuery("from User user where user.email=:email")
+			.setParameter("email", name)
+			.list();
+	
+//     List<User> users =	em.createEntityManager().createQuery(
+//		    "select u " +
+//		    "from User u " +
+//		    "where by u.email = 'admin@skinqualitycare.com.au'", User.class ).getResultList();
+//		
 		
-		
-		return user;
+		return users.get(0);
 	}
 	
 	

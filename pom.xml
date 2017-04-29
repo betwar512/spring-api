@@ -49,17 +49,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		    <version>${springframework.version}</version>
 	     </dependency>
 	
-  <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
-	<!--     <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${org.}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${springsecurity.version}</version>
-        </dependency> -->
 <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
 	<dependency>
 	    <groupId>org.springframework.security</groupId>
@@ -122,6 +111,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     <version>1.10</version>
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/junit/junit -->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+</dependency>
 
 
 	 

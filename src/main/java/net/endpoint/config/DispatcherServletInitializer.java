@@ -13,21 +13,24 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import net.endpoint.config.filter.CORSFilter;
-
-
 @Configuration
 @EnableAuthorizationServer
 @ComponentScan({ "net.endpoint.controller" })
 public class DispatcherServletInitializer  extends AuthorizationServerConfigurerAdapter implements WebApplicationInitializer {
 //
+	@Override
     public void onStartup(ServletContext servletContext) {      
       XmlWebApplicationContext appContext = new XmlWebApplicationContext();
+   
       appContext.setConfigLocation("classpath:spring-config.xml");
       //Adding the listener for the rootContext
-     servletContext.addFilter("securityFilter",new DelegatingFilterProxy("springSecurityFilterChain"))
+      DelegatingFilterProxy filter2 = new DelegatingFilterProxy("CORSFilter");
+      servletContext.addFilter("CORSFilter",filter2)
+      .addMappingForUrlPatterns(null, false, "/*");
+      servletContext.addFilter("securityFilter",new DelegatingFilterProxy("springSecurityFilterChain"))
                    .addMappingForUrlPatterns(null, false, "/*");
-     servletContext.addFilter("CORSFilter", CORSFilter.class);
+
+   //  .addMappingForUrlPatterns(null, false, "/api");
      servletContext.addListener(new ContextLoaderListener(appContext));
      //Dispatcher
       ServletRegistration.Dynamic dispatcher =

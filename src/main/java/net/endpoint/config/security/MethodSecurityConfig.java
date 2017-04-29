@@ -1,5 +1,6 @@
 package net.endpoint.config.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -10,16 +11,16 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
   
-	//@Autowired
-  //  private OAuth2SecurityConfiguration securityConfig;
+   @Autowired
+   private OAuth2SecurityConfiguration securityConfig;
     @Override
     protected MethodSecurityExpressionHandler createExpressionHandler() {
         return new OAuth2MethodSecurityExpressionHandler();
     }
 
-//	public void setSecurityConfig(OAuth2SecurityConfiguration securityConfig) {
-//		this.securityConfig = securityConfig;
-//	}
+	public void setSecurityConfig(OAuth2SecurityConfiguration securityConfig) {
+	this.securityConfig = securityConfig;
+	}
 
     
 

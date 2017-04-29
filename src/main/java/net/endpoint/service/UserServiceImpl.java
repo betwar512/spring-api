@@ -1,11 +1,9 @@
 package net.endpoint.service;
 
 import java.util.List;
-
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
-
 import net.endpoint.dao.UserDao;
 import net.endpoint.model.User;
 
@@ -35,6 +33,14 @@ public class UserServiceImpl implements UserService {
 	@Transactional(readOnly=true)
 	public User get(long id) {
 		return userDao.get(id);
+	}
+
+
+
+	@Transactional(readOnly=true)
+	public User findByName(String name) {
+		return userDao.findbyname(name);
+
 	}
 	
 	

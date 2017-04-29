@@ -18,6 +18,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import net.endpoint.config.filter.CORSFilter;
 import net.endpoint.util.CustomEncoder;
  
 @Configuration
@@ -26,9 +29,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
 	 private static String REALM="MY_OAUTH_REALM";
 
-	 
-	     @Autowired
-	      private TokenStore tokenStore;
+	    @Autowired
+	     private TokenStore tokenStore;
 
 	     @Autowired
 	     DataSource dataSource;
@@ -36,12 +38,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	     @Autowired
 	     private UserApprovalHandler userApprovalHandler;
 	 
-		  @Autowired
-		  @Qualifier("authenticationManagerBean")
-		  private AuthenticationManager authenticationManager;
-		 
-		    @Override
-		    public void configure(ClientDetailsServiceConfigurer clients) 
+		 @Autowired
+		 @Qualifier("authenticationManagerBean")
+		 private AuthenticationManager authenticationManager;
+	 
+		 @Override
+		 public void configure(ClientDetailsServiceConfigurer clients) 
 		      throws Exception {
 		        clients.jdbc(dataSource);
 //		          .withClient("client-app")
@@ -57,8 +59,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	    public void configure(
 	      AuthorizationServerSecurityConfigurer oauthServer) 
 	      throws Exception {
-	    		
+	    //	oauthServer.addTokenEndpointAuthenticationFilter(new CORSFilter());
 	        oauthServer.realm(REALM+"/client");//allowFormAuthenticationForClients();
+	        oauthServer.checkTokenAccess("permitAll()");
 	    }
 	     
 	    @Bean
@@ -67,26 +70,31 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 			return encoder;
 		}
 	    
+	    @Bean
+	    public TokenStore tokenStore() {
+	        return new JdbcTokenStore(this.dataSource);//new InMemoryTokenStore();
+	    }
+	    
 	    @Override
 	    public void configure(
 	      AuthorizationServerEndpointsConfigurer endpoints) 
 	      throws Exception {
-	  
+	    		
 	        endpoints
 	          .tokenStore(tokenStore)
 	          .userApprovalHandler(userApprovalHandler)
 	          .authenticationManager(authenticationManager);
 	    }
 	 	 
-	    @Value("classpath:schema.sql")
-	    private Resource schemaScript;
+	 //   @Value("classpath:schema.sql")
+	  //  private Resource schemaScript;
 	 	    
 	    @Primary
 	    @Bean
 	    public RemoteTokenServices tokenService() {
 	        RemoteTokenServices tokenService = new RemoteTokenServices();
 	        tokenService.setCheckTokenEndpointUrl(
-	          "http://localhost:8080/oauth/check_token");
+	          "http://localhost:8080/endpoint/oauth/check_token");
 	        tokenService.setClientId("client-app");
 	        tokenService.setClientSecret("secret");
 	        return tokenService;

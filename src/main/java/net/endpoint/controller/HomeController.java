@@ -20,9 +20,9 @@ public class HomeController {
 		}
 		
 	@RequestMapping(method = RequestMethod.GET)
-	public List<User> get(){
-	    List<User> result = this.userService.getAll();
-		return result;
+	public String get(){
+	
+		return "Endpoint Api";
 	}
 	
 
