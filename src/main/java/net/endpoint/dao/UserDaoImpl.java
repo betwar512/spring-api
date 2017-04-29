@@ -41,15 +41,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findbyname(String name) {
-//		EntityManagerFactory em = this.sessionFactory.getCurrentSession().getEntityManagerFactory();
-//		CriteriaBuilder cb = this.sessionFactory.getCurrentSession().getCriteriaBuilder();
-//		Metamodel m=	em.getMetamodel();
-//		EntityType<User> user_ = m.entity(User.class);
-//		CriteriaQuery<User> cr=em.getCriteriaBuilder().createQuery(User.class);
-//	   Root<User> root=	cr.from(User.class);
-//	    cr.where(cb.equal(root.get(user_.getName()), name));
 	EntityManagerFactory em = this.sessionFactory.getCurrentSession().getEntityManagerFactory();
-	
 	
 	 @SuppressWarnings("unchecked")
 	List<User> users	=this.sessionFactory.getCurrentSession()

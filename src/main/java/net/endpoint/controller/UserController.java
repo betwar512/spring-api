@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.endpoint.dto.account.ProfileDto;
 import net.endpoint.model.User;
 import net.endpoint.service.UserService;
 
@@ -26,18 +27,14 @@ public class UserController {
 			this.userService = userService;
 		}
 
-		@RequestMapping(value="/api/user",method = RequestMethod.GET)
-		public User get(Principal principal){
-			
-			String name=  principal.getName();
-			System.out.println("name"+name);
-			 return userService.findByName(name);
-			
-	
+		@RequestMapping(method = RequestMethod.GET)
+		public ProfileDto get(Principal principal){
+			String name = principal.getName();
+    	 return   userService.findByUserName(name);
 		}
 		
 		@RequestMapping(value="/create",method = RequestMethod.POST)
-		public void create(@RequestBody User user){
+		public void create(@RequestBody User user,Principal principal){
 
 			
 		}

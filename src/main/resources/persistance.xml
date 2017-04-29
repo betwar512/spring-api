@@ -37,10 +37,15 @@
 	 <bean id="myUserDao" class="net.endpoint.dao.UserDaoImpl">
 	 <property name="sessionFactory" ref="mySessionFactory"></property>
 	 </bean>
+	 	 	 <!-- Dao mapping -->
+	 <bean id="myProfileDao" class="net.endpoint.dao.ProfileDaoImpl">
+	 <property name="sessionFactory" ref="mySessionFactory"></property>
+	 </bean>
 <!-- Service mapping -->
 	 <bean id="myUserService" class="net.endpoint.service.UserServiceImpl">
 	 <property name="transactionManager" ref="transactionManager"/>
 	 <property name="userDao" ref="myUserDao"></property>
+	 <property name="profileDao" ref="myProfileDao"></property>
 	 </bean>
 	 
 	 

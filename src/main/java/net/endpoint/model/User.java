@@ -21,6 +21,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import net.endpoint.model.account.Account;
+
 /**
  * User base Email server class 
  * @author A.H.Safaie
