@@ -1,12 +1,9 @@
 package net.endpoint.service;
 
 import java.util.List;
-
-import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
-
 import net.endpoint.dao.ProfileDao;
 import net.endpoint.dao.UserDao;
 import net.endpoint.dto.account.ProfileDto;
