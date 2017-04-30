@@ -15,7 +15,15 @@ public class AddressDto {
 		this.setId(Long.toString(address.getId()));	
 	}
 	
-	
+	public Address convertTo(Address ad){
+		  ad = ad!=null? ad : new Address();
+		  if(!this.getAddress().isEmpty())
+			  ad.setAddressLine1(this.getAddress());
+		  if(!this.getUnit().isEmpty())
+			  ad.setNumber(this.getUnit());
+		  
+		return ad;
+	}
 	
 	public String getId() {
 		return id;

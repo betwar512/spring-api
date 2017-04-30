@@ -12,10 +12,11 @@ import net.endpoint.model.account.Person;
  */
 public class ProfileDto {
 
-	private String username;
+	private String  username;
 	private String firstname;
-	private String lastname;
-	private String email;
+	private String  lastname;
+	private String     email;
+	private Date         dob;
 	private String lastLogin;
 	private List<AddressDto> addresses = new ArrayList<>();
 	private List<PhoneDto>      phones = new ArrayList<>();
@@ -30,10 +31,11 @@ public class ProfileDto {
 	 * @param person
 	 */
 	public void pars(Person person){		
-		this.username = person.getUser().getUserName();
-		this.email = person.getUser().getEmail();
+		this.username  = person.getUser().getUserName();
+		this.email     = person.getUser().getEmail();
 		this.firstname = person.getFirstName();
-		this.lastname = person.getLastName();
+		this.lastname  = person.getLastName();
+		this.dob       = person.getDateOfBirth();
 		
 	if(!person.getAddresses().isEmpty()){
 		person.getAddresses().forEach(a->{
@@ -48,8 +50,11 @@ public class ProfileDto {
 			phdto.pars(t);
 			phones.add(phdto);
 		});
+	  }
 	}
-	}
+	
+	
+	
 	
 	public Date getTimestamp() {
 		return timestamp;
@@ -130,6 +135,14 @@ public class ProfileDto {
 
 	public void setPhones(List<PhoneDto> phones) {
 		this.phones = phones;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 	
 

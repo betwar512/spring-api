@@ -62,6 +62,11 @@ public class UserServiceImpl implements UserService {
 		pdto.pars(person);
 		return pdto;
 	}
+
+	@Override
+	public void updateProfile(ProfileDto profileDto) {
+		this.profileDao.updateProfile(profileDto);
+	}
 	
 	
 }

@@ -12,6 +12,20 @@ public class PhoneDto {
 		this.setServerid(Long.toString(phone.getId()));
 	}
 	
+	/**
+	 * 
+	 * @param phone null for new object 
+	 * @return
+	 */
+	public Phone convertTo(Phone phone){
+		phone = phone!=null ? phone : new Phone();
+	   if(!this.getNumber().isEmpty())
+		   phone.setNumber(this.getNumber());
+	   
+		   		phone.setCountryCode("+61");   
+		return phone;
+	}
+	
 	public String getServerid() {
 		return serverid;
 	}

@@ -33,10 +33,11 @@ public class UserController {
     	 return   userService.findByUserName(name);
 		}
 		
-		@RequestMapping(value="/create",method = RequestMethod.POST)
-		public void create(@RequestBody User user,Principal principal){
-
-			
+		@RequestMapping(value="/update",method = RequestMethod.POST)
+		public void create(@RequestBody ProfileDto profile,Principal principal){
+			String name = principal.getName();
+			profile.setEmail(name);
+			this.userService.updateProfile(profile);
 		}
 		
 		public void update(){}

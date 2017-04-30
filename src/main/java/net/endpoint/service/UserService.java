@@ -12,4 +12,5 @@ public interface UserService {
 	public User findByName(String name);
 	public List<User> getAll();
 	public ProfileDto findByUserName(String name);
+	public void updateProfile(ProfileDto profileDto);
 }
