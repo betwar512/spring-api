@@ -3,7 +3,10 @@ package net.endpoint.dto.account;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import net.endpoint.model.account.Address;
 import net.endpoint.model.account.Person;
+import net.endpoint.model.account.Phone;
 
 /**
  * 
@@ -36,20 +39,21 @@ public class ProfileDto {
 		this.firstname = person.getFirstName();
 		this.lastname  = person.getLastName();
 		this.dob       = person.getDateOfBirth();
-		
+		this.lastLogin = new Date().toString();
 	if(!person.getAddresses().isEmpty()){
-		person.getAddresses().forEach(a->{
+		for(Address a:person.getAddresses()){
 			AddressDto adDto = new AddressDto();
 			adDto.pars(a);
 			addresses.add(adDto);
-		});
-	}
+			}
+	  }
+	
 	if(!person.getPhones().isEmpty()){
-		person.getPhones().forEach(t->{
+		for(Phone p :person.getPhones()){
 			PhoneDto phdto = new PhoneDto();
-			phdto.pars(t);
+			phdto.pars(p);
 			phones.add(phdto);
-		});
+		}
 	  }
 	}
 	
@@ -143,6 +147,13 @@ public class ProfileDto {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	@Override
+	public String toString() {
+		return "ProfileDto [username=" + username + ", firstname=" + firstname + ", lastname=" + lastname + ", email="
+				+ email + ", dob=" + dob + ", lastLogin=" + lastLogin + ", addresses=" + addresses + ", phones="
+				+ phones + ", timestamp=" + timestamp + "]";
 	}
 	
 

@@ -4,54 +4,53 @@ import net.endpoint.model.account.Address;
 
 public class AddressDto {
 
-	private String id;
-	private String unit;
-	private String address;
-	
-	
-	public void pars(Address address){
-		this.setAddress(address.getAddressLine1());
-		this.setUnit(address.getNumber());
-		this.setId(Long.toString(address.getId()));	
+	public String id;
+	public String unit;
+	public String addressline1;
+	public String addressline2;
+	public String state;
+	public String country;
+	public String city;
+	public Integer postCode;
+
+	/**
+	 * 
+	 * @param address
+	 */
+	public void pars(Address address) {
+		this.addressline1 = address.getAddressLine1();
+		this.unit    = address.getUnit();
+		this.country = address.getCountry();
+		this.city    = address.getCity();
+		this.state   = address.getState();
+		this.id      = String.valueOf(address.getId());
+		this.postCode = address.getPostCode();
 	}
-	
-	public Address convertTo(Address ad){
-		  ad = ad!=null? ad : new Address();
-		  if(!this.getAddress().isEmpty())
-			  ad.setAddressLine1(this.getAddress());
-		  if(!this.getUnit().isEmpty())
-			  ad.setNumber(this.getUnit());
-		  
+
+	/**
+	 * 
+	 * @param ad
+	 * @return
+	 */
+	public Address convertTo(Address ad) {
+		ad = ad != null ? ad : new Address();
+		ad.setAddressLine1(this.addressline1);
+		ad.setUnit(this.unit);
+		ad.setAddressLine2(this.addressline2);
+		ad.setCity(this.country);
+		ad.setPostCode(this.postCode);
+		ad.setCountry(this.country);
 		return ad;
 	}
-	
-	public String getId() {
-		return id;
-	}
 
-
-
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-
-
-
-	public String getUnit() {
-		return unit;
-	}
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
+	@Override
+	public String toString() {
+		return "AddressDto [id=" + id + ", unit=" + unit + ", addressline1=" + addressline1 + ", addressline2="
+				+ addressline2 + ", state=" + state + ", country=" + country + ", city=" + city + ", postCode="
+				+ postCode + "]";
 	}
 	
 	
 	
+
 }

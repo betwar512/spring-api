@@ -4,12 +4,14 @@ import net.endpoint.model.account.Phone;
 
 public class PhoneDto {
 
-	private String serverid;
-	private String   number;
+	public String serverid;
+	public String   number;
+	public String     type;
 	
 	public void pars(Phone phone){
 		this.setNumber(phone.getNumber());
 		this.setServerid(Long.toString(phone.getId()));
+		this.type = phone.getType();
 	}
 	
 	/**

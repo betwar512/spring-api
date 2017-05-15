@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 public class CustomEncoder implements PasswordEncoder {
 
+	
 	@Override
 	public String encode(CharSequence rawPassword) {
 		return Crypt.crypt(rawPassword.toString());
@@ -25,5 +26,6 @@ public class CustomEncoder implements PasswordEncoder {
 							       .toString()
 							           .getBytes(), encodedPassword));
 	}
+
 
 }

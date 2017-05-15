@@ -30,7 +30,9 @@ public class UserController {
 		@RequestMapping(method = RequestMethod.GET)
 		public ProfileDto get(Principal principal){
 			String name = principal.getName();
-    	 return   userService.findByUserName(name);
+    	 ProfileDto dto=   userService.findByUserName(name);
+    	 System.out.println(dto.toString());
+    	 return dto;
 		}
 		
 		@RequestMapping(value="/update",method = RequestMethod.POST)

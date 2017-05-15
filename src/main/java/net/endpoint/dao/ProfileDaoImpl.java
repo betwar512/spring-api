@@ -65,7 +65,7 @@ public class ProfileDaoImpl implements ProfileDao {
 		
 		if(profiledto.getAddresses()!=null){
 		 for(AddressDto a :profiledto.getAddresses()){		 
-		  Address   ad =loadAddress(Long.parseLong(a.getId()));
+		  Address   ad = loadAddress(Long.parseLong(a.id));
 		   ad =  a.convertTo(ad);
 		   ad.setPerson(person);
 		   save(ad);
@@ -96,6 +96,40 @@ public class ProfileDaoImpl implements ProfileDao {
 	
 	private void save(Object o){
 		sessionFactory.getCurrentSession().saveOrUpdate(o);
+	}
+
+
+/**
+ * 
+ */
+	@Override
+	public Address addOrUpdateAddtess(AddressDto addressdto) {
+		Address ad  = null;
+		if(addressdto!=null && addressdto.id!= null ){
+			 ad  =  loadAddress(Long.parseLong(addressdto.id));
+			 if(ad!=null){
+		        ad =  addressdto.convertTo(ad);	    
+		       this.save(ad);
+		   }
+		}	
+	return ad;
+	}
+
+
+	/**
+	 * <p>Save Or update phone</p>
+	 * @return Phone  
+	 * 
+	 */
+	@Override
+	public Phone addOrUpdatePhone(PhoneDto phonedto) {
+		Phone result = null;
+		if(phonedto!=null && phonedto.serverid!=null){
+			 result = loadPhone(Long.parseLong(phonedto.serverid));
+			 result = phonedto.convertTo(result);	
+			this.save(result);
+		}	
+		return result;
 	}
 	
 	
