@@ -19,6 +19,7 @@ public class AddressDto {
 	 */
 	public void pars(Address address) {
 		this.addressline1 = address.getAddressLine1();
+		this.addressline2 = address.getAddressLine2();
 		this.unit    = address.getUnit();
 		this.country = address.getCountry();
 		this.city    = address.getCity();
@@ -37,7 +38,7 @@ public class AddressDto {
 		ad.setAddressLine1(this.addressline1);
 		ad.setUnit(this.unit);
 		ad.setAddressLine2(this.addressline2);
-		ad.setCity(this.country);
+		ad.setCity(this.city);
 		ad.setPostCode(this.postCode);
 		ad.setCountry(this.country);
 		return ad;

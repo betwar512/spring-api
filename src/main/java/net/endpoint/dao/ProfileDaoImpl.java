@@ -63,25 +63,25 @@ public class ProfileDaoImpl implements ProfileDao {
 		person.setUpdatedAt(new Date());
 		save(person);
 		
-		if(profiledto.getAddresses()!=null){
-		 for(AddressDto a :profiledto.getAddresses()){		 
-		  Address   ad = loadAddress(Long.parseLong(a.id));
-		   ad =  a.convertTo(ad);
-		   ad.setPerson(person);
-		   save(ad);
-		   person.getAddresses().add(ad);
-		  
-		   }
-		}
-		if(!profiledto.getPhones().isEmpty()){
-			for(PhoneDto pdto:profiledto.getPhones()){
-				Phone p =loadPhone(Long.parseLong(pdto.getServerid()));
-				p = pdto.convertTo(p);
-				p.setPerson(person);
-				save(p);
-				person.getPhones().add(p);	
-			}
-		}
+//		if(profiledto.getAddresses()!=null){
+//		 for(AddressDto a :profiledto.getAddresses()){		 
+//		  Address   ad = loadAddress(Long.parseLong(a.id));
+//		   ad =  a.convertTo(ad);
+//		   ad.setPerson(person);
+//		   save(ad);
+//		   person.getAddresses().add(ad);
+//		  
+//		   }
+//		}
+//		if(!profiledto.getPhones().isEmpty()){
+//			for(PhoneDto pdto:profiledto.getPhones()){
+//				Phone p =loadPhone(Long.parseLong(pdto.getServerid()));
+//				p = pdto.convertTo(p);
+//				p.setPerson(person);
+//				save(p);
+//				person.getPhones().add(p);	
+//			}
+//		}
 		save(person);
 	}
 	

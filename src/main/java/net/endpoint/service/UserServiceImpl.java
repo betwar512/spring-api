@@ -70,6 +70,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public AddressDto createOrUpdateAddress(AddressDto address) {
 		Address ad =	profileDao.addOrUpdateAddtess(address);
 		AddressDto result = new AddressDto();
@@ -78,6 +79,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public PhoneDto createOrUpdatePhone(PhoneDto phonedto) {
 		  Phone p =   profileDao.addOrUpdatePhone(phonedto);
 		  	phonedto.pars(p);
