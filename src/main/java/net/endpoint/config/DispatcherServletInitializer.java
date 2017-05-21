@@ -3,6 +3,7 @@ package net.endpoint.config;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -40,5 +41,12 @@ public class DispatcherServletInitializer  extends AuthorizationServerConfigurer
           
     }
     
-  
+//	@Bean
+//	public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
+//	    ServletRegistrationBean registration = new ServletRegistrationBean(
+//	            dispatcherServlet);
+//	    registration.addUrlMappings("/whatever/*", "/whatever2/*");
+//	    return registration;
+//	}
+	
  }
