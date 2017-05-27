@@ -6,9 +6,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import net.endpoint.dao.ProfileDao;
 import net.endpoint.dao.UserDao;
+import net.endpoint.dto.account.AddressDto;
+import net.endpoint.dto.account.PhoneDto;
 import net.endpoint.dto.account.ProfileDto;
 import net.endpoint.model.User;
+import net.endpoint.model.account.Address;
 import net.endpoint.model.account.Person;
+import net.endpoint.model.account.Phone;
 
 public class UserServiceImpl implements UserService {
 
@@ -63,6 +67,29 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateProfile(ProfileDto profileDto) {
 		this.profileDao.updateProfile(profileDto);
+	}
+
+	@Override
+	@Transactional
+	public AddressDto createOrUpdateAddress(AddressDto address) {
+		Address ad =	profileDao.addOrUpdateAddtess(address);
+		AddressDto result = new AddressDto();
+		result.pars(ad);
+		return result;
+	}
+
+	@Override
+	@Transactional
+	public PhoneDto createOrUpdatePhone(PhoneDto phonedto) {
+		  Phone p =   profileDao.addOrUpdatePhone(phonedto);
+		  	phonedto.pars(p);
+		  	return phonedto;
+	}
+
+	@Override
+	public User updatePassword(User user, String password) {
+
+		return null;
 	}
 	
 	

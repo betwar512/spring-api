@@ -63,25 +63,25 @@ public class ProfileDaoImpl implements ProfileDao {
 		person.setUpdatedAt(new Date());
 		save(person);
 		
-		if(profiledto.getAddresses()!=null){
-		 for(AddressDto a :profiledto.getAddresses()){		 
-		  Address   ad =loadAddress(Long.parseLong(a.getId()));
-		   ad =  a.convertTo(ad);
-		   ad.setPerson(person);
-		   save(ad);
-		   person.getAddresses().add(ad);
-		  
-		   }
-		}
-		if(!profiledto.getPhones().isEmpty()){
-			for(PhoneDto pdto:profiledto.getPhones()){
-				Phone p =loadPhone(Long.parseLong(pdto.getServerid()));
-				p = pdto.convertTo(p);
-				p.setPerson(person);
-				save(p);
-				person.getPhones().add(p);	
-			}
-		}
+//		if(profiledto.getAddresses()!=null){
+//		 for(AddressDto a :profiledto.getAddresses()){		 
+//		  Address   ad = loadAddress(Long.parseLong(a.id));
+//		   ad =  a.convertTo(ad);
+//		   ad.setPerson(person);
+//		   save(ad);
+//		   person.getAddresses().add(ad);
+//		  
+//		   }
+//		}
+//		if(!profiledto.getPhones().isEmpty()){
+//			for(PhoneDto pdto:profiledto.getPhones()){
+//				Phone p =loadPhone(Long.parseLong(pdto.getServerid()));
+//				p = pdto.convertTo(p);
+//				p.setPerson(person);
+//				save(p);
+//				person.getPhones().add(p);	
+//			}
+//		}
 		save(person);
 	}
 	
@@ -96,6 +96,40 @@ public class ProfileDaoImpl implements ProfileDao {
 	
 	private void save(Object o){
 		sessionFactory.getCurrentSession().saveOrUpdate(o);
+	}
+
+
+/**
+ * 
+ */
+	@Override
+	public Address addOrUpdateAddtess(AddressDto addressdto) {
+		Address ad  = null;
+		if(addressdto!=null && addressdto.id!= null ){
+			 ad  =  loadAddress(Long.parseLong(addressdto.id));
+			 if(ad!=null){
+		        ad =  addressdto.convertTo(ad);	    
+		       this.save(ad);
+		   }
+		}	
+	return ad;
+	}
+
+
+	/**
+	 * <p>Save Or update phone</p>
+	 * @return Phone  
+	 * 
+	 */
+	@Override
+	public Phone addOrUpdatePhone(PhoneDto phonedto) {
+		Phone result = null;
+		if(phonedto!=null && phonedto.serverid!=null){
+			 result = loadPhone(Long.parseLong(phonedto.serverid));
+			 result = phonedto.convertTo(result);	
+			this.save(result);
+		}	
+		return result;
 	}
 	
 	
