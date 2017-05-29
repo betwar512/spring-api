@@ -50,39 +50,27 @@ public class ProfileDaoImpl implements ProfileDao {
 	 *<p> Update profile from Profile Dto </p>
 	 */
 	@Override
-	public void updateProfile(ProfileDto profiledto) {	
-		Person person = findByUserName(profiledto.getEmail());
-		person = person!=null ? person : new Person();
-		if(!profiledto.getFirstname().isEmpty())
-		    person.setFirstName(profiledto.getFirstname());
-		if(!profiledto.getLastLogin().isEmpty())
-			person.setLastName(profiledto.getLastname());
-		if(profiledto.getDob() != null)
-			   	person.setDateOfBirth(profiledto.getDob());
-		if(person.getCreatedAt() == null) person.setCreatedAt(new Date());
-		person.setUpdatedAt(new Date());
-		save(person);
-		
-//		if(profiledto.getAddresses()!=null){
-//		 for(AddressDto a :profiledto.getAddresses()){		 
-//		  Address   ad = loadAddress(Long.parseLong(a.id));
-//		   ad =  a.convertTo(ad);
-//		   ad.setPerson(person);
-//		   save(ad);
-//		   person.getAddresses().add(ad);
-//		  
-//		   }
-//		}
-//		if(!profiledto.getPhones().isEmpty()){
-//			for(PhoneDto pdto:profiledto.getPhones()){
-//				Phone p =loadPhone(Long.parseLong(pdto.getServerid()));
-//				p = pdto.convertTo(p);
-//				p.setPerson(person);
-//				save(p);
-//				person.getPhones().add(p);	
-//			}
-//		}
-		save(person);
+	public boolean updateProfile(ProfileDto profiledto) {	
+		boolean result = false;
+	 if(profiledto!=null){
+	    Person person = findByUserName(profiledto.getEmail());
+		 if(person!=null){
+			person = person!=null ? person : new Person();
+			if(!profiledto.getFirstname().isEmpty()){
+			    person.setFirstName(profiledto.getFirstname());
+			    }
+			if(!profiledto.getLastLogin().isEmpty()){
+				person.setLastName(profiledto.getLastname());
+				}
+			if(profiledto.getDob() != null){
+				   	person.setDateOfBirth(profiledto.getDob());
+				   	}
+			 person.setUpdatedAt(new Date());
+		   save(person);
+		return true;
+		 }
+	  }
+	 return result;
 	}
 	
 	

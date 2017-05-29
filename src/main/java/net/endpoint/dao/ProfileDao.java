@@ -13,7 +13,7 @@ public interface ProfileDao {
 	public Person load(long id);
 	public Person findByUser(User user);
 	public Person findByUserName(String username);
-	public void   updateProfile(ProfileDto profiledto);
+	public boolean updateProfile(ProfileDto profiledto);
 	public Address addOrUpdateAddtess(AddressDto   addressdto);
 	public Phone addOrUpdatePhone(PhoneDto phonedto);
 }

@@ -29,6 +29,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
 	 private static String REALM="MY_OAUTH_REALM";
 	 private static final String URL =  "http://betwarendpoint.net:8181/endpoint/oauth/check_token";
+	 private static final String URL_DEV =  "http://localhost:8080/endpoint/oauth/check_token";
 	    @Autowired
 	     private TokenStore tokenStore;
 
@@ -94,7 +95,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	    public RemoteTokenServices tokenService() {
 	        RemoteTokenServices tokenService = new RemoteTokenServices();
 	        tokenService.setCheckTokenEndpointUrl(
-	         AuthorizationServerConfiguration.URL);
+	         AuthorizationServerConfiguration.URL_DEV);
 	        tokenService.setClientId("client-app");
 	        tokenService.setClientSecret("secret");
 	        return tokenService;

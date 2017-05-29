@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import net.endpoint.dao.ProfileDao;
 import net.endpoint.dao.UserDao;
+import net.endpoint.dto.account.AccountRequestDto;
 import net.endpoint.dto.account.AddressDto;
 import net.endpoint.dto.account.PhoneDto;
 import net.endpoint.dto.account.ProfileDto;
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional(readOnly=true)
 	public User findByName(String name) {
-		return userDao.findbyname(name);
+		return userDao.findbyName(name);
 
 	}
 
@@ -88,9 +89,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User updatePassword(User user, String password) {
-
-		return null;
+		return	userDao.changePassword(user, password);
 	}
+
+	@Override
+	public boolean createAccount(AccountRequestDto accountRequestDto) {
+		   return   this.userDao.create(accountRequestDto);
+	 }
 	
-	
+
 }

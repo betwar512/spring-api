@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.endpoint.dto.account.AccountRequestDto;
 import net.endpoint.dto.account.AddressDto;
 import net.endpoint.dto.account.ProfileDto;
 import net.endpoint.model.User;
@@ -36,20 +37,26 @@ public class UserController {
     	 return dto;
 		}
 		
+		@RequestMapping(value="/create",method = RequestMethod.POST)
+		public AccountRequestDto create(@RequestBody AccountRequestDto accountRequestDto){
+			   this.userService.createAccount(accountRequestDto);
+			return new AccountRequestDto();
+		}
+		
+		
 		@RequestMapping(value="/update",method = RequestMethod.POST)
-		public void create(@RequestBody ProfileDto profile,Principal principal){
+		public void update(@RequestBody ProfileDto profile,Principal principal){
 			String name = principal.getName();
 			profile.setEmail(name);
 			this.userService.updateProfile(profile);
 		}
 		
 		@RequestMapping(value="/update/address",method = RequestMethod.POST)
-		public AddressDto updateAddress(@RequestBody AddressDto address){
+		public AddressDto createOrUpdateAddress(@RequestBody AddressDto address){
 			return userService.createOrUpdateAddress(address);
 		}
 		
-		public void update(){}
-		
+	
 		public void delete(){}
 	
 	

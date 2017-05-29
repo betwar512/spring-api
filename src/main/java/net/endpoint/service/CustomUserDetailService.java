@@ -18,7 +18,7 @@ public class CustomUserDetailService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		User user = userDao.findbyname(username);
+		User user = userDao.findbyName(username);
 		
 		return null; //userDao.findbyname(username);
 	}

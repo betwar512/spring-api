@@ -17,6 +17,17 @@ public abstract class CustomTypes {
 		
 	}
 	
+	public enum DOMAINS{
+		EndPoint("betwarendpoint.net"),
+		SkinQuality("skinqualitycare.com.au");
+		private String domain;
+		DOMAINS(String domain){
+			this.domain = domain;
+		}
+		public String getDomain(){
+			return this.domain;
+		}
+	}
 	
 	/**
 	 * <p>Types for Phone and Address </p>
