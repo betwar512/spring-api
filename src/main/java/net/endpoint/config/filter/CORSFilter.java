@@ -24,7 +24,7 @@ public class CORSFilter implements Filter {
 		System.out.println("Filtering on...........................................................");
 		HttpServletResponse response = (HttpServletResponse) res;
 		  HttpServletRequest request = (HttpServletRequest) req;
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3003");
+        response.setHeader("Access-Control-Allow-Origin", "http://betwarendpoint.net:80");
         response.setHeader("Access-Control-Allow-Credentials", "true");
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
 		response.setHeader("Access-Control-Max-Age", "3600");
