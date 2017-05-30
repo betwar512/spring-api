@@ -29,7 +29,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
 	 private static String REALM="MY_OAUTH_REALM";
 	 private static final String URL =  "http://betwarendpoint.net:8181/endpoint/oauth/check_token";
-	 private static final String URL_DEV =  "http://localhost:8080/endpoint/oauth/check_token";
+	// private static final String URL_DEV =  "http://localhost:8080/endpoint/oauth/check_token";
+	 private static final String SECRET = "f68098956cd41badf8dd518c69c3832582fe23a1910039796f43b64ae2b9f8d1";
 	    @Autowired
 	     private TokenStore tokenStore;
 
@@ -47,13 +48,13 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 		 public void configure(ClientDetailsServiceConfigurer clients) 
 		      throws Exception {
 		        clients.jdbc(dataSource);
-//		          .withClient("client-app")
-//		          .authorizedGrantTypes("password", "authorization_code", "client_credentials","refresh_token", "implicit")
-//		          .authorities("ROLE_CLIENT", "ADMIN")
+//		          .withClient("angular-endpoint")
+//		          .authorizedGrantTypes("password","refresh_token", "implicit")
+//		          .authorities("ROLE_CLIENT","USER")
 //		          .scopes("read", "write", "trust")
-//		          .secret("secret")
+//		          .secret(SECRET)
 //	              .autoApprove(true);
-
+//"authorization_code", "client_credentials",
 		    }
 	 
 	    @Override
@@ -95,9 +96,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	    public RemoteTokenServices tokenService() {
 	        RemoteTokenServices tokenService = new RemoteTokenServices();
 	        tokenService.setCheckTokenEndpointUrl(
-	         AuthorizationServerConfiguration.URL_DEV);
-	        tokenService.setClientId("client-app");
-	        tokenService.setClientSecret("secret");
+	         AuthorizationServerConfiguration.URL);
+	        tokenService.setClientId("angular-endpoint");
+	        tokenService.setClientSecret(SECRET);
 	        return tokenService;
 	    }
 	    

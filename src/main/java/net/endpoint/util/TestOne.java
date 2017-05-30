@@ -15,7 +15,7 @@ public class TestOne {
 	@Test
 	public void test() throws NoSuchAlgorithmException, NoSuchProviderException {
 
-		String pass = "4650080";
+		String pass = "endpointAngular";
 		 MessageDigest md = MessageDigest.getInstance("SHA-256");
 	        md.update(pass.getBytes());
 
