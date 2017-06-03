@@ -4,7 +4,8 @@ import java.util.Date;
 
 
 public class AccountRequestDto {
-	
+	public String firstName;
+	public String lastName;
 	public String userName;
 	public String domainName;
 	public Date dob;

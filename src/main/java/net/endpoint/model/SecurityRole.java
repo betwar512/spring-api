@@ -15,9 +15,9 @@ public class SecurityRole {
 	@Id
 	@Column(name="security_role_id")
 	@GeneratedValue
-	private long       id;
-	private String   name;
-	private Integer level;
+	private long        id;
+	private String    name;
+	private Integer  level;
 	private Date timestamp;
 	
 	

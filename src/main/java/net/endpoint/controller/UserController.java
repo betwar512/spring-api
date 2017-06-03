@@ -45,10 +45,11 @@ public class UserController {
 		
 		
 		@RequestMapping(value="/update",method = RequestMethod.POST)
-		public void update(@RequestBody ProfileDto profile,Principal principal){
+		public ProfileDto update(@RequestBody ProfileDto profile,Principal principal){
 			String name = principal.getName();
 			profile.setEmail(name);
 			this.userService.updateProfile(profile);
+			return profile;
 		}
 		
 		@RequestMapping(value="/update/address",method = RequestMethod.POST)

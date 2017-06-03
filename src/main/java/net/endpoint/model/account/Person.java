@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,6 +22,7 @@ import net.endpoint.model.User;
 public class Person {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	private long            id;
 	@Column(name="first_name")
 	private String   firstName;

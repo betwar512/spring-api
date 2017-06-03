@@ -3,6 +3,8 @@ package net.endpoint.dao;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.SessionFactory;
 
 import net.endpoint.dto.account.AddressDto;
@@ -40,22 +42,26 @@ public class ProfileDaoImpl implements ProfileDao {
 	@Override
 	public Person findByUserName(String username) {
 		 List<Person> list = sessionFactory.getCurrentSession()
-				 							.createQuery("from Person p where p.user.email=:username")
-				 									.setParameter("username", username).list();
+				 						   .createQuery("from Person p where p.user.email=:username")
+				 						   .setParameter("username", username).list();
 		 return list!=null && list.size()>0 ? list.get(0) : null;
 	}
 
 
 	/**
 	 *<p> Update profile from Profile Dto </p>
+	 *@return boolean 
 	 */
+	@Transactional
 	@Override
 	public boolean updateProfile(ProfileDto profiledto) {	
 		boolean result = false;
-	 if(profiledto!=null){
+	 if(profiledto != null){
 	    Person person = findByUserName(profiledto.getEmail());
-		 if(person!=null){
-			person = person!=null ? person : new Person();
+		   if(person == null) {
+			   person  = new Person();
+				person.setCreatedAt(new Date());
+		       }
 			if(!profiledto.getFirstname().isEmpty()){
 			    person.setFirstName(profiledto.getFirstname());
 			    }
@@ -68,7 +74,7 @@ public class ProfileDaoImpl implements ProfileDao {
 			 person.setUpdatedAt(new Date());
 		   save(person);
 		return true;
-		 }
+		 
 	  }
 	 return result;
 	}

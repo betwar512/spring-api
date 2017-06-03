@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.Resource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -19,8 +18,6 @@ import org.springframework.security.oauth2.provider.approval.UserApprovalHandler
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-
-import net.endpoint.config.filter.CORSFilter;
 import net.endpoint.util.CustomEncoder;
  
 @Configuration
@@ -28,7 +25,6 @@ import net.endpoint.util.CustomEncoder;
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
 	 private static String REALM="MY_OAUTH_REALM";
-	 private static final String URL =  "http://betwarendpoint.net:8181/endpoint/oauth/check_token";
 	 private static final String URL_DEV =  "http://localhost:8080/endpoint/oauth/check_token";
 	    @Autowired
 	     private TokenStore tokenStore;
