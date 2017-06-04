@@ -65,7 +65,6 @@ public class UserDaoImpl implements UserDao {
 	 * <p>Create a new user </p>
 	 * @return boolean ? false == not valid 
 	 */
-	@Transactional
 	@Override
 	public boolean create(AccountRequestDto accountRequestDto) {
 	

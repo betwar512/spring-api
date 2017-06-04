@@ -46,7 +46,13 @@ public class ProfileDaoImpl implements ProfileDao {
 				 						   .setParameter("username", username).list();
 		 return list!=null && list.size()>0 ? list.get(0) : null;
 	}
-
+private User getUser(String email){
+		UserDaoImpl dao =   new UserDaoImpl();		
+		dao.setSessionFactory(this.sessionFactory);
+	return dao.findbyName(email);
+}
+	
+	
 
 	/**
 	 *<p> Update profile from Profile Dto </p>
@@ -61,16 +67,20 @@ public class ProfileDaoImpl implements ProfileDao {
 		   if(person == null) {
 			   person  = new Person();
 				person.setCreatedAt(new Date());
+				User user = getUser(profiledto.getEmail());
+				person.setUser(user);
+				this.sessionFactory.getCurrentSession().save(person);
 		       }
 			if(!profiledto.getFirstname().isEmpty()){
 			    person.setFirstName(profiledto.getFirstname());
 			    }
-			if(!profiledto.getLastLogin().isEmpty()){
+			if(profiledto.getLastname() != null){
 				person.setLastName(profiledto.getLastname());
 				}
 			if(profiledto.getDob() != null){
 				   	person.setDateOfBirth(profiledto.getDob());
 				   	}
+			
 			 person.setUpdatedAt(new Date());
 		   save(person);
 		return true;

@@ -2,24 +2,30 @@ package net.endpoint.controller;
 
 
 import java.security.Principal;
+import java.util.Set;
+import java.util.stream.Stream;
+
+import javax.management.relation.RoleStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.mysql.cj.api.xdevapi.Result;
 
 import net.endpoint.dto.account.AccountRequestDto;
 import net.endpoint.dto.account.AddressDto;
 import net.endpoint.dto.account.ProfileDto;
+import net.endpoint.model.SecurityRole;
 import net.endpoint.model.User;
 import net.endpoint.service.UserService;
 
 
 @RestController
 @RequestMapping("/api/user")
-public class UserController {
+public class UserController extends MainController {
 
 	
 		@Autowired
@@ -32,14 +38,21 @@ public class UserController {
 		@RequestMapping(method = RequestMethod.GET)
 		public ProfileDto get(Principal principal){
 			String name = principal.getName();
-    	 ProfileDto dto = userService.findByUserName(name);
+    	 ProfileDto dto = loadProfile(name);
     	 System.out.println(dto.toString());
     	 return dto;
 		}
 		
 		@RequestMapping(value="/create",method = RequestMethod.POST)
-		public AccountRequestDto create(@RequestBody AccountRequestDto accountRequestDto){
+		public AccountRequestDto create(@RequestBody AccountRequestDto accountRequestDto,Principal principal){
+			
+			  User user =  userService.findByName(principal.getName());
+			   Set<SecurityRole> roles = user.getRolse();
+			   Stream<SecurityRole> Result = roles.stream().filter(t->{ return t.getLevel() > 4 ? true : false;  });
+			   
+		 if(Result.count()>0){  
 			   this.userService.createAccount(accountRequestDto);
+			}
 			return new AccountRequestDto();
 		}
 		
@@ -53,7 +66,7 @@ public class UserController {
 		}
 		
 		@RequestMapping(value="/update/address",method = RequestMethod.POST)
-		public AddressDto createOrUpdateAddress(@RequestBody AddressDto address){
+		public AddressDto createOrUpdateAddress(@RequestBody AddressDto address,Principal principal){
 			return userService.createOrUpdateAddress(address);
 		}
 		

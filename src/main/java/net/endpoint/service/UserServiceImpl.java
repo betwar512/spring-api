@@ -93,6 +93,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public boolean createAccount(AccountRequestDto accountRequestDto) {
 		   return   this.userDao.create(accountRequestDto);
 	 }

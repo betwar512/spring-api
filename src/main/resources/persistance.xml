@@ -47,6 +47,11 @@
 	 <property name="userDao" ref="myUserDao"></property>
 	 <property name="profileDao" ref="myProfileDao"></property>
 	 </bean>
+	
+	 <bean id="myGlobalService" class="net.endpoint.service.GlobalSettingsServiceImpl">
+	 <property name="profileDao" ref="myProfileDao"></property>
+	 </bean>
+	
 	 
 	 
 	</beans>
