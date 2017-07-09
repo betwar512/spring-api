@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import net.endpoint.service.UserService;
+import net.endpoint.service.email.EmailService;
+import net.endpoint.service.email.EmailServiceImpl;
 
 @RestController
 @RequestMapping("/")
@@ -18,9 +20,13 @@ public class HomeController {
 		
 	@RequestMapping(method = RequestMethod.GET)
 	public String get(){
-	
-		return "Endpoint Api";
+	EmailService service = new EmailServiceImpl();
+	service.sentEmail();
+	return "Endpoint Api";
 	}
+	
+	
+	
 	
 
 }

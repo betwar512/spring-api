@@ -24,5 +24,6 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
 		    return p;
 
 		}
-	}
+	
+}
 

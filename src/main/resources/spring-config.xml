@@ -14,4 +14,17 @@
  <context:component-scan base-package="net.endpoint" />  
  <mvc:resources mapping="/resources/**" location="/resources/" />
 <import resource="classpath:persistance.xml"/>
+
+   <bean id="mailSender"
+   	class="org.springframework.mail.javamail.JavaMailSenderImpl"
+   	lazy-init="false">
+         <property name="host" value="email-smtp.us-east-1.amazonaws.com"/>
+         <property name="port" value="25"></property>
+         <property name="username" value="AKIAI7A26VJDLF4OJQNA"></property>
+         <property name="password" value="AhRoDI/aM9jAGkGKYSor9Yjc1qL+ykqLOBAIN0pMJqbA"></property>
+    </bean>
+
+   <bean id="myEmailService" class="net.endpoint.service.email.EmailServiceImpl">
+	 <property name="sender" ref="mailSender"></property>
+	 </bean>
 </beans>

@@ -67,7 +67,8 @@ public class UserController extends MainController {
 		
 		@RequestMapping(value="/update/address",method = RequestMethod.POST)
 		public AddressDto createOrUpdateAddress(@RequestBody AddressDto address,Principal principal){
-			return userService.createOrUpdateAddress(address);
+			 userService.createOrUpdateAddress(address);
+			 return address;
 		}
 		
 	

@@ -30,7 +30,7 @@ public class ProfileDaoImpl implements ProfileDao {
 			List<Person> list=	sessionFactory.getCurrentSession()
 				.createQuery("from Person p where p.user = :user")
 				.setParameter("user", user).list();					
-		return list!=null && list.size()>0 ? list.get(0) : null;
+		return list !=null && !list.isEmpty() ? list.get(0) : null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -39,7 +39,7 @@ public class ProfileDaoImpl implements ProfileDao {
 		 List<Person> list = sessionFactory.getCurrentSession()
 				 						   .createQuery("from Person p where p.user.email=:username")
 				 						   .setParameter("username", username).list();
-		 return list!=null && list.size()>0 ? list.get(0) : null;
+		 return list!=null && !list.isEmpty() ? list.get(0) : null;
 	}
 	
 	/**
@@ -79,8 +79,8 @@ public class ProfileDaoImpl implements ProfileDao {
 				person.setLastName(profiledto.getLastname());
 				}
 			if(profiledto.getDob() != null){
-				   	person.setDateOfBirth(profiledto.getDob());
-				   	}
+				person.setDateOfBirth(profiledto.getDob());
+				 }
 			
 			 person.setUpdatedAt(new Date());
 		   save(person);
@@ -103,10 +103,6 @@ public class ProfileDaoImpl implements ProfileDao {
 		sessionFactory.getCurrentSession().saveOrUpdate(o);
 	}
 
-
-/**
- * 
- */
 	@Override
 	public void updateAddress(Address address) {
 		if(address!=null){

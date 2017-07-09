@@ -3,7 +3,6 @@ package net.endpoint.config.security;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -24,7 +23,7 @@ import net.endpoint.util.CustomEncoder;
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-	 private static String REALM="MY_OAUTH_REALM";
+	 private static final String REALM="MY_OAUTH_REALM";
 	 private static final String URL_DEV =  "http://localhost:8080/endpoint/oauth/check_token";
 	    @Autowired
 	     private TokenStore tokenStore;
@@ -69,7 +68,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	    
 	    @Bean
 	    public TokenStore tokenStore() {
-	        return new JdbcTokenStore(this.dataSource);//new InMemoryTokenStore();
+	        return new JdbcTokenStore(this.dataSource);
+	        //new InMemoryTokenStore();
 	    }
 	    
 	    @Override

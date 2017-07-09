@@ -2,6 +2,7 @@ package net.endpoint.util;
 
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Base64;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Base64;
  */
 public abstract class HelpUtil {
 	
-	public static SimpleDateFormat DATETIME = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+	public static final SimpleDateFormat DATETIME = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 	
    public boolean isNullOrEmpty(String str){
    	return str!=null && !str.isEmpty() ? false : true;
@@ -21,8 +22,8 @@ public abstract class HelpUtil {
    
    public static String Encode64(long id){
 	   byte[] bytes = longToBytes(id);
-	   byte[] encoded = Base64.getEncoder().encode(bytes);
-	   return encoded.toString();
+	   byte[] encoded = Base64.getEncoder().encode(bytes);	
+	   return  Arrays.toString(encoded);
    }
    
    public static long Decode64(String id){

@@ -1,6 +1,5 @@
 package net.endpoint.dao;
 
-import net.endpoint.dto.account.PhoneDto;
 import net.endpoint.dto.account.ProfileDto;
 import net.endpoint.model.User;
 import net.endpoint.model.account.Address;

@@ -3,7 +3,6 @@ package net.endpoint.config;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;

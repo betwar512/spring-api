@@ -42,8 +42,7 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional(readOnly=true)
 	public List<User> getAll(){
-		List<User> result=this.userDao.getAll();
-		return result;
+		return this.userDao.getAll();
 	}
 
 
@@ -102,17 +101,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public AddressDto createOrUpdateAddress(AddressDto address) {
+	public boolean createOrUpdateAddress(AddressDto address) {
 		Address ad  = null;
 		if(address!=null && address.id!= null ){
 			 ad  =  this.profileDao.loadAddress(Long.parseLong(address.id));
 		      ad =  address.convertTo(ad);
+		      this.profileDao.updateAddress(ad);
+		      return true;
 			 }
-
-			
-		
-		
-	  return null;
+	  return false;
 	}
 
 	@Override
@@ -157,6 +154,7 @@ public class UserServiceImpl implements UserService {
 				boolean passwordIsValid = !StringUtils.isNullOrEmpty(accountRequestDto.password) &&
 						                   accountRequestDto.password.equals(accountRequestDto.rePassword) ;
 			  if(passwordIsValid){
+			
 				CustomEncoder   cr = new CustomEncoder();
 				String encodedPass = cr.encode(accountRequestDto.password);
 				user.setEmail(accountRequestDto.userName +"@"+ accountRequestDto.domainName);
@@ -174,19 +172,12 @@ public class UserServiceImpl implements UserService {
 				person.setUser(user);
 				this.profileDao.update(person);
 				return true;
+				
 				  }//password
 			   }//domain 
 			}//dto
 	return false;
 	 }
-
-
-	public boolean isUserExist(String username, String domainName) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
 
 
 }
