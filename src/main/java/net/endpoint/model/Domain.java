@@ -1,5 +1,6 @@
 package net.endpoint.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,7 +14,8 @@ public class Domain {
 	@GeneratedValue
 	private long id;
 	private String name;
-	
+	@Column(name="ivalid" , nullable = false, columnDefinition = "TINYINT", length = 1)
+	private boolean active;
 	
 	public long getId() {
 		return id;
@@ -27,6 +29,13 @@ public class Domain {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
 	
 	
 }

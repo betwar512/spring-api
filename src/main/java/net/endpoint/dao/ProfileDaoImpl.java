@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.hibernate.SessionFactory;
-import net.endpoint.dto.account.PhoneDto;
 import net.endpoint.dto.account.ProfileDto;
 import net.endpoint.model.User;
 import net.endpoint.model.account.Address;
@@ -42,11 +41,17 @@ public class ProfileDaoImpl implements ProfileDao {
 				 						   .setParameter("username", username).list();
 		 return list!=null && list.size()>0 ? list.get(0) : null;
 	}
-private User getUser(String email){
+	
+	/**
+	 * 
+	 * @param email
+	 * @return
+	 */
+   private User getUser(String email){
 		UserDaoImpl dao =   new UserDaoImpl();		
 		dao.setSessionFactory(this.sessionFactory);
 	return dao.findbyName(email);
-}
+  }
 	
 	
 
@@ -118,7 +123,9 @@ private User getUser(String email){
 	 */
 	@Override
 	public void updatePhone(Phone phone) {
-		
+		if(phone!=null){
+			this.save(phone);
+		}
 	}
 
 

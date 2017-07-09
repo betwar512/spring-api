@@ -1,16 +1,12 @@
 package net.endpoint.service;
 
-import static org.junit.Assert.assertFalse;
 
 import java.util.Date;
 import java.util.List;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import com.mysql.cj.api.xdevapi.Result;
 import com.mysql.cj.core.util.StringUtils;
-
 import net.endpoint.dao.ProfileDao;
 import net.endpoint.dao.UserDao;
 import net.endpoint.dto.account.AccountRequestDto;
@@ -75,6 +71,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public void updateProfile(ProfileDto profiledto) {
 
 		 if(profiledto != null){
@@ -171,8 +168,7 @@ public class UserServiceImpl implements UserService {
 				Person person = new Person();
 				person.setFirstName(accountRequestDto.firstName);
 				person.setLastName(accountRequestDto.lastName);
-				person.setDateOfBirth(accountRequestDto.dob);
-				
+				person.setDateOfBirth(accountRequestDto.dob);	
 				person.setCreatedAt(new Date());
 				person.setUpdatedAt(new Date());
 				person.setUser(user);

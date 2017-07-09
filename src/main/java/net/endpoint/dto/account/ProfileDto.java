@@ -33,7 +33,8 @@ public class ProfileDto {
 	 * Pars Model to Dto 
 	 * @param person
 	 */
-	public void pars(Person person){		
+	public void pars(Person person){	
+		if(person != null){
 		this.username  = person.getUser().getUserName();
 		this.email     = person.getUser().getEmail();
 		this.firstname = person.getFirstName();
@@ -53,7 +54,8 @@ public class ProfileDto {
 			PhoneDto phdto = new PhoneDto();
 			phdto.pars(p);
 			phones.add(phdto);
-		}
+		 }
+	   }
 	  }
 	}
 	
