@@ -1,21 +1,9 @@
 package net.endpoint.dao;
 
-import java.util.Date;
 import java.util.List;
-
-import javax.persistence.EntityManagerFactory;
-import javax.transaction.Transactional;
-
 import org.hibernate.SessionFactory;
-
-import com.mysql.cj.core.util.StringUtils;
-
-import net.endpoint.dto.account.AccountRequestDto;
 import net.endpoint.model.Domain;
 import net.endpoint.model.User;
-import net.endpoint.model.account.Person;
-import net.endpoint.util.CustomEncoder;
-import net.endpoint.util.CustomTypes.DOMAINS;
 
 /**
  * 
@@ -57,68 +45,21 @@ public class UserDaoImpl implements UserDao {
 			.createQuery("from User user where user.email=:email")
 			.setParameter("email", name)
 			.list();
-		return users.get(0);
+		return users.isEmpty() ? null : users.get(0);
 	}
 	
-
-	/**
-	 * <p>Create a new user </p>
-	 * @return boolean ? false == not valid 
-	 */
-	@Override
-	public boolean create(AccountRequestDto accountRequestDto) {
-	
-	  if(accountRequestDto!=null){
-			User user = new User();
-			user.setUserName(accountRequestDto.userName);
-			Domain domain = this.getDomainByName(accountRequestDto.domainName);		
-		 if(domain!=null){
-			user.setDomain(domain);
-			boolean passwordIsValid = !StringUtils.isNullOrEmpty(accountRequestDto.password) &&
-					                   accountRequestDto.password.equals(accountRequestDto.rePassword) ;
-		  if(passwordIsValid){
-			CustomEncoder   cr = new CustomEncoder();
-			String encodedPass = cr.encode(accountRequestDto.password);
-			user.setEmail(accountRequestDto.userName +"@"+ accountRequestDto.domainName);
-			user.setPassword(encodedPass);
-			user.setCreatedAt(new Date());
-			user.setUpdatedAt(new Date());
-			this.sessionFactory.getCurrentSession().saveOrUpdate(user);
-			
-			Person person = new Person();
-			person.setFirstName(accountRequestDto.firstName);
-			person.setLastName(accountRequestDto.lastName);
-			person.setDateOfBirth(accountRequestDto.dob);
-			
-			person.setCreatedAt(new Date());
-			person.setUpdatedAt(new Date());
-			person.setUser(user);
-			
-			this.sessionFactory.getCurrentSession().saveOrUpdate(person);
-			return true;
-			  }//password
-		   }//domain 
-		}//dto
-		return false;
-	}
 
 	@Override
 	public void delete(long id) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public User changePassword(User user,String password) {
-		if(!StringUtils.isNullOrEmpty(password)){
-			CustomEncoder encoder = new CustomEncoder();
-			String hash=encoder.encode(password);
-			user.setPassword(hash);
-		    this.sessionFactory.getCurrentSession().saveOrUpdate(user);
-		}
-		
-		return user;
+	public void update(User user){
+		this.sessionFactory.getCurrentSession().saveOrUpdate(user);
 	}
+	
 	
 	  /*-----------------------------------------------------------*/
 	 /*			Private 										  */
@@ -129,7 +70,7 @@ public class UserDaoImpl implements UserDao {
 	 * @param domain
 	 * @return Domain 
 	 */
-	private Domain getDomainByName(String domain){
+	public Domain getDomainByName(String domain){
 		if(domain!=null && !domain.isEmpty()){
 		return (Domain) this.sessionFactory.getCurrentSession()
 					.createQuery("from Domain domain where domain.name=:name")
@@ -138,6 +79,9 @@ public class UserDaoImpl implements UserDao {
 		    }
 	 return null ;
 	}
+
+
+
 	
 
 	

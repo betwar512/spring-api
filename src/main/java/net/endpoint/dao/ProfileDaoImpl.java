@@ -2,12 +2,8 @@ package net.endpoint.dao;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.hibernate.SessionFactory;
-
-import net.endpoint.dto.account.AddressDto;
 import net.endpoint.dto.account.PhoneDto;
 import net.endpoint.dto.account.ProfileDto;
 import net.endpoint.model.User;
@@ -89,16 +85,16 @@ private User getUser(String email){
 	 return result;
 	}
 	
-	
-	private Address loadAddress(long id){
+	@Override
+	public Address loadAddress(long id){
 		return this.sessionFactory.getCurrentSession().load(Address.class, id);
 	}
-	
-	private Phone loadPhone(long id){
+	@Override
+	public Phone loadPhone(long id){
 		return this.sessionFactory.getCurrentSession().load(Phone.class, id);
 	}
-	
-	private void save(Object o){
+	@Override
+	public void save(Object o){
 		sessionFactory.getCurrentSession().saveOrUpdate(o);
 	}
 
@@ -107,16 +103,11 @@ private User getUser(String email){
  * 
  */
 	@Override
-	public Address addOrUpdateAddtess(AddressDto addressdto) {
-		Address ad  = null;
-		if(addressdto!=null && addressdto.id!= null ){
-			 ad  =  loadAddress(Long.parseLong(addressdto.id));
-			 if(ad!=null){
-		        ad =  addressdto.convertTo(ad);	    
-		       this.save(ad);
-		   }
-		}	
-	return ad;
+	public void updateAddress(Address address) {
+		if(address!=null){
+			this.save(address);
+		}
+		
 	}
 
 
@@ -126,14 +117,15 @@ private User getUser(String email){
 	 * 
 	 */
 	@Override
-	public Phone addOrUpdatePhone(PhoneDto phonedto) {
-		Phone result = null;
-		if(phonedto!=null && phonedto.serverid!=null){
-			 result = loadPhone(Long.parseLong(phonedto.serverid));
-			 result = phonedto.convertTo(result);	
-			this.save(result);
-		}	
-		return result;
+	public void updatePhone(Phone phone) {
+		
+	}
+
+
+	@Override
+	public void update(Person person) {
+		this.sessionFactory.getCurrentSession().saveOrUpdate(person);
+		
 	}
 	
 	

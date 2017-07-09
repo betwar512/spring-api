@@ -21,9 +21,9 @@ public class PhoneDto {
 	 */
 	public Phone convertTo(Phone phone){
 		phone = phone!=null ? phone : new Phone();
-	   if(!this.getNumber().isEmpty())
+	   if(!this.getNumber().isEmpty()){
 		   phone.setNumber(this.getNumber());
-	   
+	       }
 		   		phone.setCountryCode("+61");   
 		return phone;
 	}

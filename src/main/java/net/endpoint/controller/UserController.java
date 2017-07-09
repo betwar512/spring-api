@@ -50,7 +50,7 @@ public class UserController extends MainController {
 			   Set<SecurityRole> roles = user.getRolse();
 			   Stream<SecurityRole> Result = roles.stream().filter(t->{ return t.getLevel() > 4 ? true : false;  });
 			   
-		 if(Result.count()>0){  
+		 if(Result.count() > 0){  
 			   this.userService.createAccount(accountRequestDto);
 			}
 			return new AccountRequestDto();

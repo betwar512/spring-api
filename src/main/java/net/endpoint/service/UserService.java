@@ -14,9 +14,10 @@ public interface UserService {
 	public List<User> getAll();
 	public User       findByName(String name);
 	public ProfileDto findByUserName(String name);
+	public boolean   isUserExist(String username , String domainName);
 	public boolean createAccount(AccountRequestDto accountRequestDto);
 	public void       updateProfile(ProfileDto profileDto);
 	public AddressDto createOrUpdateAddress(AddressDto address);
-	public PhoneDto   createOrUpdatePhone(PhoneDto phonedto);
-	public User       updatePassword(User user, String password);
+	public boolean   createOrUpdatePhone(PhoneDto phonedto);
+	public boolean       updatePassword(User user, String password);
 }
