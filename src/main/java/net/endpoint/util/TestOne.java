@@ -8,12 +8,12 @@ import java.security.NoSuchProviderException;
 
 import org.junit.Test;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 public class TestOne {
 
 	@Test
-	public void test() throws NoSuchAlgorithmException, NoSuchProviderException {
+	public void test() throws NoSuchAlgorithmException {
 
 		String pass = "4650080";
 		 MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -22,7 +22,7 @@ public class TestOne {
 	        byte byteData[] = md.digest();
 
 	        //convert the byte to hex format method 1
-	        StringBuffer sb = new StringBuffer();
+	        StringBuilder sb = new StringBuilder();
 	        for (int i = 0; i < byteData.length; i++) {
 	         sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
 	        }
@@ -31,7 +31,8 @@ public class TestOne {
 
 		
 	
-	String cryptedPassword = new ShaPasswordEncoder(512).toString();//.encodePassword("4650080", null);
+	String cryptedPassword = new ShaPasswordEncoder(512).toString();
+	//.encodePassword("4650080", null);
 	System.out.println(cryptedPassword);
 	assertNotNull(cryptedPassword);
 	}

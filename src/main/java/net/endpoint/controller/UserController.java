@@ -21,8 +21,11 @@ import net.endpoint.dto.account.ProfileDto;
 import net.endpoint.model.SecurityRole;
 import net.endpoint.model.User;
 import net.endpoint.service.UserService;
+import net.endpoint.service.email.EmailService;
+import net.endpoint.service.email.EmailServiceImpl;
 
 
+@SuppressWarnings("unused")
 @RestController
 @RequestMapping("/api/user")
 public class UserController extends MainController {
@@ -37,6 +40,9 @@ public class UserController extends MainController {
 
 		@RequestMapping(method = RequestMethod.GET)
 		public ProfileDto get(Principal principal){
+			EmailService service = new EmailServiceImpl();
+			service.sentEmail();
+
 			String name = principal.getName();
     	 ProfileDto dto = loadProfile(name);
     	 System.out.println(dto.toString());
@@ -48,9 +54,9 @@ public class UserController extends MainController {
 			
 			  User user =  userService.findByName(principal.getName());
 			   Set<SecurityRole> roles = user.getRolse();
-			   Stream<SecurityRole> Result = roles.stream().filter(t->{ return t.getLevel() > 4 ? true : false;  });
+			   Stream<SecurityRole> result = roles.stream().filter(t-> t.getLevel() > 4);
 			   
-		 if(Result.count() > 0){  
+		 if(result.count() > 0){  
 			   this.userService.createAccount(accountRequestDto);
 			}
 			return new AccountRequestDto();

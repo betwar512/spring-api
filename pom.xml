@@ -17,19 +17,29 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		    <jackson.version>2.7.5</jackson.version>
 	</properties>
 	
-	 <build>  
-	  <finalName>endpoint</finalName>  
-	  <plugins>  
-	   <plugin>  
-	    <artifactId>maven-compiler-plugin</artifactId>  
-	    <configuration>  
-	     <source>${jdk.version}</source>  
-	     <target>${jdk.version}</target>  
-	    </configuration>  
-	   </plugin>  
-	  </plugins>  
-	 </build>  
+		 <build>  
+		  <finalName>endpoint</finalName>  
+		  <plugins>  
+		   <plugin>  
+		    <artifactId>maven-compiler-plugin</artifactId>  
+		    <configuration>  
+		     <source>${jdk.version}</source>  
+		     <target>${jdk.version}</target>  
+		    </configuration>  
+		   </plugin>  
+		  </plugins>  
+		 </build>  
+		 
 	<dependencies>
+	 
+	 <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot</artifactId>
+		    <version>1.5.4.RELEASE</version>
+		</dependency>
+	 
+	 
 	 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -54,6 +64,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		    <artifactId>spring-context-support</artifactId>
 		    <version>${springframework.version}</version>
 		</dependency>
+			<!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-mail -->
+	<dependency>
+	    <groupId>org.springframework.integration</groupId>
+	    <artifactId>spring-integration-mail</artifactId>
+	    <version>${springframework.version}</version>
+	</dependency>
 			
 <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
 	<dependency>
@@ -130,6 +146,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	    <artifactId>mail</artifactId>
 	    <version>1.4</version>
 	</dependency>
+
 
  </dependencies>
 	

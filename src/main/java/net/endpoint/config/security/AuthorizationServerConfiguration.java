@@ -62,14 +62,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	     
 	    @Bean
 		public PasswordEncoder passwordEncoder(){
-			PasswordEncoder encoder = new CustomEncoder();
-			return encoder;
+			return new CustomEncoder();
 		}
 	    
 	    @Bean
 	    public TokenStore tokenStore() {
 	        return new JdbcTokenStore(this.dataSource);
-	        //new InMemoryTokenStore();
 	    }
 	    
 	    @Override
@@ -83,9 +81,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	          .authenticationManager(authenticationManager);
 	    }
 	 	 
-	 //   @Value("classpath:schema.sql")
-	  //  private Resource schemaScript;
-	 	    
+	    
 	    @Primary
 	    @Bean
 	    public RemoteTokenServices tokenService() {
@@ -96,34 +92,5 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	        tokenService.setClientSecret("secret");
 	        return tokenService;
 	    }
-	    
-//	    @Bean
-//	    public TokenStore tokenStore() {
-//	        return new JdbcTokenStore(dataSource);
-//	    }
-	    
-//	    @Bean
-//	    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
-//	        DataSourceInitializer initializer = new DataSourceInitializer();
-//	        initializer.setDataSource(dataSource);
-//	        initializer.setDatabasePopulator(databasePopulator());
-//	        return initializer;
-//	    }
-	     
-//	    private DatabasePopulator databasePopulator() {
-//	        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-//	        populator.addScript(schemaScript);
-//	        return populator;
-//	    }
-	     
-//	    @Bean
-//	    public DataSource dataSource() {
-//	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//	        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-//	        dataSource.setUrl("jdbc:mysql://52.63.208.154:3306/test");
-//	        dataSource.setUsername("root");
-//	        dataSource.setPassword("Solmaz662M");
-//	        return dataSource;
-//	    }
 	    
 }

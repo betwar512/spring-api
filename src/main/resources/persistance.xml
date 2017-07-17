@@ -52,5 +52,4 @@
 	 <property name="profileDao" ref="myProfileDao"></property>
 	 </bean>
 
-	 
 	</beans>
