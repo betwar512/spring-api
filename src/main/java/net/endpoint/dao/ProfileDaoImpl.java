@@ -3,31 +3,30 @@ package net.endpoint.dao;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
-import org.hibernate.SessionFactory;
 import net.endpoint.dto.account.ProfileDto;
 import net.endpoint.model.User;
 import net.endpoint.model.account.Address;
 import net.endpoint.model.account.Person;
 import net.endpoint.model.account.Phone;
 
-public class ProfileDaoImpl implements ProfileDao {
+public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 
-	SessionFactory sessionFactory;
-	
-	public void setSessionFactory(SessionFactory sessionFactory){
-		this.sessionFactory = sessionFactory;
-	}
+//	SessionFactory sessionFactory;
+//	
+//	public void setSessionFactory(SessionFactory sessionFactory){
+//		this.sessionFactory = sessionFactory;
+//	}
 	
 	
 	@Override
 	public Person load(long id) {
-		return sessionFactory.getCurrentSession().load(Person.class, id);
+		return this.getSession().load(Person.class, id);
 	}
 
 	@Override
 	public Person findByUser(User user) {
 			@SuppressWarnings("unchecked")
-			List<Person> list=	sessionFactory.getCurrentSession()
+			List<Person> list=	this.getSession()
 				.createQuery("from Person p where p.user = :user")
 				.setParameter("user", user).list();					
 		return list !=null && !list.isEmpty() ? list.get(0) : null;
@@ -36,7 +35,7 @@ public class ProfileDaoImpl implements ProfileDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Person findByUserName(String username) {
-		 List<Person> list = sessionFactory.getCurrentSession()
+		 List<Person> list = this.getSession()
 				 						   .createQuery("from Person p where p.user.email=:username")
 				 						   .setParameter("username", username).list();
 		 return list!=null && !list.isEmpty() ? list.get(0) : null;
@@ -49,7 +48,7 @@ public class ProfileDaoImpl implements ProfileDao {
 	 */
    private User getUser(String email){
 		UserDaoImpl dao =   new UserDaoImpl();		
-		dao.setSessionFactory(this.sessionFactory);
+	//	dao.setSessionFactory(this.sessionFactory);
 	return dao.findbyName(email);
   }
 	
@@ -70,7 +69,7 @@ public class ProfileDaoImpl implements ProfileDao {
 				person.setCreatedAt(new Date());
 				User user = getUser(profiledto.getEmail());
 				person.setUser(user);
-				this.sessionFactory.getCurrentSession().save(person);
+				this.getSession().save(person);
 		       }
 			if(!profiledto.getFirstname().isEmpty()){
 			    person.setFirstName(profiledto.getFirstname());
@@ -92,15 +91,15 @@ public class ProfileDaoImpl implements ProfileDao {
 	
 	@Override
 	public Address loadAddress(long id){
-		return this.sessionFactory.getCurrentSession().load(Address.class, id);
+		return this.getSession().load(Address.class, id);
 	}
 	@Override
 	public Phone loadPhone(long id){
-		return this.sessionFactory.getCurrentSession().load(Phone.class, id);
+		return this.getSession().load(Phone.class, id);
 	}
 	@Override
 	public void save(Object o){
-		sessionFactory.getCurrentSession().saveOrUpdate(o);
+		this.getSession().saveOrUpdate(o);
 	}
 
 	@Override
@@ -127,7 +126,7 @@ public class ProfileDaoImpl implements ProfileDao {
 
 	@Override
 	public void update(Person person) {
-		this.sessionFactory.getCurrentSession().saveOrUpdate(person);
+		this.getSession().saveOrUpdate(person);
 		
 	}
 	

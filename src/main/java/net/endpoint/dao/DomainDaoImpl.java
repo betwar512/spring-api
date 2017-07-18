@@ -4,24 +4,24 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import net.endpoint.model.Domain;
 
-public class DomainDaoImpl implements DomainDao {
+public class DomainDaoImpl extends BaseDao implements DomainDao {
 
 	
-	SessionFactory sessionFactory;
-	
-	public void setSessionFactory(SessionFactory sessionFactory){
-		this.sessionFactory = sessionFactory;
-	}
+//	SessionFactory sessionFactory;
+//	
+//	public void setSessionFactory(SessionFactory sessionFactory){
+//		this.sessionFactory = sessionFactory;
+//	}
 	
 	
 	public Domain get(long id) {
-	   return this.sessionFactory.getCurrentSession().load(Domain.class, id);
+	   return this.getSession().load(Domain.class, id);
 	}
 
 
 	public Domain findByName(String name) {
 	@SuppressWarnings("unchecked")
-	List<Domain> domains = this.sessionFactory.getCurrentSession()
+	List<Domain> domains = this.getSession()
 				.createQuery("from Domain domain where domain.name=:name")
 				.setParameter("name", name)
 				.list();
@@ -30,7 +30,7 @@ public class DomainDaoImpl implements DomainDao {
 
 	
 	public Long saveOrUpdate(Domain domain) {
-		this.sessionFactory.getCurrentSession().saveOrUpdate(domain);
+		this.getSession().saveOrUpdate(domain);
 		return domain.getId();
 	}
 

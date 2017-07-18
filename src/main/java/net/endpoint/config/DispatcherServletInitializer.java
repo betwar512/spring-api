@@ -13,9 +13,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
-@Configuration
-@EnableAuthorizationServer
-@ComponentScan({ "net.endpoint.controller" })
+
 public class DispatcherServletInitializer  extends AuthorizationServerConfigurerAdapter implements WebApplicationInitializer {
 //
 	@Override
