@@ -2,6 +2,8 @@ package net.endpoint.dao;
 
 import java.util.List;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
+
 import net.endpoint.model.Domain;
 import net.endpoint.model.User;
 
@@ -10,21 +12,16 @@ import net.endpoint.model.User;
  * @author Betwar
  *
  */
-public class UserDaoImpl implements UserDao {
+
+@Repository
+public class UserDaoImpl extends BaseDao implements UserDao {
 
 	
-	SessionFactory sessionFactory;
-	
-	public void setSessionFactory(SessionFactory sessionFactory){
-		this.sessionFactory = sessionFactory;
-	}
-	
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<User> getAll() {		
-		return this.sessionFactory
-							.getCurrentSession()
+		return this.getSession()
 							  .createQuery("from User user")
 							       .list();
 		
@@ -33,15 +30,14 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User get(long id) {
-		return this.sessionFactory
-				          .getCurrentSession()
+		return this.getSession()
 				                     .get(User.class,id);
 	}
 
 	@Override
 	public User findbyName(String name) {
 	 @SuppressWarnings("unchecked")
-	List<User> users	= this.sessionFactory.getCurrentSession()
+	List<User> users	= this.getSession()
 			.createQuery("from User user where user.email=:email")
 			.setParameter("email", name)
 			.list();
@@ -57,7 +53,7 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public void update(User user){
-		this.sessionFactory.getCurrentSession().saveOrUpdate(user);
+		this.getSession().saveOrUpdate(user);
 	}
 	
 	
@@ -72,7 +68,7 @@ public class UserDaoImpl implements UserDao {
 	 */
 	public Domain getDomainByName(String domain){
 		if(domain!=null && !domain.isEmpty()){
-		return (Domain) this.sessionFactory.getCurrentSession()
+		return (Domain)this.getSession()
 					.createQuery("from Domain domain where domain.name=:name")
 						.setParameter("name", domain)
 						   .uniqueResult();

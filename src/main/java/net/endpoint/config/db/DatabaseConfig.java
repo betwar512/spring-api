@@ -27,15 +27,15 @@ public class DatabaseConfig {
     @Value("${hibernate.hbm2ddl.auto}") private String hibernateHbm2ddlAuto;
 	@Autowired        
     DataSource dataSource;
-	@Bean()    
-	 public DataSource getDataSource(){
-	        DriverManagerDataSource ds = new DriverManagerDataSource();        
-	        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-	        ds.setUrl("jdbc:mysql://52.63.208.154:3306/mailserver");
-	        ds.setUsername("root");
-	        ds.setPassword("Solmaz662M");        
-	 return ds;
-	 }
+//	@Bean()    
+//	 public DataSource getDataSource(){
+//	        DriverManagerDataSource ds = new DriverManagerDataSource();        
+//	        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+//	        ds.setUrl("jdbc:mysql://52.63.208.154:3306/mailserver");
+//	        ds.setUsername("root");
+//	        ds.setPassword("Solmaz662M");        
+//	 return ds;
+//	 }
 	    
 	 @Bean
 	 public SessionFactory sessionFactory() {
@@ -47,10 +47,10 @@ public class DatabaseConfig {
 	   return localFactory.getObject();
 	 }
 
-	 @Bean
-		public HibernateTransactionManager hibernateTransactionManager(){
-		    return new HibernateTransactionManager(sessionFactory());
-		}
+//	 @Bean
+//		public HibernateTransactionManager hibernateTransactionManager(){
+//		    return new HibernateTransactionManager(sessionFactory());
+//		}
 	 
 
 	@Bean

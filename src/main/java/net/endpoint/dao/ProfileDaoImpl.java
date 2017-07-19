@@ -3,12 +3,15 @@ package net.endpoint.dao;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
 import net.endpoint.dto.account.ProfileDto;
 import net.endpoint.model.User;
 import net.endpoint.model.account.Address;
 import net.endpoint.model.account.Person;
 import net.endpoint.model.account.Phone;
-
+@Repository
 public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 
 //	SessionFactory sessionFactory;

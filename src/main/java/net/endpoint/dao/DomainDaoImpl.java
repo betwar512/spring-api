@@ -2,8 +2,11 @@ package net.endpoint.dao;
 
 import java.util.List;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
+
 import net.endpoint.model.Domain;
 
+@Repository
 public class DomainDaoImpl extends BaseDao implements DomainDao {
 
 	

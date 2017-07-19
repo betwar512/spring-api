@@ -3,10 +3,13 @@ package net.endpoint.service;
 
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
-import com.mysql.cj.core.util.StringUtils;
+import org.springframework.util.StringUtils;
+
 import net.endpoint.dao.ProfileDao;
 import net.endpoint.dao.UserDao;
 import net.endpoint.dto.account.AccountRequestDto;
@@ -20,6 +23,7 @@ import net.endpoint.model.account.Person;
 import net.endpoint.model.account.Phone;
 import net.endpoint.util.CustomEncoder;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	
@@ -127,7 +131,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean updatePassword(User user, String password) {
-		if(!StringUtils.isNullOrEmpty(password)){
+		if(!StringUtils.isEmpty(password)){
 			CustomEncoder encoder = new CustomEncoder();
 			String hash = encoder.encode(password);
 			user.setPassword(hash);
@@ -151,7 +155,7 @@ public class UserServiceImpl implements UserService {
 				Domain domain = this.userDao.getDomainByName(accountRequestDto.domainName);		
 			 if(domain!=null){
 				user.setDomain(domain);
-				boolean passwordIsValid = !StringUtils.isNullOrEmpty(accountRequestDto.password) &&
+				boolean passwordIsValid = !StringUtils.isEmpty(accountRequestDto.password) &&
 						                   accountRequestDto.password.equals(accountRequestDto.rePassword) ;
 			  if(passwordIsValid){
 			

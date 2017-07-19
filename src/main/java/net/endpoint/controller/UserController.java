@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mysql.cj.api.xdevapi.Result;
-
 import net.endpoint.dto.account.AccountRequestDto;
 import net.endpoint.dto.account.AddressDto;
 import net.endpoint.dto.account.ProfileDto;
