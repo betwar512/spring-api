@@ -10,21 +10,19 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import net.endpoint.config.filter.CORSFilter;
 import net.endpoint.util.CustomEncoder;
  
 @Configuration
-@EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
 	 private static final String REALM="MY_OAUTH_REALM";
-	 private static final String URL_DEV =  "http://localhost:8080/endpoint/oauth/check_token";
+	 private static final String URL_DEV =  "http://localhost:8080/oauth/check_token";
 	    @Autowired
 	     private TokenStore tokenStore;
 
@@ -41,13 +39,14 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 		 @Override
 		 public void configure(ClientDetailsServiceConfigurer clients) 
 		      throws Exception {
-		        clients.jdbc(dataSource);
-//		          .withClient("client-app")
-//		          .authorizedGrantTypes("password", "authorization_code", "client_credentials","refresh_token", "implicit")
-//		          .authorities("ROLE_CLIENT", "ADMIN")
-//		          .scopes("read", "write", "trust")
-//		          .secret("secret")
-//	              .autoApprove(true);
+		           clients.jdbc(dataSource)
+		          .withClient("client-app")
+		          .authorizedGrantTypes("password", "authorization_code", "client_credentials","refresh_token", "implicit")
+		          .authorities("ROLE_CLIENT", "ADMIN")
+		          .scopes("read", "write", "trust")
+		          .secret("testsecret")
+	              .autoApprove(true)
+	              .accessTokenValiditySeconds(60000000);
 
 		    }
 	 
@@ -55,7 +54,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	    public void configure(
 	      AuthorizationServerSecurityConfigurer oauthServer) 
 	      throws Exception {
-	    //	oauthServer.addTokenEndpointAuthenticationFilter(new CORSFilter());
+	    	oauthServer.addTokenEndpointAuthenticationFilter(new CORSFilter());
 	        oauthServer.realm(REALM+"/client");//allowFormAuthenticationForClients();
 	        oauthServer.checkTokenAccess("permitAll()");
 	    }
@@ -64,12 +63,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 		public PasswordEncoder passwordEncoder(){
 			return new CustomEncoder();
 		}
-	    
-	    @Bean
-	    public TokenStore tokenStore() {
-	        return new JdbcTokenStore(this.dataSource);
-	    }
-	    
+	       
 	    @Override
 	    public void configure(
 	      AuthorizationServerEndpointsConfigurer endpoints) 
@@ -82,14 +76,14 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	    }
 	 	 
 	    
+	    
 	    @Primary
 	    @Bean
 	    public RemoteTokenServices tokenService() {
 	        RemoteTokenServices tokenService = new RemoteTokenServices();
-	        tokenService.setCheckTokenEndpointUrl(
-	         AuthorizationServerConfiguration.URL_DEV);
+	        tokenService.setCheckTokenEndpointUrl(URL_DEV);
 	        tokenService.setClientId("client-app");
-	        tokenService.setClientSecret("secret");
+	        tokenService.setClientSecret("testsecret");
 	        return tokenService;
 	    }
 	    

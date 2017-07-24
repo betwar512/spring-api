@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
@@ -17,8 +18,6 @@ import org.springframework.security.oauth2.provider.approval.TokenStoreUserAppro
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-
-
 
 import net.endpoint.util.CustomEncoder;
 
@@ -37,20 +36,19 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 		@Autowired
 		DataSource dataSource;
-
-	   @Autowired
+	    @Autowired
 	    private ClientDetailsService clientDetailsService;
 	
 	   /**
-	    * <p>User Oauth taking place here ,Using custom query to handle Authentication for grandt_type : password </p>
+	    * <p>User Oath taking place here ,Using custom query to handle Authentication for grandt_type : password </p>
 	    * @param auth
 	    * @throws Exception
 	    */
 	   @Autowired
 	   protected void globalUserDetails(AuthenticationManagerBuilder auth)  throws Exception {
-		//   String userByRule = "select user_name as username,role from user_role where user_name=?";
+
 		   auth.jdbcAuthentication()
-		       .passwordEncoder(new CustomEncoder()) //Use custom encoder to read Dovcote encoded pass 
+		       .passwordEncoder(new CustomEncoder())
 		       .dataSource(dataSource)
 			   .usersByUsernameQuery(USER_QUERY)
 			   .authoritiesByUsernameQuery(USER_ROLE_QUERY);
@@ -61,7 +59,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	    	   http
-	        //   .csrf().disable()
+	           .csrf().disable()
 	          // .anonymous().disable()
 	           .authorizeRequests()
 	           .antMatchers(HttpMethod.OPTIONS,"/oauth/token").permitAll()
@@ -69,21 +67,6 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	           .anyRequest().authenticated();
 	    }
      
-	  
-	    @Bean
-	    public TokenStore tokenStore() {
-	        return new JdbcTokenStore(this.dataSource)
-	        		;//new InMemoryTokenStore();
-	    }
-
-	    @Override
-	    @Bean
-	    public AuthenticationManager authenticationManagerBean() 
-	      throws Exception {
-	        return super.authenticationManagerBean();
-	    }
-	 
-	
 	    
 	    @Bean
 	    @Autowired
@@ -104,5 +87,21 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        return store;
 	    }
 	    
+	
+	    @Override
+	    @Bean
+	    public AuthenticationManager authenticationManagerBean() 
+	      throws Exception {
+	        return super.authenticationManagerBean();
+	    }
+	 
+
+	    
+	    @Bean
+	    public TokenStore tokenStore() {
+	        return new JdbcTokenStore(this.dataSource);
+	    }
+	
+	  
 	    
 }

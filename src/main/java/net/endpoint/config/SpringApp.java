@@ -7,12 +7,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 @SpringBootApplication
-@EnableAuthorizationServer
 @ComponentScan({ "net.endpoint" })
+//@EnableAutoConfiguration(exclude = { WebMvcAutoConfiguration.class })
 public class SpringApp {
 
 	
@@ -27,5 +29,16 @@ public class SpringApp {
 	        ppc.setIgnoreUnresolvablePlaceholders(true);
 	        return ppc;
 	    }
+  
+  @Bean
+  public WebMvcConfigurer corsConfigurer() {
+      return new WebMvcConfigurerAdapter() {
+          @Override
+          public void addCorsMappings(CorsRegistry registry) {
+              registry.addMapping("/**");
+          }
+      };
+  }
+  
 	
  }

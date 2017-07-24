@@ -15,8 +15,8 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Component(value="CORSFilter")
-@Order(Ordered.HIGHEST_PRECEDENCE)
+//@Component(value="CORSFilter")
+//@Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter {
 
 	@Override

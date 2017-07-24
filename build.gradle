@@ -13,7 +13,7 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-    baseName = 'gs-spring-boot'
+    baseName = 'endpoint-spring'
     version =  '0.1.0'
 }
 
@@ -30,7 +30,7 @@ dependencies {
         exclude module: "spring-boot-starter-tomcat"
     }																																																																																																		
     
-    compile("org.springframework.boot:spring-boot-starter-jetty")
+     compile("org.springframework.boot:spring-boot-starter-jetty")
     // end::jetty[]
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
@@ -42,8 +42,8 @@ dependencies {
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa')
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-mail')
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-security')
-    compile(group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.3.RELEASE')
-    compile(group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.0.8.RELEASE') {
+    compile(group: 'org.springframework.security', name: 'spring-security-jwt')
+    compile(group: 'org.springframework.security.oauth', name: 'spring-security-oauth2') {
         exclude(module: 'jackson-mapper-asl') // We already have a more recent jackson via Spring Boot
     }
    

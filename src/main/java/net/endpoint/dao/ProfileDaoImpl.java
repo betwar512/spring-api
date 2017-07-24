@@ -21,6 +21,7 @@ public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 //	}
 	
 	
+	
 	@Override
 	public Person load(long id) {
 		return this.getSession().load(Person.class, id);
@@ -38,6 +39,7 @@ public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Person findByUserName(String username) {
+		System.out.println(username);
 		 List<Person> list = this.getSession()
 				 						   .createQuery("from Person p where p.user.email=:username")
 				 						   .setParameter("username", username).list();
