@@ -1,26 +1,23 @@
 package net.endpoint.model.oauth;
 
-import javax.sql.DataSource;
-
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
+import org.springframework.stereotype.Service;
 
-public class CustomClientDetailsService implements ClientDetailsService {
+@Service
+public class CustomClientDetailsService  implements ClientDetailsService  {
 
 	
 	 @Autowired
-     DataSource dataSource;
+     SessionFactory sessionFactory;
 	
 	
 	@Override
-	public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-		
-		
-		
-		// TODO Auto-generated method stub
-		return null;
+	public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {	
+	 return sessionFactory.getCurrentSession().load(ClientDetailsImpl.class,clientId);
 	}
 
 }

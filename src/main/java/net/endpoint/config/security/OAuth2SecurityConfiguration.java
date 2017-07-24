@@ -36,9 +36,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 		@Autowired
 		DataSource dataSource;
-	    @Autowired
-	    private ClientDetailsService clientDetailsService;
-	
+
 	   /**
 	    * <p>User Oath taking place here ,Using custom query to handle Authentication for grandt_type : password </p>
 	    * @param auth
@@ -66,42 +64,17 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	           .antMatchers("/resources/**").permitAll()
 	           .anyRequest().authenticated();
 	    }
-     
 	    
-	    @Bean
-	    @Autowired
-	    public TokenStoreUserApprovalHandler userApprovalHandler(TokenStore tokenStore){
-	        TokenStoreUserApprovalHandler handler = new TokenStoreUserApprovalHandler();
-	        handler.setTokenStore(tokenStore);
-	        handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
-	        handler.setClientDetailsService(clientDetailsService);
-	        return handler;
-	    }
-	     
-	    @Bean
-	    @Autowired
-	    public ApprovalStore approvalStore(TokenStore tokenStore) throws Exception {
-	        TokenApprovalStore store = new TokenApprovalStore();
-	        store.setTokenStore(tokenStore);
-	     
-	        return store;
-	    }
-	    
-	
 	    @Override
 	    @Bean
 	    public AuthenticationManager authenticationManagerBean() 
 	      throws Exception {
 	        return super.authenticationManagerBean();
 	    }
-	 
-
 	    
 	    @Bean
 	    public TokenStore tokenStore() {
-	        return new JdbcTokenStore(this.dataSource);
+	        return new JdbcTokenStore(dataSource);
 	    }
-	
-	  
 	    
 }

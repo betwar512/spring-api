@@ -4,35 +4,21 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
 @Entity
-@Table(name="ClientDetails")
+@Table(name="oauth_client_details")
 public class ClientDetailsImpl implements ClientDetails {
 
-	private static final long serialVersionUID = 5101520299011663465L;
-	//	 appId VARCHAR(255) PRIMARY KEY,
-//	  resourceIds VARCHAR(255),
-//	  appSecret VARCHAR(255),
-//	  scope VARCHAR(255),
-//	  grantTypes VARCHAR(255),
-//	  redirectUrl VARCHAR(255),
-//	  authorities VARCHAR(255),
-//	  access_token_validity INTEGER,
-//	  refresh_token_validity INTEGER,
-//	  additionalInformation VARCHAR(4096),
-//	  autoApproveScopes VARCHAR(255)
+	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY) 
+	@Column(name="client_id")
 	private String appId;
 	@Column
 	private String resourceIds;
@@ -44,15 +30,15 @@ public class ClientDetailsImpl implements ClientDetails {
 	private String grantTypes;
 	@Column
 	private String redirectUrl;
-	@Column
+	@Column(name="authorized_grant_types")
 	private String authorities;
 	@Column(name="access_token_validity")
 	private Integer validAccessToken;
 	@Column(name="refresh_token_validity")
 	private Integer validRefreshToken;
-	@Column
+	@Column(name="additional_information")
 	private String additionalInformation;
-	@Column
+	@Column(name="autoapprove")
 	private String autoApproveScopes;
 	
 	@Override
@@ -71,7 +57,7 @@ public class ClientDetailsImpl implements ClientDetails {
 
 	@Override
 	public boolean isSecretRequired() {
-		return false;
+		return !this.appSecret.isEmpty();
 	}
 
 	@Override
@@ -81,47 +67,53 @@ public class ClientDetailsImpl implements ClientDetails {
 
 	@Override
 	public boolean isScoped() {
-		return false;
+		return !this.scope.isEmpty();
 	}
 
 	@Override
 	public Set<String> getScope() {
-		return null;
+		return this.toSet(this.scope);
 	}
 
 	@Override
 	public Set<String> getAuthorizedGrantTypes() {
-		return null;
+		return this.toSet(this.authorities);
 	}
 
+	private Set<String> toSet(String arg){
+		String[] strs = arg.split(",");
+		Set<String> list = new HashSet<>();
+		for(String str:strs){
+			list.add(str);
+		}
+		return list;
+	}
+	
 	@Override
 	public Set<String> getRegisteredRedirectUri() {
-		  Set<String> set = new HashSet<>();		   
-		   for(String str: this.redirectUrl.split(",")){
-			   set.add(str);
-			   }
-		return set;
+		return this.toSet(this.redirectUrl);
 	}
 
 	@Override
 	public Collection<GrantedAuthority> getAuthorities() {
-	
-		return null;
+	String[] strs =	authorities.split(",");
+	return GrantedAuthorityImpl.getAuthoritize(strs);
 	}
 
 	@Override
 	public Integer getAccessTokenValiditySeconds() {
-		return null;
+		return this.validAccessToken;
 	}
 
 	@Override
 	public Integer getRefreshTokenValiditySeconds() {
-		return null;
+		return this.validRefreshToken;
 	}
 
 	@Override
 	public boolean isAutoApprove(String scope) {
-		return false;
+	Set<String> strs =  this.toSet(this.autoApproveScopes);
+		return strs.contains(scope);
 	}
 
 	@Override

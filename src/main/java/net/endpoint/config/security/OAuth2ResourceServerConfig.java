@@ -32,5 +32,6 @@ public class OAuth2ResourceServerConfig  extends ResourceServerConfigurerAdapter
 	        .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	    }
 	
+	 
 	
 }

@@ -1,6 +1,7 @@
 package net.endpoint.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +21,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Type;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import net.endpoint.model.account.Account;
@@ -31,8 +35,9 @@ import net.endpoint.model.account.Account;
  */
 @Entity
 @Table(name="virtual_users")
-public class User {
+public class User implements UserDetails{
 
+	private static final long serialVersionUID = -2058978764684892356L;
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY) 
 		private long         id;
@@ -123,6 +128,39 @@ public class User {
 		public String toString() {
 			return "User [id=" + id + ", userName=" + userName + ", email=" + email + ", createdAt=" + createdAt
 					+ ", updatedAt=" + updatedAt + "]";
+		}
+		
+		
+		
+		@Override
+		public Collection<? extends GrantedAuthority> getAuthorities() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public String getUsername() {
+			
+			return this.getEmail();
+		}
+		@Override
+		public boolean isAccountNonExpired() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		@Override
+		public boolean isAccountNonLocked() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		@Override
+		public boolean isCredentialsNonExpired() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		@Override
+		public boolean isEnabled() {
+			// TODO Auto-generated method stub
+			return false;
 		}
 	
 		

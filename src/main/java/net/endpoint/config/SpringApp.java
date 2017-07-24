@@ -14,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 @SpringBootApplication
 @ComponentScan({ "net.endpoint" })
-//@EnableAutoConfiguration(exclude = { WebMvcAutoConfiguration.class })
 public class SpringApp {
 
 	
@@ -32,7 +31,7 @@ public class SpringApp {
   
   @Bean
   public WebMvcConfigurer corsConfigurer() {
-      return new WebMvcConfigurerAdapter() {
+       return new WebMvcConfigurerAdapter() {
           @Override
           public void addCorsMappings(CorsRegistry registry) {
               registry.addMapping("/**");
