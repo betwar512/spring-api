@@ -15,14 +15,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @EnableIntegration
 public class EmailConfig {
 
-	// @Autowired
-	// DirectChannel outboundMail;
-
-//	@Bean
-//	@Transformer(inputChannel="inboundMail", outputChannel="outboundMail")
-//	public org.springframework.integration.transformer.Transformer transformer() {
-//	    return new MailToStringTransformer();
-//	}
 	 @Bean
 	   public JavaMailSenderImpl mailSender() {
 	       JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

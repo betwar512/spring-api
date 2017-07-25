@@ -4,6 +4,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+        
     }
 }
 
@@ -11,6 +12,9 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 jar {
     baseName = 'endpoint-spring'
@@ -21,14 +25,19 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+eclipse { 
+ classpath { 
+		downloadJavadoc = true
+		downloadSources = true
+	}
+}
 
 dependencies {
+	compile("org.springframework.boot:spring-boot-devtools")
     // tag::jetty[]
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
-    }																																																																																																		
+     }																																																																																																		
     
      compile("org.springframework.boot:spring-boot-starter-jetty")
     // end::jetty[]
