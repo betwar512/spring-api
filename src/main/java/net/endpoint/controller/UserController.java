@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import javax.management.relation.RoleStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,7 +32,7 @@ public class UserController extends MainController {
 	
 		@Autowired
 		UserService userService;
-	
+
 		public void setUserService(UserService userService) {
 			this.userService = userService;
 		}

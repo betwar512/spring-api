@@ -22,7 +22,7 @@ import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import net.endpoint.config.filter.CORSFilter;
 import net.endpoint.model.oauth.CustomClientDetailsService;
-import net.endpoint.model.oauth.UserDetailsServiceImpl;
+import net.endpoint.service.UserServiceImpl;
 import net.endpoint.util.CustomEncoder;
  
 @Configuration
@@ -49,7 +49,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	    @Autowired
 	    private CustomClientDetailsService clientDetailsService;
 	    @Autowired
-	    UserDetailsServiceImpl userDetailsService;
+	    UserServiceImpl userDetailsService;
 	    
 		 @Override
 		 public void configure(ClientDetailsServiceConfigurer clients) 

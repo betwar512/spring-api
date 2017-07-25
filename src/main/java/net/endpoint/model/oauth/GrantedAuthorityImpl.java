@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 
-
+/**
+ * Authority implementation for oath 
+ * @author A.H.Safaie 
+ *
+ */
 public class GrantedAuthorityImpl implements GrantedAuthority {
 	
 	private static final long serialVersionUID = 1L;
