@@ -1,4 +1,4 @@
-package net.endpoint.unittest;
+package net.endpoint.test;
 
 import static org.junit.Assert.*;
 
@@ -9,24 +9,13 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
 
-import org.hibernate.annotations.common.util.StringHelper;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
+import net.endpoint.util.CustomEncoder;
 import net.endpoint.util.HelpUtil;
 
-public class FirstTest {
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
+public class EncodeCustomTest {
 
 	@Test
 	public void encode64(){
@@ -35,6 +24,16 @@ public class FirstTest {
 		 String encoded =  HelpUtil.Encode64(num);
 		 System.out.println(encoded);
 		assertNotNull(encoded);
+	}
+	
+	@Test
+	public void generateIt(){
+		String str = "Solmaz662M";
+		CustomEncoder ne = new CustomEncoder();
+		System.out.println(ne.encode(str));
+		
+		
+		
 	}
 	
 	@Test

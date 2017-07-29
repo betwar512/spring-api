@@ -14,13 +14,7 @@ import net.endpoint.model.account.Phone;
 @Repository
 public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 
-//	SessionFactory sessionFactory;
-//	
-//	public void setSessionFactory(SessionFactory sessionFactory){
-//		this.sessionFactory = sessionFactory;
-//	}
-	
-	
+
 	
 	@Override
 	public Person load(long id) {
@@ -38,11 +32,11 @@ public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Person findByUserName(String username) {
-		System.out.println(username);
+	public Person findByUserName(String email) {
+		System.out.println(email);
 		 List<Person> list = this.getSession()
-				 						   .createQuery("from Person p where p.user.email=:username")
-				 						   .setParameter("username", username).list();
+				 						   .createQuery("from Person p where p.user.email=:email")
+				 						   .setParameter("email", email).list();
 		 return list!=null && !list.isEmpty() ? list.get(0) : null;
 	}
 	
@@ -53,7 +47,6 @@ public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 	 */
    private User getUser(String email){
 		UserDaoImpl dao =   new UserDaoImpl();		
-	//	dao.setSessionFactory(this.sessionFactory);
 	return dao.findbyName(email);
   }
 	

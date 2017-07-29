@@ -1,42 +1,39 @@
 package net.endpoint.service;
 
-
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.StringUtils;
-
 import net.endpoint.dao.ProfileDao;
-import net.endpoint.dao.UserDao;
+import net.endpoint.dao.UserDaoImpl;
 import net.endpoint.dto.account.AccountRequestDto;
 import net.endpoint.dto.account.AddressDto;
 import net.endpoint.dto.account.PhoneDto;
 import net.endpoint.dto.account.ProfileDto;
 import net.endpoint.model.Domain;
+import net.endpoint.model.SecurityRole;
 import net.endpoint.model.User;
 import net.endpoint.model.account.Address;
 import net.endpoint.model.account.Person;
 import net.endpoint.model.account.Phone;
+import net.endpoint.util.AESCipherHelper;
 import net.endpoint.util.CustomEncoder;
+import net.endpoint.util.CustomTypes.SECURITY_ROLE;
 
 @Service
 public class UserServiceImpl implements UserService , UserDetailsService {
 
 	@Autowired
-	UserDao userDao;
+	UserDaoImpl userDao;
 	@Autowired
 	ProfileDao profileDao;
 	
 	
-	public void setUserDao(UserDao userDao) {
+	public void setUserDao(UserDaoImpl userDao) {
 		this.userDao = userDao;
 	}
 	
@@ -153,18 +150,27 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 			    user = new User();
 				user.setUserName(accountRequestDto.userName);
 				Domain domain = this.userDao.getDomainByName(accountRequestDto.domainName);		
-			 if(domain!=null){
-				user.setDomain(domain);
-				boolean passwordIsValid = !StringUtils.isEmpty(accountRequestDto.password) &&
-						                   accountRequestDto.password.equals(accountRequestDto.rePassword) ;
-			  if(passwordIsValid){
+	    if(domain!=null){
+		   user.setDomain(domain);
+		   boolean passwordIsValid = !StringUtils.isEmpty(accountRequestDto.password) && accountRequestDto.password.equals(accountRequestDto.rePassword) ;
 			
+		   if(passwordIsValid){
 				CustomEncoder   cr = new CustomEncoder();
 				String encodedPass = cr.encode(accountRequestDto.password);
 				user.setEmail(accountRequestDto.userName +"@"+ accountRequestDto.domainName);
 				user.setPassword(encodedPass);
 				user.setCreatedAt(new Date());
 				user.setUpdatedAt(new Date());
+				user.setRegisteredEmail(accountRequestDto.registerationEmail);
+				
+				SECURITY_ROLE role = SECURITY_ROLE.valueOf(accountRequestDto.role.toUpperCase());
+				SecurityRole    sr = this.userDao.loadSecurityRole(role);
+				user.getRolse().add(sr);
+				try {
+					user.setEmailPassword(AESCipherHelper.encrypt(accountRequestDto.password));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				this.userDao.update(user);
 				
 				Person person = new Person();
@@ -183,9 +189,12 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 	return false;
 	 }
 
+	
+	
+	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return  this.userDao.findbyName(username);
+	public UserDetails loadUserByUsername(String username) {
+		return   this.userDao.findbyName(username);
 	}
 
 

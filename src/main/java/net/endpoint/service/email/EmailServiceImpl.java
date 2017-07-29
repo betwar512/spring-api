@@ -1,59 +1,114 @@
 package net.endpoint.service.email;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+
+import javax.mail.Folder;
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Store;
 import javax.mail.internet.MimeMessage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import 	org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 
+import net.endpoint.dto.account.EmailDto;
+import net.endpoint.model.User;
 
+@Component
 public class EmailServiceImpl implements EmailService {
 
-    private	JavaMailSenderImpl mailSender;
+	@Autowired
+    private	JavaMailSender mailSender;
 
 	public void setMailSender(JavaMailSenderImpl mailSender) {
 		this.mailSender = mailSender;
 	}
 
-	public EmailServiceImpl(){
-	    this.mailSender();
-	}
-	
-
-  private void mailSender() {
-	        this.mailSender = new JavaMailSenderImpl();
-	        this.mailSender.setHost("email-smtp.us-east-1.amazonaws.com");
-	        this.mailSender.setProtocol("smtp");
-	        this.mailSender.setPort(25);
-	        this.mailSender.setUsername("AKIAI7A26VJDLF4OJQNA");
-	        this.mailSender.setPassword("AhRoDI/aM9jAGkGKYSor9Yjc1qL+ykqLOBAIN0pMJqbA");
-		Properties mailProperties = new Properties();
-		        mailProperties.put("mail.smtp.auth", "true");
-		        mailProperties.put("mail.smtp.starttls.enable", "true");
-		        mailProperties.put("mail.smtp.starttls.required", "true");
-		        mailProperties.put("mail.smtp.debug", "true");
-		        mailProperties.put("mail.transport.protocol", "smtps");
-		        mailSender.setJavaMailProperties(mailProperties);
-	   }
-
-
 	@Override
-	public void sentEmail() {
+	  public void sendSimpleMail(String to, String subject, String text) {
+		SimpleMailMessage message = new SimpleMailMessage(); 
+		 message.setTo(to); 
+		 message.setSubject(subject); 
+		 message.setText(text);
+		 mailSender.send(message);
+		}
+	
+	@Override
+	public void sentEmail(String to,String subject,String text) {
 	if(this.mailSender != null){
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 		
 	   try {
 			helper.setFrom("admin@skinqualitycare.com.au");
-			helper.setTo("betwar512@gmail.com");
-			helper.setText("Thank you for ordering!");
-		
+			helper.setTo(to);
+			helper.setSubject(subject);
+			helper.setText(text);
+			mailSender.send(message);
 		  } catch (MessagingException e) {
 			e.printStackTrace();
 		}
-	//	mailSender.send(message);
 	  }else
 			System.out.println("Its null ");
 	}
 
+	@Override
+	public List<EmailDto> checkEmails(User user)  {
+	      List<EmailDto> emails = new ArrayList<>();
+		try {  
+		    	  Properties props = new Properties();
+		    	    String host      = "mail.skinqualitycare.com.au";
+		    	  String   username  =   user.getEmail();
+		    	  String   password  =user.getPassword();
+		    	    String port ="993";
+		    	    String provider  = "imap";
+		    	    props.put("mail.imap.host", host);
+		    	    props.put("mail.imap.port", port);
+		    	    props.put("mail.imap.ssl.enable", "true");
+		    	      //Connect to the server
+		    	      Session session = Session.getDefaultInstance(props);
+		    	      Store     store = session.getStore(provider);     
+		    	      store.connect(host, username, password);
+
+
+		      //create the folder object and open it
+		      Folder emailFolder = store.getFolder("INBOX");
+		      emailFolder.open(Folder.READ_ONLY);
+
+		      // retrieve the messages from the folder in an array and print it
+		      Message[] messages = emailFolder.getMessages();
+		
+		      System.out.println("messages.length---" + messages.length);
+		
+		      for (int i = 0, n = messages.length; i < n; i++) {
+		         Message message = messages[i];
+		         System.out.println("---------------------------------");
+		         System.out.println("Email Number " + (i + 1));
+		         System.out.println("Subject: " + message.getSubject());
+		         System.out.println("From: " + message.getFrom()[0]);
+		         System.out.println("Text: " + message.getContent().toString());
+
+		         emails.add(new EmailDto(message.getFrom()[0].toString()
+							        		 ,message.getSubject()
+							        		 ,message.getContent().toString()
+							        		 ,message.getSentDate()));
+		         
+		      }
+
+		        //close the store and folder objects
+		        emailFolder.close(false);
+		       store.close();
+			    } catch (MessagingException | IOException e) {
+				e.printStackTrace();
+			}
+		   
+ 	return emails;
+		}
 }

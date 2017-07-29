@@ -29,6 +29,20 @@ public abstract class CustomTypes {
 		}
 	}
 	
+	public enum SECURITY_ROLE{
+		ADMIN("Admin"),
+		USER("User");
+		private String role;
+		SECURITY_ROLE(String role){
+			this.role = role;
+		}
+		public String getRole(){
+			return this.role;
+		}
+	}
+	
+	
+	
 	/**
 	 * <p>Types for Phone and Address </p>
 	 * @author A.H.Safaie

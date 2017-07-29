@@ -1,9 +1,11 @@
 package net.endpoint.model.account;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,14 +15,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import net.endpoint.model.User;
 
 @Entity
 @Table(name="person")
-public class Person {
+public class Person implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	private long            id;
@@ -34,8 +39,11 @@ public class Person {
 	private Date     createdAt;
 	@Column(name="updated_at")
 	private Date     updatedAt;
-	@ManyToOne
+//	@ManyToOne
+//	@JoinColumn(name="user_id",nullable=false)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id",nullable=false)
+	//	@PrimaryKeyJoinColumn
 	private User user;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
 	private Set<Phone>      phones = new HashSet<>();

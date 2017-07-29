@@ -1,5 +1,6 @@
 package net.endpoint.model.account;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,8 +15,9 @@ import net.endpoint.model.User;
 
 @Entity
 @Table(name="user_account")
-public class Account {
+public class Account implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name="user_account_id")
 	@GeneratedValue

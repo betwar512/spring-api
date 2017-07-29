@@ -1,5 +1,6 @@
 package net.endpoint.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,8 +11,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="user_security_role")
-public class SecurityRole {
+public class SecurityRole implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name="security_role_id")
 	@GeneratedValue

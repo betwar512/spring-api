@@ -1,7 +1,6 @@
 package net.endpoint.util;
 
 import java.nio.ByteBuffer;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Base64;
 
@@ -13,7 +12,7 @@ import java.util.Base64;
  */
 public abstract class HelpUtil {
 	
-	public static final SimpleDateFormat DATETIME = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+//	private  SimpleDateFormat DATETIME = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 	
    public boolean isNullOrEmpty(String str){
    	return str!=null && !str.isEmpty() ? false : true;

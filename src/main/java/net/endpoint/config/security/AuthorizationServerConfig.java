@@ -21,12 +21,12 @@ import org.springframework.security.oauth2.provider.request.DefaultOAuth2Request
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import net.endpoint.config.filter.CORSFilter;
-import net.endpoint.model.oauth.CustomClientDetailsService;
+import net.endpoint.service.CustomClientDetailsService;
 import net.endpoint.service.UserServiceImpl;
 import net.endpoint.util.CustomEncoder;
  
 @Configuration
-public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	     private static final String REALM="MY_OAUTH_REALM";
 	 
@@ -61,7 +61,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 //		          .scopes("read", "write", "trust")
 //		          .secret("testsecret")
 //	              .autoApprove(true)
-//	              .accessTokenValiditySeconds(60000000);
+//	              .accessTokenValiditySeconds(600000);
 
 		    }
 	 

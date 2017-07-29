@@ -1,5 +1,6 @@
 package net.endpoint.model.account;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,8 +12,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="phone")
-public class Phone {
+public class Phone implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	public enum PHONE_TYPE{
 		Home,Office;
 	}

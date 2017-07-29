@@ -10,12 +10,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.oauth2.provider.approval.ApprovalStore;
-import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
-import org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler;
-import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
@@ -28,9 +22,10 @@ import net.endpoint.util.CustomEncoder;
  */
 @Configuration
 @EnableWebSecurity
-public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	private static final String USER_QUERY = "select email as username,password,domain_id as enabled from virtual_users where email=?";
-	private static final String USER_ROLE_QUERY = "select u.email as username,rl.name as role FROM virtual_users u,user_security_role rl "
+public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter {
+	private static final String USER_QUERY = "select email as username,password,iactive as enabled from virtual_users where email=?";
+	private static final String USER_ROLE_QUERY = 
+			     "select u.email as username,rl.name as role FROM virtual_users u,user_security_role rl "
 		   		+ " JOIN user_user_security_role user_role "
 		   		+ " where user_role.user_id = u.id AND u.email=?";
 	
@@ -46,8 +41,8 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	   protected void globalUserDetails(AuthenticationManagerBuilder auth)  throws Exception {
 
 		   auth.jdbcAuthentication()
-		       .passwordEncoder(new CustomEncoder())
 		       .dataSource(dataSource)
+		       .passwordEncoder(new CustomEncoder())
 			   .usersByUsernameQuery(USER_QUERY)
 			   .authoritiesByUsernameQuery(USER_ROLE_QUERY);
 	    }

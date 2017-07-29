@@ -1,10 +1,9 @@
 package net.endpoint.dao;
 
 import java.util.List;
-
-import net.endpoint.dto.account.AccountRequestDto;
 import net.endpoint.model.Domain;
 import net.endpoint.model.User;
+
 
 public interface UserDao {
 

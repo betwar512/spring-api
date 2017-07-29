@@ -1,15 +1,14 @@
 package net.endpoint.dao;
 
 import java.util.List;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-
 import net.endpoint.model.Domain;
 import net.endpoint.model.User;
 
+
 /**
  * 
- * @author Betwar
+ * @author A.H.Safaie
  *
  */
 
@@ -21,17 +20,13 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<User> getAll() {		
-		return this.getSession()
-							  .createQuery("from User user")
-							       .list();
-		
+		return this.getSession().createQuery("from User user").list();
 	}
 	
 
 	@Override
 	public User get(long id) {
-		return this.getSession()
-				                     .get(User.class,id);
+		return this.getSession().get(User.class,id);
 	}
 
 	@Override
@@ -57,6 +52,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	}
 	
 	
+	
 	  /*-----------------------------------------------------------*/
 	 /*			Private 										  */
 	/*-----------------------------------------------------------*/
@@ -75,10 +71,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		    }
 	 return null ;
 	}
-
-
-
-	
 
 	
 }

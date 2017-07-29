@@ -11,5 +11,7 @@ public class AccountRequestDto {
 	public Date dob;
 	public String password;
 	public String rePassword;
+	public String registerationEmail;
+	public String role;
 
 }

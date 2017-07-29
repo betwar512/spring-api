@@ -19,6 +19,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,6 +29,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import net.endpoint.model.account.Account;
+import net.endpoint.model.account.Person;
 
 /**
  * User base Email server class 
@@ -35,9 +38,10 @@ import net.endpoint.model.account.Account;
  */
 @Entity
 @Table(name="virtual_users")
-public class User implements UserDetails{
+public class User implements UserDetails {
 
-	private static final long serialVersionUID = -2058978764684892356L;
+	private static final long serialVersionUID = 1L;
+	
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY) 
 		private long         id;
@@ -45,11 +49,17 @@ public class User implements UserDetails{
 		private String userName;
 		@Column(name="password")
 		private String password;
+		@Column(name="email_password")
+		private String emailPassword;
 		@Column(name="email")
 		private String    email;
+		@Column(name="registered_email")
+		private String registeredEmail;		
 		@ManyToOne
 		@JoinColumn(name="domain_id",nullable=false)
 		private Domain   domain;
+		@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+		private Person person;
 		@Column(name="created_at")
 		@Type(type = "date")
 		private Date  createdAt;
@@ -130,6 +140,25 @@ public class User implements UserDetails{
 					+ ", updatedAt=" + updatedAt + "]";
 		}
 		
+		public Person getPerson() {
+			return person;
+		}
+		public void setPerson(Person person) {
+			this.person = person;
+		}
+		
+		public String getEmailPassword() {
+			return emailPassword;
+		}
+		public void setEmailPassword(String emailPassword) {
+			this.emailPassword = emailPassword;
+		}
+		public String getRegisteredEmail() {
+			return registeredEmail;
+		}
+		public void setRegisteredEmail(String registeredEmail) {
+			this.registeredEmail = registeredEmail;
+		}
 		
 		
 		@Override
@@ -139,7 +168,6 @@ public class User implements UserDetails{
 		}
 		@Override
 		public String getUsername() {
-			
 			return this.getEmail();
 		}
 		@Override
