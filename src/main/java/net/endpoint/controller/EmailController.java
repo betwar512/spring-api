@@ -17,7 +17,7 @@ public class EmailController extends MainController {
 	
 	public List<EmailDto> getAll(){
 
-		return null;
+		return emailService.checkEmails(this.loadUser());
 	}
 	
 }

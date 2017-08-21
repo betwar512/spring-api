@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,12 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
 import net.endpoint.model.User;
 
 @Entity
@@ -39,8 +34,6 @@ public class Person implements Serializable {
 	private Date     createdAt;
 	@Column(name="updated_at")
 	private Date     updatedAt;
-//	@ManyToOne
-//	@JoinColumn(name="user_id",nullable=false)
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id",nullable=false)
 	//	@PrimaryKeyJoinColumn

@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 
 	@Override
 	@Transactional
-	public boolean createAccount(AccountRequestDto accountRequestDto) {
+	public boolean createAccount(AccountRequestDto accountRequestDto) throws Exception {
 		 User       user = null;
 		 String userName = accountRequestDto.userName + accountRequestDto.domainName ;
 		            user = this.userDao.findbyName(userName);
@@ -165,12 +165,8 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 				
 				SECURITY_ROLE role = SECURITY_ROLE.valueOf(accountRequestDto.role.toUpperCase());
 				SecurityRole    sr = this.userDao.loadSecurityRole(role);
-				user.getRolse().add(sr);
-				try {
-					user.setEmailPassword(AESCipherHelper.encrypt(accountRequestDto.password));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				user.getRolse().add(sr);		
+				user.setEmailPassword(AESCipherHelper.encrypt(accountRequestDto.password));
 				this.userDao.update(user);
 				
 				Person person = new Person();
