@@ -1,4 +1,4 @@
-package net.endpoint.util;
+package net.endpoint.utils;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;

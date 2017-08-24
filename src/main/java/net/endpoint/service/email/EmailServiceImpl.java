@@ -18,12 +18,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import 	org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+
+
 import net.endpoint.dto.account.EmailDto;
 import net.endpoint.model.User;
 
@@ -33,9 +36,14 @@ public class EmailServiceImpl implements EmailService {
 	@Autowired
     private	JavaMailSender mailSender;
 
+
+
 	public void setMailSender(JavaMailSenderImpl mailSender) {
 		this.mailSender = mailSender;
 	}
+	
+	
+	
 
 	@Override
     public void sendSimpleMail(String to, String subject, String text) {
@@ -163,5 +171,13 @@ public class EmailServiceImpl implements EmailService {
 	            message.getRecipients(Message.RecipientType.TO));
 	        transport.close();
 	        }
+	
+	
+	public void sendEmailWithVelocity(EmailDto email) {
+		
+		
+		
+	}
+	
 	
 }

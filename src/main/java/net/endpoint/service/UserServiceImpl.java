@@ -1,5 +1,6 @@
 package net.endpoint.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,12 @@ import net.endpoint.model.User;
 import net.endpoint.model.account.Address;
 import net.endpoint.model.account.Person;
 import net.endpoint.model.account.Phone;
-import net.endpoint.util.AESCipherHelper;
-import net.endpoint.util.CustomEncoder;
-import net.endpoint.util.CustomTypes.SECURITY_ROLE;
+import net.endpoint.utils.AESCipherHelper;
+import net.endpoint.utils.CustomEncoder;
+import net.endpoint.utils.enums.EnumTypes.SECURITY_ROLE;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService , UserDetailsService {
 
 	@Autowired
@@ -46,6 +48,16 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 		return this.userDao.getAll();
 	}
 
+	public List<ProfileDto> getAllProfileDtos(){
+		
+    List<ProfileDto> profiles = new ArrayList<>();		  
+		  this.getAll().forEach(t->{
+			 ProfileDto pr =   new ProfileDto();
+			 pr.pars(t.getPerson());
+			  profiles.add(pr);		  
+		  });
+		return profiles;
+	}
 
 	@Transactional(readOnly=true)
 	public User get(long id) {

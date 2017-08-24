@@ -1,4 +1,4 @@
-package net.endpoint.util;
+package net.endpoint.utils;
 
 import org.apache.commons.codec.digest.Crypt;
 import org.springframework.security.crypto.password.PasswordEncoder;

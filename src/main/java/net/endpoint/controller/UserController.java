@@ -1,12 +1,13 @@
 package net.endpoint.controller;
 
-import java.util.ArrayList;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Stream;
-
-import javax.transaction.Transactional;
-
+import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import net.endpoint.model.SecurityRole;
 import net.endpoint.model.User;
 import net.endpoint.service.UserService;
 import net.endpoint.service.email.EmailService;
+import net.endpoint.service.email.EmailTemplateServiceImpl;
 
 
 @RestController
@@ -30,6 +32,9 @@ public class UserController extends MainController {
 		UserService userService;
 		@Autowired
 		EmailService emailService;
+		@Autowired
+		EmailTemplateServiceImpl etp;
+		
 		public void setUserService(UserService userService) {
 			this.userService = userService;
 		}
@@ -38,23 +43,19 @@ public class UserController extends MainController {
 		public ProfileDto get(){	
     	 ProfileDto dto = loadProfile();
     	 logger.debug(dto.toString());
+    	 try {
+  
+			this.etp.sendEditableMail("abbas", "betwar512@gmail.com","",new Locale("en"));
+		} catch (MessagingException | IOException e) {
+			e.printStackTrace();
+		}
     	 return dto;
 		}
 		
 		@RequestMapping(value="/all",method = RequestMethod.GET)
-		@Transactional
 		public List<ProfileDto> getAll(){
-		  boolean isAuth = true;//this.loadUser().getRolse().stream().filter(t-> t.getLevel() > 4).count() > 0;
-		  List<ProfileDto> profiles = new ArrayList<>();
-		  
-		  this.userService.getAll().forEach(t->{
-			 ProfileDto pr =   new ProfileDto();
-			 pr.pars(t.getPerson());
-			  profiles.add(pr);
-			  
-			  
-		  });
-			//return isAuth? this.userService.getAll() : null;
+		  boolean isAuth = true;
+		  List<ProfileDto> profiles = this.userService.getAllProfileDtos();
 		  return profiles;
 		}
 		

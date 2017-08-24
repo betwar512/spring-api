@@ -19,4 +19,5 @@ public interface UserService {
 	public boolean    createOrUpdateAddress(AddressDto address);
 	public boolean    createOrUpdatePhone(PhoneDto phonedto);
 	public boolean    updatePassword(User user, String password);
+	public List<ProfileDto> getAllProfileDtos();
 }

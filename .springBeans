@@ -9,6 +9,7 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>java:net.endpoint.config.SpringApp</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

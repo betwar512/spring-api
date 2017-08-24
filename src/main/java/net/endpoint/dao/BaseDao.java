@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import net.endpoint.model.SecurityRole;
-import net.endpoint.util.CustomTypes.SECURITY_ROLE;
+import net.endpoint.utils.enums.EnumTypes.SECURITY_ROLE;
 
 @Repository
 public abstract class BaseDao {

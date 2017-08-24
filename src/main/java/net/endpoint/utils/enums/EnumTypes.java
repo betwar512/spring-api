@@ -1,4 +1,4 @@
-package net.endpoint.util;
+package net.endpoint.utils.enums;
 
 
 /**
@@ -6,7 +6,7 @@ package net.endpoint.util;
  * @author A.H.Sfaie
  *
  */
-public abstract class CustomTypes {
+public interface EnumTypes {
 
 	/**
 	 * <p>Types for accounts for security level mapping later on on db </p>

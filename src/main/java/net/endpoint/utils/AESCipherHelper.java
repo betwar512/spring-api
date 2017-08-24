@@ -1,4 +1,4 @@
-package net.endpoint.util;
+package net.endpoint.utils;
 
 import java.security.Key;
 import java.util.Base64;

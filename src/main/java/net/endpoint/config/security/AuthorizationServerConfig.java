@@ -23,7 +23,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import net.endpoint.config.filter.CORSFilter;
 import net.endpoint.service.CustomClientDetailsService;
 import net.endpoint.service.UserServiceImpl;
-import net.endpoint.util.CustomEncoder;
+import net.endpoint.utils.CustomEncoder;
  
 @Configuration
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
