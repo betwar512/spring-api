@@ -1,12 +1,12 @@
-package net.endpoint.service;
+package net.endpoint.account.service;
 
 import java.util.List;
 
-import net.endpoint.dto.account.AccountRequestDto;
-import net.endpoint.dto.account.AddressDto;
-import net.endpoint.dto.account.PhoneDto;
-import net.endpoint.dto.account.ProfileDto;
-import net.endpoint.model.User;
+import net.endpoint.account.dto.AccountRequestDto;
+import net.endpoint.account.dto.AddressDto;
+import net.endpoint.account.dto.PhoneDto;
+import net.endpoint.account.dto.ProfileDto;
+import net.endpoint.account.model.User;
 
 public interface UserService {
 

@@ -20,9 +20,10 @@ import org.springframework.security.oauth2.provider.approval.UserApprovalHandler
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+
+import net.endpoint.account.service.CustomClientDetailsService;
+import net.endpoint.account.service.UserServiceImpl;
 import net.endpoint.config.filter.CORSFilter;
-import net.endpoint.service.CustomClientDetailsService;
-import net.endpoint.service.UserServiceImpl;
 import net.endpoint.utils.CustomEncoder;
  
 @Configuration

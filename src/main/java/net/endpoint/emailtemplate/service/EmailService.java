@@ -1,11 +1,11 @@
-package net.endpoint.service.email;
+package net.endpoint.emailtemplate.service;
 
 import java.util.List;
 
 import javax.mail.MessagingException;
 
-import net.endpoint.dto.account.EmailDto;
-import net.endpoint.model.User;
+import net.endpoint.account.model.User;
+import net.endpoint.emailtemplate.dto.EmailDto;
 
 public interface EmailService {
 	/**

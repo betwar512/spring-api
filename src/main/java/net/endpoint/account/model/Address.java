@@ -1,4 +1,4 @@
-package net.endpoint.model.account;
+package net.endpoint.account.model;
 
 import java.io.Serializable;
 

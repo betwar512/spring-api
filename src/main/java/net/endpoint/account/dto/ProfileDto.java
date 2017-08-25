@@ -1,12 +1,12 @@
-package net.endpoint.dto.account;
+package net.endpoint.account.dto;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import net.endpoint.model.account.Address;
-import net.endpoint.model.account.Person;
-import net.endpoint.model.account.Phone;
+import net.endpoint.account.model.Address;
+import net.endpoint.account.model.Person;
+import net.endpoint.account.model.Phone;
 
 /**
  * 

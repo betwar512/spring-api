@@ -4,9 +4,26 @@ package net.endpoint.utils.enums;
 
 public interface EmailTemplates {
 	
- public static final String PNG_MIME = "image/png";
- public static final String ENCODE_UTF_8 = "UTF-8";
-	
+
+/**
+ * 
+ * @author Betwar
+ *
+ */
+ public enum EmailContentProperties {
+	 HTML5("HTML5"),
+	 ENCODE_UTF_8("UTF-8"),
+	 PNG_MIME("image/png");
+	 private final String value;
+	 private EmailContentProperties(String value) {
+		 this.value  = value;
+	 }
+	 public String getValue() {
+		 return this.value;
+	 }
+ }
+ 
+ 
  public enum EmailTemplatesUrls {
 	TEMPLATE_NAME("url");
 	private final String url;

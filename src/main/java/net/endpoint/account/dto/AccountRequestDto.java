@@ -1,4 +1,4 @@
-package net.endpoint.dto.account;
+package net.endpoint.account.dto;
 
 import java.util.Date;
 

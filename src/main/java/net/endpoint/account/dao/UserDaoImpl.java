@@ -1,9 +1,11 @@
-package net.endpoint.dao;
+package net.endpoint.account.dao;
 
 import java.util.List;
 import org.springframework.stereotype.Repository;
+
+import net.endpoint.account.model.User;
+import net.endpoint.dao.BaseDao;
 import net.endpoint.model.Domain;
-import net.endpoint.model.User;
 
 
 /**

@@ -1,6 +1,6 @@
-package net.endpoint.dto.account;
+package net.endpoint.account.dto;
 
-import net.endpoint.model.account.Phone;
+import net.endpoint.account.model.Phone;
 
 public class PhoneDto {
 

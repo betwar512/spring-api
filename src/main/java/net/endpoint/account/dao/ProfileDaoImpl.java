@@ -1,4 +1,4 @@
-package net.endpoint.dao;
+package net.endpoint.account.dao;
 
 import java.util.Date;
 import java.util.List;
@@ -6,11 +6,12 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import net.endpoint.dto.account.ProfileDto;
-import net.endpoint.model.User;
-import net.endpoint.model.account.Address;
-import net.endpoint.model.account.Person;
-import net.endpoint.model.account.Phone;
+import net.endpoint.account.dto.ProfileDto;
+import net.endpoint.account.model.Address;
+import net.endpoint.account.model.Person;
+import net.endpoint.account.model.Phone;
+import net.endpoint.account.model.User;
+import net.endpoint.dao.BaseDao;
 @Repository
 public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 

@@ -1,6 +1,6 @@
-package net.endpoint.dto.account;
+package net.endpoint.account.dto;
 
-import net.endpoint.model.account.Address;
+import net.endpoint.account.model.Address;
 
 public class AddressDto {
 

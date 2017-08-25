@@ -1,4 +1,4 @@
-package net.endpoint.service;
+package net.endpoint.account.service;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

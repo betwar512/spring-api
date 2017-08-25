@@ -2,9 +2,10 @@ package net.endpoint.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import net.endpoint.account.dto.ProfileDto;
+import net.endpoint.account.model.User;
 import net.endpoint.config.security.IAuthenticationFacade;
-import net.endpoint.dto.account.ProfileDto;
-import net.endpoint.model.User;
 import net.endpoint.service.GlobalSettingsService;
 
 /**

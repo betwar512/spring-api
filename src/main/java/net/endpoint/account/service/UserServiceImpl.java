@@ -1,4 +1,4 @@
-package net.endpoint.service;
+package net.endpoint.account.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,18 +9,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import net.endpoint.dao.ProfileDao;
-import net.endpoint.dao.UserDaoImpl;
-import net.endpoint.dto.account.AccountRequestDto;
-import net.endpoint.dto.account.AddressDto;
-import net.endpoint.dto.account.PhoneDto;
-import net.endpoint.dto.account.ProfileDto;
+
+import net.endpoint.account.dao.ProfileDao;
+import net.endpoint.account.dao.UserDaoImpl;
+import net.endpoint.account.dto.AccountRequestDto;
+import net.endpoint.account.dto.AddressDto;
+import net.endpoint.account.dto.PhoneDto;
+import net.endpoint.account.dto.ProfileDto;
+import net.endpoint.account.model.Address;
+import net.endpoint.account.model.Person;
+import net.endpoint.account.model.Phone;
+import net.endpoint.account.model.SecurityRole;
+import net.endpoint.account.model.User;
 import net.endpoint.model.Domain;
-import net.endpoint.model.SecurityRole;
-import net.endpoint.model.User;
-import net.endpoint.model.account.Address;
-import net.endpoint.model.account.Person;
-import net.endpoint.model.account.Phone;
 import net.endpoint.utils.AESCipherHelper;
 import net.endpoint.utils.CustomEncoder;
 import net.endpoint.utils.enums.EnumTypes.SECURITY_ROLE;

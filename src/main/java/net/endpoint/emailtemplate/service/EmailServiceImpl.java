@@ -1,4 +1,4 @@
-package net.endpoint.service.email;
+package net.endpoint.emailtemplate.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,9 +26,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import 	org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
-
-import net.endpoint.dto.account.EmailDto;
-import net.endpoint.model.User;
+import net.endpoint.account.model.User;
+import net.endpoint.emailtemplate.dto.EmailDto;
 
 @Component
 public class EmailServiceImpl implements EmailService {
@@ -172,12 +171,6 @@ public class EmailServiceImpl implements EmailService {
 	        transport.close();
 	        }
 	
-	
-	public void sendEmailWithVelocity(EmailDto email) {
-		
-		
-		
-	}
-	
+
 	
 }

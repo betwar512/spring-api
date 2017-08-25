@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import net.endpoint.dto.account.AccountRequestDto;
-import net.endpoint.dto.account.AddressDto;
-import net.endpoint.dto.account.ProfileDto;
-import net.endpoint.model.SecurityRole;
-import net.endpoint.model.User;
-import net.endpoint.service.UserService;
-import net.endpoint.service.email.EmailService;
-import net.endpoint.service.email.EmailTemplateServiceImpl;
+
+import net.endpoint.account.dto.AccountRequestDto;
+import net.endpoint.account.dto.AddressDto;
+import net.endpoint.account.dto.ProfileDto;
+import net.endpoint.account.model.SecurityRole;
+import net.endpoint.account.model.User;
+import net.endpoint.account.service.UserService;
+import net.endpoint.emailtemplate.service.EmailService;
+import net.endpoint.emailtemplate.service.EmailTemplateServiceImpl;
 
 
 @RestController

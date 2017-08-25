@@ -3,10 +3,11 @@ package net.endpoint.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import net.endpoint.dao.UserDao;
-import net.endpoint.dto.account.ProfileDto;
-import net.endpoint.model.User;
-import net.endpoint.model.account.Person;
+
+import net.endpoint.account.dao.UserDao;
+import net.endpoint.account.dto.ProfileDto;
+import net.endpoint.account.model.Person;
+import net.endpoint.account.model.User;
 
 @Service
 public class GlobalSettingsServiceImpl implements GlobalSettingsService {

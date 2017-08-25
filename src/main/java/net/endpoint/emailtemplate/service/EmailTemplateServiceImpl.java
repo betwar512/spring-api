@@ -1,4 +1,4 @@
-package net.endpoint.service.email;
+package net.endpoint.emailtemplate.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,8 +21,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-
-import net.endpoint.config.SpringMailConfig;
+import net.endpoint.utils.enums.EmailTemplates.EmailContentProperties;
 
 @Service
 public class EmailTemplateServiceImpl {
@@ -197,7 +196,7 @@ public class EmailTemplateServiceImpl {
 	    public String getEditableMailTemplate() throws IOException {
 	        final Resource templateResource = this.applicationContext.getResource(EMAIL_EDITABLE_TEMPLATE_CLASSPATH_RES);
 	        final InputStream inputStream = templateResource.getInputStream();
-	        return IOUtils.toString(inputStream, SpringMailConfig.EMAIL_TEMPLATE_ENCODING);
+	        return IOUtils.toString(inputStream, EmailContentProperties.ENCODE_UTF_8.getValue());
 	    }
 
 

@@ -1,4 +1,4 @@
-package net.endpoint.dto.account;
+package net.endpoint.emailtemplate.dto;
 
 import java.util.Date;
 

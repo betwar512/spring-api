@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import net.endpoint.model.SecurityRole;
+import net.endpoint.account.model.SecurityRole;
 import net.endpoint.utils.enums.EnumTypes.SECURITY_ROLE;
 
 @Repository

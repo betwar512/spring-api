@@ -8,14 +8,7 @@ import net.endpoint.model.Domain;
 @Repository
 public class DomainDaoImpl extends BaseDao implements DomainDao {
 
-	
-//	SessionFactory sessionFactory;
-//	
-//	public void setSessionFactory(SessionFactory sessionFactory){
-//		this.sessionFactory = sessionFactory;
-//	}
-	
-	
+
 	public Domain get(long id) {
 	   return this.getSession().load(Domain.class, id);
 	}

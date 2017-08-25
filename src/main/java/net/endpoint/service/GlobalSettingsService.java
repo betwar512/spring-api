@@ -1,6 +1,6 @@
 package net.endpoint.service;
-import net.endpoint.dto.account.ProfileDto;
-import net.endpoint.model.User;
+import net.endpoint.account.dto.ProfileDto;
+import net.endpoint.account.model.User;
 
 public interface GlobalSettingsService {
 

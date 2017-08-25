@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import net.endpoint.dto.account.EmailDto;
-import net.endpoint.service.email.EmailService;
-import net.endpoint.service.email.EmailTemplateServiceImpl;
+
+import net.endpoint.emailtemplate.dto.EmailDto;
+import net.endpoint.emailtemplate.service.EmailService;
+import net.endpoint.emailtemplate.service.EmailTemplateServiceImpl;
 
 
 @RestController

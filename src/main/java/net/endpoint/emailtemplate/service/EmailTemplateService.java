@@ -1,4 +1,4 @@
-package net.endpoint.service.email;
+package net.endpoint.emailtemplate.service;
 
 public interface EmailTemplateService {
 
