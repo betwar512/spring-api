@@ -24,7 +24,7 @@ import org.thymeleaf.context.Context;
 import net.endpoint.utils.enums.EmailTemplates.EmailContentProperties;
 
 @Service
-public class EmailTemplateServiceImpl {
+public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	    private static final String url =  "templates/welcometemplate/";
 
 	    private static final String EMAIL_TEXT_TEMPLATE_NAME = "text/email-text";
@@ -64,6 +64,7 @@ public class EmailTemplateServiceImpl {
 	    /* 
 	     * Send plain TEXT mail 
 	     */
+	    @Override
 	    public void sendTextMail(
 	        final String recipientName, final String recipientEmail, final Locale locale)
 	        throws MessagingException {
@@ -93,6 +94,7 @@ public class EmailTemplateServiceImpl {
 	    /* 
 	     * Send HTML mail (simple) 
 	     */
+	    @Override
 	    public void sendSimpleMail(
 	        final String recipientName, final String recipientEmail, final Locale locale)
 	        throws MessagingException {
@@ -121,6 +123,7 @@ public class EmailTemplateServiceImpl {
 	    /* 
 	     * Send HTML mail with attachment. 
 	     */
+	    @Override
 	    public void sendMailWithAttachment(
 	        final String recipientName, final String recipientEmail, final String attachmentFileName,
 	        final byte[] attachmentBytes, final String attachmentContentType, final Locale locale)
@@ -157,6 +160,7 @@ public class EmailTemplateServiceImpl {
 	    /* 
 	     * Send HTML mail with in-line image
 	     */
+	    @Override
 	    public void sendMailWithInline(
 	        final String recipientName, final String recipientEmail, final String imageResourceName,
 	        final byte[] imageBytes, final String imageContentType, final Locale locale)
@@ -203,6 +207,7 @@ public class EmailTemplateServiceImpl {
 	    /*
 	     * Send HTML mail with inline image
 	     */
+	    @Override
 	    public void sendEditableMail(
 	            final String recipientName, final String recipientEmail, final String htmlContent,
 	            final Locale locale)
