@@ -26,7 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import net.endpoint.model.Domain;
+import net.endpoint.main.model.Domain;
 
 /**
  * User base Email server class 

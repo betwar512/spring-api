@@ -3,8 +3,8 @@ package net.endpoint.emailtemplate.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.endpoint.dao.BaseDao;
 import net.endpoint.emailtemplate.model.EmailTemplate;
+import net.endpoint.main.dao.BaseDao;
 
 public class EmailTemplateDaoImpl extends BaseDao implements EmailTemplateDao {
 

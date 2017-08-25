@@ -11,7 +11,7 @@ import net.endpoint.account.model.Address;
 import net.endpoint.account.model.Person;
 import net.endpoint.account.model.Phone;
 import net.endpoint.account.model.User;
-import net.endpoint.dao.BaseDao;
+import net.endpoint.main.dao.BaseDao;
 @Repository
 public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 

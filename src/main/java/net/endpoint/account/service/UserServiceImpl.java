@@ -21,7 +21,7 @@ import net.endpoint.account.model.Person;
 import net.endpoint.account.model.Phone;
 import net.endpoint.account.model.SecurityRole;
 import net.endpoint.account.model.User;
-import net.endpoint.model.Domain;
+import net.endpoint.main.model.Domain;
 import net.endpoint.utils.AESCipherHelper;
 import net.endpoint.utils.CustomEncoder;
 import net.endpoint.utils.enums.EnumTypes.SECURITY_ROLE;

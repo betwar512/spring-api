@@ -4,8 +4,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import net.endpoint.account.model.User;
-import net.endpoint.dao.BaseDao;
-import net.endpoint.model.Domain;
+import net.endpoint.main.dao.BaseDao;
+import net.endpoint.main.model.Domain;
 
 
 /**

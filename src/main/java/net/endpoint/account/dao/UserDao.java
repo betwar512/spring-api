@@ -3,7 +3,7 @@ package net.endpoint.account.dao;
 import java.util.List;
 
 import net.endpoint.account.model.User;
-import net.endpoint.model.Domain;
+import net.endpoint.main.model.Domain;
 
 
 public interface UserDao {

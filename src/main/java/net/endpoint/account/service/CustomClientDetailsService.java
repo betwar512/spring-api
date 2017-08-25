@@ -7,7 +7,7 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.stereotype.Service;
 
-import net.endpoint.model.oauth.ClientDetailsImpl;
+import net.endpoint.main.model.ClientDetailsImpl;
 
 @Service
 public class CustomClientDetailsService  implements ClientDetailsService  {
