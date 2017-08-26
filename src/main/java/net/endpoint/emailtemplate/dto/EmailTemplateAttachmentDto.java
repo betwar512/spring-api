@@ -1,39 +1,21 @@
 package net.endpoint.emailtemplate.dto;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import org.apache.commons.io.IOUtils;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 public class EmailTemplateAttachmentDto {
 
 	private String name;
 	private String htmlFiledId;
-	private MultipartFile attachedFile;
+	private byte[] attachedFile;
 	private String fileType;
 
-	public EmailTemplateAttachmentDto(String name, String htmlFiledId, String fileType, File attachedFile) {
+	public EmailTemplateAttachmentDto(String name, String htmlFiledId, String fileType, byte[] attachedFile) {
 		super();
 		this.name = name;
 		this.htmlFiledId = htmlFiledId;
-	try {
-		this.attachedFile = this.writeToMultiPartFile(attachedFile);
-	          } catch (IOException e) {
-		   e.printStackTrace();
-	         }
+		this.attachedFile = attachedFile;
 		this.fileType = fileType;
 	}
 
-	
-	private MultipartFile writeToMultiPartFile(File file) throws IOException{
-		FileInputStream input = new FileInputStream(file);	
-		return new MockMultipartFile(this.name,
-		            file.getName(), "text/plain", IOUtils.toByteArray(input));
-	}
-	
-	
 	public String getName() {
 		return name;
 	}
@@ -50,11 +32,11 @@ public class EmailTemplateAttachmentDto {
 		this.htmlFiledId = htmlFiledId;
 	}
 
-	public MultipartFile getAttachedFile() {
+	public byte[] getAttachedFile() {
 		return attachedFile;
 	}
 
-	public void setAttachedFile(MultipartFile attachedFile) {
+	public void setAttachedFile(byte[] attachedFile) {
 		this.attachedFile = attachedFile;
 	}
 

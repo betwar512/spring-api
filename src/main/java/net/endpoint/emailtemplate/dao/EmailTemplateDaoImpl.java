@@ -3,9 +3,11 @@ package net.endpoint.emailtemplate.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import net.endpoint.emailtemplate.model.EmailTemplate;
 import net.endpoint.main.dao.BaseDao;
-
+@Repository
 public class EmailTemplateDaoImpl extends BaseDao implements EmailTemplateDao {
 
 	@Override

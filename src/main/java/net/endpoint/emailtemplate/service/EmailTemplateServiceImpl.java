@@ -73,7 +73,8 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        etd.getAttachments().forEach(m->{ 	
 	        	   // Add the inline image, referenced from the HTML code as "cid:${imageResourceName}"  
 			 try {
-					InputStreamSource	imageSource = new ByteArrayResource(m.getAttachedFile().getBytes());
+				 
+					InputStreamSource	imageSource = new ByteArrayResource(m.getAttachedFile());
 					message.addInline(m.getHtmlFiledId(), imageSource, m.getFileType());
 				} catch (Exception e ) {
 					logger.error(e);
@@ -120,7 +121,7 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        	   // Add the inline image, referenced from the HTML code as "cid:${imageResourceName}"
 		        
 				try {
-					InputStreamSource	imageSource = new ByteArrayResource(m.getAttachedFile().getBytes());
+					InputStreamSource	imageSource = new ByteArrayResource(m.getAttachedFile());
 					message.addInline(m.getHtmlFiledId(), imageSource, m.getFileType());
 				} catch (Exception e ) {
 					logger.error(e);
