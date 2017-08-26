@@ -5,10 +5,8 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -21,8 +19,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-
 import net.endpoint.emailtemplate.dto.EmailTemplateDto;
+import net.endpoint.emailtemplate.dto.RecivedEmailDto;
+import net.endpoint.emailtemplate.dto.SendEmailDto;
+import net.endpoint.utils.enums.EmailTemplates;
 import net.endpoint.utils.enums.EmailTemplates.EmailContentProperties;
 
 @Service
@@ -34,13 +34,7 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	    private static final String EMAIL_WITHATTACHMENT_TEMPLATE_NAME = "html/email-withattachment";
 	    private static final String EMAIL_INLINEIMAGE_TEMPLATE_NAME = "html/email-inlineimage";
 	    private static final String EMAIL_EDITABLE_TEMPLATE_CLASSPATH_RES =  "classpath:"+url+"welcome.html";
-	    private static final String BACKGROUND_IMAGE = "mail/editablehtml/images/background.png";
-	    private static final String LOGO_BACKGROUND_IMAGE = "mail/editablehtml/images/logo-background.png";
-	    private static final String THYMELEAF_BANNER_IMAGE = "mail/editablehtml/images/thymeleaf-banner.png";
-	    private static final String THYMELEAF_LOGO_IMAGE = "mail/editablehtml/images/thymeleaf-logo.png";
-	    
-
-	    private static final String product1 =url+"product-1.png";
+	    static final String product1 =url+"product-1.png";
 	    private static final String product2 = url+"product-2.png";
 	    private static final String product3 = url+"product-3.png";
 	    private static final String product4 = url+"product-4.png";
@@ -70,7 +64,6 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	    public void sendTextMail(
 	        final String recipientName, final String recipientEmail, final Locale locale)
 	        throws MessagingException {
-	    	 Locale l = new Locale("en");
 	        // Prepare the evaluation context
 	        final Context ctx = new Context(locale);
 	        ctx.setVariable("name", recipientName);
@@ -199,8 +192,8 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	    /* 
 	     * Send HTML mail with inline image
 	     */
-	    public String getEditableMailTemplate() throws IOException {
-	        final Resource templateResource = this.applicationContext.getResource(EMAIL_EDITABLE_TEMPLATE_CLASSPATH_RES);
+	    public String getEditableMailTemplate(String url) throws IOException {
+	        final Resource templateResource = this.applicationContext.getResource(url);
 	        final InputStream inputStream = templateResource.getInputStream();
 	        return IOUtils.toString(inputStream, EmailContentProperties.ENCODE_UTF_8.getValue());
 	    }
@@ -218,7 +211,7 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        // Prepare message using a Spring helper
 	        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
 	        final MimeMessageHelper message
-	                = new MimeMessageHelper(mimeMessage, true /* multipart */, "UTF-8");
+=              new MimeMessageHelper(mimeMessage, true /* multipart */, "UTF-8");
 	        message.setSubject("Example editable HTML email");
 	        message.setFrom("info@skinqualitycare.com.au");
 	        message.setTo(recipientEmail);
@@ -230,7 +223,7 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        ctx.setVariable("hobbies", Arrays.asList("Cinema", "Sports", "Music"));
 
 	        // Create the HTML body using Thymeleaf
-	        final String output = stringTemplateEngine.process(getEditableMailTemplate(), ctx);
+	        final String output = stringTemplateEngine.process(getEditableMailTemplate(EMAIL_EDITABLE_TEMPLATE_CLASSPATH_RES), ctx);
 	        message.setText(output, true /* isHtml */);
 
 	        // Add the inline images, referenced from the HTML code as "cid:image-name"
@@ -243,17 +236,104 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        this.mailSender.send(mimeMessage);
 	    }
 
+	    
+	    
+	    /*-------------------------------------------------------*/
+	    /*		               Themplate Methods 			    */
+	    /*-------------------------------------------------------*/
+	    
 
+	    
+	    public void sendEditableTemplateEmail(EmailTemplateDto etd,RecivedEmailDto emailDto) throws MessagingException, IOException{
+	    	
+	        // Prepare message using a Spring helper
+	        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+	        final MimeMessageHelper message
+            = new MimeMessageHelper(mimeMessage, true, EmailTemplates.EmailContentProperties.ENCODE_UTF_8.getValue());
+	        message.setSubject(emailDto.getSubject());
+	        message.setFrom(emailDto.getFrom());
+	        message.setTo(emailDto.getTo());
+
+	        // Prepare the evaluation context
+	        final Context ctx = new Context(null);
+	         //Attach filed contents to context       
+	        etd.getFields().forEach(f->{
+	        			   ctx.setVariable(f.getFiledId(), f.getContent());   	
+	        });
+
+	        // Create the HTML body using Thymeleaf
+	        final String output = stringTemplateEngine.process(etd.getHtmlContent(), ctx);
+	        message.setText(output, true /* isHtml */);
+	        //Attach Files here 
+	        etd.getAttachments().forEach(m->{ 	
+	        	   // Add the inline image, referenced from the HTML code as "cid:${imageResourceName}"  
+			 try {
+					InputStreamSource	imageSource = new ByteArrayResource(m.getAttachedFile().getBytes());
+					message.addInline(m.getHtmlFiledId(), imageSource, m.getFileType());
+				} catch (Exception e ) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+	        });
+ 
+	        // Send mail
+	      this.mailSender.send(mimeMessage);
+
+	    }
+	    
+	    
+
+	    
+	    
 		@Override
-		public void generateEmail(EmailTemplateDto eto) {
-			// TODO Auto-generated method stub
+		public void generateEmail(EmailTemplateDto eto,SendEmailDto emailDto) throws MessagingException {
+			
+			String htmlStrong = eto.getHtmlContent();
+			
+			
+		    // Prepare the evaluation context
+	        final Context ctx = new Context(emailDto.getLocale());
+	        ctx.setVariable("name", emailDto.toString());
+	        ctx.setVariable("subscriptionDate", new Date());
+	        ctx.setVariable("hobbies", Arrays.asList("Cinema", "Sports", "Music"));	        
+	        eto.getAttachments().forEach(t->{    	
+	        	  ctx.setVariable(t.getHtmlFiledId(), t.getName()); // so that we can reference it from HTML  	
+	        });
+	        
+	      
+
+	        // Prepare message using a Spring helper
+	        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+	        final MimeMessageHelper message
+	            = new MimeMessageHelper(mimeMessage, true /* multipart */,EmailTemplates.EmailContentProperties.ENCODE_UTF_8.getValue());
+	        message.setSubject(emailDto.getSubject());
+	        message.setFrom(emailDto.getFrom());
+	        message.setTo(emailDto.getTo());
+
+	        // Create the HTML body using Thymeleaf
+	        final String htmlContent = this.htmlTemplateEngine.process(EMAIL_INLINEIMAGE_TEMPLATE_NAME, ctx);
+	        message.setText(htmlContent, true /* isHtml */);
+
+	        eto.getAttachments().forEach(m->{ 	
+	        	   // Add the inline image, referenced from the HTML code as "cid:${imageResourceName}"
+		        
+				try {
+					InputStreamSource	imageSource = new ByteArrayResource(m.getAttachedFile().getBytes());
+					message.addInline(m.getHtmlFiledId(), imageSource, m.getFileType());
+				} catch (Exception e ) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+   	
+	        });
+	        
+	     
+	        // Send mail
+	        this.mailSender.send(mimeMessage);
+			
+			
 			
 		}
 	    
-	    
-	    /*-------------------------------------------------------*/
-	    /*		               Private Methods 				    */
-	    /*-------------------------------------------------------*/
-	    
-
+	
 }

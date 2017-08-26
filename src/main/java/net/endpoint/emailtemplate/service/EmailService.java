@@ -5,7 +5,7 @@ import java.util.List;
 import javax.mail.MessagingException;
 
 import net.endpoint.account.model.User;
-import net.endpoint.emailtemplate.dto.EmailDto;
+import net.endpoint.emailtemplate.dto.RecivedEmailDto;
 
 public interface EmailService {
 	/**
@@ -27,7 +27,7 @@ public interface EmailService {
 	 * @param user
 	 * @return  List<EmailDto>
 	 */
-	public List<EmailDto> checkEmails(User user);
+	public List<RecivedEmailDto> checkEmails(User user);
 	/**
 	 * <p>Send Html email include attachments </p>
 	 * @param user

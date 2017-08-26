@@ -25,9 +25,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import 	org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-
 import net.endpoint.account.model.User;
-import net.endpoint.emailtemplate.dto.EmailDto;
+import net.endpoint.emailtemplate.dto.RecivedEmailDto;
 
 @Component
 public class EmailServiceImpl implements EmailService {
@@ -73,8 +72,8 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public List<EmailDto> checkEmails(User user)  {
-	      List<EmailDto> emails = new ArrayList<>();
+	public List<RecivedEmailDto> checkEmails(User user)  {
+	      List<RecivedEmailDto> emails = new ArrayList<>();
 		try {  
 		    	  Properties  props  = new Properties();
 		    	  String       host  = "mail.skinqualitycare.com.au";
@@ -108,7 +107,7 @@ public class EmailServiceImpl implements EmailService {
 		         System.out.println("From: " + message.getFrom()[0]);
 		         System.out.println("Text: " + message.getContent().toString());
 
-		         emails.add(new EmailDto(message.getFrom()[0].toString()
+		         emails.add(new RecivedEmailDto(message.getFrom()[0].toString(),""
 							        		 ,message.getSubject()
 							        		 ,message.getContent().toString()
 							        		 ,message.getSentDate()));
