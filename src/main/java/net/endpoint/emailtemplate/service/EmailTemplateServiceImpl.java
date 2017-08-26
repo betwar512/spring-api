@@ -21,6 +21,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+
+import net.endpoint.emailtemplate.dto.EmailTemplateDto;
 import net.endpoint.utils.enums.EmailTemplates.EmailContentProperties;
 
 @Service
@@ -240,6 +242,13 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        // Send mail
 	        this.mailSender.send(mimeMessage);
 	    }
+
+
+		@Override
+		public void generateEmail(EmailTemplateDto eto) {
+			// TODO Auto-generated method stub
+			
+		}
 	    
 	    
 	    /*-------------------------------------------------------*/

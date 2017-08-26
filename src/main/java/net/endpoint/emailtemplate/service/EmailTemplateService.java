@@ -2,12 +2,14 @@ package net.endpoint.emailtemplate.service;
 
 import java.io.IOException;
 import java.util.Locale;
-
 import javax.mail.MessagingException;
+import net.endpoint.emailtemplate.dto.EmailTemplateDto;
 
 public interface EmailTemplateService {
 
-  public void	sendTextMail(
+	public void generateEmail(EmailTemplateDto eto);
+	
+    public void	sendTextMail(
 	        final String recipientName, final String recipientEmail, final Locale locale)
 	        throws MessagingException;
 	

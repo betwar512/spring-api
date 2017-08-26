@@ -8,6 +8,17 @@ public class EmailTemplateDto  {
 	private String         name;
 	private List<EmailTemplateAttachmentDto>   attachments;
 	private List<EmailTemplateFieldDto>  fields;
+
+	public EmailTemplateDto(String htmlContet, String name, List<EmailTemplateAttachmentDto> attachments,
+			List<EmailTemplateFieldDto> fields) {
+		super();
+		this.htmlContet = htmlContet;
+		this.name = name;
+		this.attachments = attachments;
+		this.fields = fields;
+	}
+	
+	
 	
 	public String getHtmlContet() {
 		return htmlContet;

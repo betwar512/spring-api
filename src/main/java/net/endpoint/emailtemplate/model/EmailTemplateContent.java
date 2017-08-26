@@ -19,13 +19,13 @@ public class EmailTemplateContent {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	protected long id;
 	@Column
-	private String name;
+	protected String name;
 	@Column(name="html_field_id")
-	private String htmlFieldId;
+	protected String htmlFieldId;
 	@ManyToOne
 	@JoinColumn(name="em_template_id",nullable=false)
-	private EmailTemplate template;
+	protected EmailTemplate template;
 
 }
