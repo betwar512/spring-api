@@ -1,19 +1,15 @@
 package net.endpoint.account;
 
 
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Stream;
-import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import net.endpoint.account.dto.AccountRequestDto;
 import net.endpoint.account.dto.AddressDto;
 import net.endpoint.account.dto.ProfileDto;
@@ -45,19 +41,18 @@ public class UserController extends MainController {
 		public ProfileDto get(){	
     	 ProfileDto dto = loadProfile();
     	 logger.debug(dto.toString());
-    	 try {
+  //  	 try {
   
-			this.etp.sendEditableMail("abbas", "betwar512@gmail.com","",new Locale("en"));
-		} catch (MessagingException | IOException e) {
-			e.printStackTrace();
-		}
+//			this.etp.sendEditableMail("abbas", "betwar512@gmail.com","",new Locale("en"));
+//		} catch (MessagingException | IOException e) {
+//			e.printStackTrace();
+//		}
     	 return dto;
 		}
 		
 		@RequestMapping(value="/all",method = RequestMethod.GET)
 		public List<ProfileDto> getAll(){
-		  boolean isAuth = true;
-		  List<ProfileDto> profiles = this.userService.getAllProfileDtos();
+		  List<ProfileDto> profiles = this.isAdmin() ?this.userService.getAllProfileDtos() : new ArrayList<>();
 		  return profiles;
 		}
 		

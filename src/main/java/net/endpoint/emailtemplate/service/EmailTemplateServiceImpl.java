@@ -5,9 +5,11 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -19,7 +21,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import net.endpoint.emailtemplate.dao.EmailTemplateDao;
 import net.endpoint.emailtemplate.dto.EmailTemplateDto;
-import net.endpoint.emailtemplate.dto.RecivedEmailDto;
 import net.endpoint.emailtemplate.dto.SendEmailDto;
 import net.endpoint.emailtemplate.model.EmailTemplate;
 import net.endpoint.utils.enums.EmailTemplates;
@@ -48,7 +49,7 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	    /*-------------------------------------------------------*/
 	    
 
- public void sendEditableTemplateEmail(EmailTemplateDto etd,RecivedEmailDto emailDto) throws MessagingException, IOException{
+ public void sendEditableTemplateEmail(EmailTemplateDto etd,SendEmailDto emailDto) throws MessagingException, IOException{
 	    	
 	        // Prepare message using a Spring helper
 	        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();

@@ -1,6 +1,9 @@
 package net.endpoint.emailtemplate;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,7 @@ public class EmailController extends MainController {
 	@Autowired
 	EmailTemplateServiceImpl etp;
 	
+	@RequestMapping(path="/getEmails",method = RequestMethod.GET)
 	public List<RecivedEmailDto> getAll(){
 	return emailService.checkEmails(this.loadUser());
 	}
@@ -34,10 +38,20 @@ public class EmailController extends MainController {
 		 this.emailService.sendEmail(emailDto);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public List<EmailTemplateDto> getAllTemplates(){
+	@RequestMapping(path="/getTemplates",method = RequestMethod.GET)
+	public List<EmailTemplateDto> getTemplates(){
 			 return this.etp.getAllTemplates();
 	}
 	
-	
+	@RequestMapping(path="/sendEmailTemplate",method = RequestMethod.POST)
+	public void sendEmailTemplate(EmailTemplateDto etDto,SendEmailDto emailDto){
+		
+		try {
+			this.etp.sendEditableTemplateEmail(etDto, emailDto);
+		} catch (MessagingException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }
