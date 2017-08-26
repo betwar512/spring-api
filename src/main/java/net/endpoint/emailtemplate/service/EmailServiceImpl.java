@@ -18,7 +18,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,9 +26,11 @@ import 	org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import net.endpoint.account.model.User;
 import net.endpoint.emailtemplate.dto.RecivedEmailDto;
+import net.endpoint.emailtemplate.dto.SendEmailDto;
 
-@Component
-public class EmailServiceImpl implements EmailService {
+
+ @Component
+ public class EmailServiceImpl implements EmailService {
 
 	@Autowired
     private	JavaMailSender mailSender;
@@ -40,7 +41,26 @@ public class EmailServiceImpl implements EmailService {
 		this.mailSender = mailSender;
 	}
 	
-	
+	 public void sendEmail(SendEmailDto emailDto) {
+		
+		 if(this.mailSender != null){
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message);
+				
+			   try {
+					helper.setFrom(emailDto.getFrom());
+					helper.setTo(emailDto.getTo());
+					helper.setSubject(emailDto.getSubject());
+					helper.setText(emailDto.getContent());
+					helper.setSentDate(emailDto.getSendingDate());
+					mailSender.send(message);
+				  } catch (MessagingException e) {
+					e.printStackTrace();
+				}
+			  }else
+					System.out.println("Its null ");
+		
+	};
 	
 
 	@Override
@@ -52,24 +72,6 @@ public class EmailServiceImpl implements EmailService {
 		 mailSender.send(message);
 		}
 	
-	@Override
-	public void sentEmail(String to,String subject,String text) {
-	if(this.mailSender != null){
-		MimeMessage message = mailSender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(message);
-		
-	   try {
-			helper.setFrom("admin@skinqualitycare.com.au");
-			helper.setTo(to);
-			helper.setSubject(subject);
-			helper.setText(text);
-			mailSender.send(message);
-		  } catch (MessagingException e) {
-			e.printStackTrace();
-		}
-	  }else
-			System.out.println("Its null ");
-	}
 
 	@Override
 	public List<RecivedEmailDto> checkEmails(User user)  {

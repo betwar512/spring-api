@@ -1,22 +1,26 @@
 package net.endpoint.emailtemplate.service;
 
 import java.util.List;
-
 import javax.mail.MessagingException;
-
 import net.endpoint.account.model.User;
 import net.endpoint.emailtemplate.dto.RecivedEmailDto;
+import net.endpoint.emailtemplate.dto.SendEmailDto;
 
+/**
+ * 
+ * @author Betwar-mac
+ *
+ */
 public interface EmailService {
+
 	/**
-	 * <p>Send simple email from Admin email </p>
-	 * @param to
-	 * @param subject
-	 * @param text
+	 * <p>Send Email by using EmailDto object </p>
+	 * @param emailDto
 	 */
-	void sentEmail(String to, String subject, String text);
+	public void sendEmail(SendEmailDto emailDto);
+	
 	/**
-	 * 
+	 * <p>Using SimpleEmail to sned simple String email </p>
 	 * @param to
 	 * @param subject
 	 * @param text
