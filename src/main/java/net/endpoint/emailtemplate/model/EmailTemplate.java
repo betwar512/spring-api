@@ -23,7 +23,7 @@ public class EmailTemplate {
 		private String name;
 		@Column
 		private String htmlTemplateContent;	
-		@OneToMany(fetch = FetchType.EAGER, mappedBy = "template")
+		@OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
 		private List<EmailTemplateField> fildsContents;
 		@OneToMany(fetch = FetchType.EAGER, mappedBy = "template")
 		private List<EmailTemplateAttachment> attachments;

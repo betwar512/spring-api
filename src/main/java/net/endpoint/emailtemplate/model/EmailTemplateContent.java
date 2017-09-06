@@ -24,8 +24,6 @@ public class EmailTemplateContent {
 	protected String name;
 	@Column(name="html_field_id")
 	protected String htmlFieldId;
-	@ManyToOne
-	@JoinColumn(name="em_template_id",nullable=false)
-	protected EmailTemplate template;
+
 
 }

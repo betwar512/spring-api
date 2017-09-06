@@ -16,7 +16,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.StringTemplateResolver;
-import net.endpoint.utils.enums.EmailTemplates.EmailContentProperties;
+import net.endpoint.utils.enums.EmailVariables.EmailContentProperties;
 
 
 @Configuration

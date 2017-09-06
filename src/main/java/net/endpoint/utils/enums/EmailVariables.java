@@ -2,12 +2,13 @@ package net.endpoint.utils.enums;
 
 
 
-public interface EmailTemplates {
+public interface EmailVariables {
 	
-
+	public static final String themplate_url = "";
+   
 /**
  * 
- * @author Betwar
+ * @author A.H.Safaie
  *
  */
  public enum EmailContentProperties {

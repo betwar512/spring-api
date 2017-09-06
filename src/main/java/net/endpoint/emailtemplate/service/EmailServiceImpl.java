@@ -32,6 +32,7 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
  @Component
  public class EmailServiceImpl implements EmailService {
 
+	 
 	@Autowired
     private	JavaMailSender mailSender;
 
@@ -77,19 +78,19 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
 	public List<RecivedEmailDto> checkEmails(User user)  {
 	      List<RecivedEmailDto> emails = new ArrayList<>();
 		try {  
-		    	  Properties  props  = new Properties();
-		    	  String       host  = "mail.skinqualitycare.com.au";
+		    	  Properties  props   = new Properties();
+		    	  String           host  = "mail.skinqualitycare.com.au";
 		    	  String   username  = user.getEmail();
-		    	  String   password  = user.getPassword();
-		    	  String       port  = "993";
-		    	  String   provider  = "imap";
+		    	  String   password  =  user.getPassword();
+		    	  String       port      = "993";
+		    	  String   provider   = "imap";
 		    	    props.put("mail.imap.host", host);
 		    	    props.put("mail.imap.port", port);
 		    	    props.put("mail.imap.ssl.enable", "true");
 		    	      //Connect to the server
 		    	  Session session = Session.getDefaultInstance(props);
-		    	   Store    store = session.getStore(provider);     
-		    	            store.connect(host, username, password);
+		    	  Store      store = session.getStore(provider);     
+		    	                store.connect(host, username, password);
 
 
 		      //create the folder object and open it

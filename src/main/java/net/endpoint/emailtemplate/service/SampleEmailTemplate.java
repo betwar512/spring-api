@@ -20,7 +20,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import net.endpoint.utils.enums.EmailTemplates.EmailContentProperties;
+import net.endpoint.utils.enums.EmailVariables.EmailContentProperties;
 
 public class SampleEmailTemplate {
 
