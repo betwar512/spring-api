@@ -49,7 +49,9 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	    /*-------------------------------------------------------*/
 	    
 
- public void sendEditableTemplateEmail(EmailTemplateDto etd,SendEmailDto emailDto) throws MessagingException, IOException{
+   public void sendEditableTemplateEmail(EmailTemplateDto etd,SendEmailDto emailDto)
+		 throws MessagingException ,
+		        IOException{
 	    	
 	        // Prepare message using a Spring helper
 	        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
@@ -58,6 +60,7 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        message.setSubject(emailDto.getSubject());
 	        message.setFrom(emailDto.getFrom());
 	        message.setTo(emailDto.getTo());
+	        
 
 	        // Prepare the evaluation context
 	        final Context ctx = new Context(null);

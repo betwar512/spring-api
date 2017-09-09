@@ -1,18 +1,22 @@
 package net.endpoint.emailtemplate.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 class EmailDto {
 	
-	private String    from;
-	private String      to;
-	private String subject;
-	private String content;
-	private Locale  locale;
-	private Date      timestamp;
+	private String       from;
+	private String         to;
+	private List<String>  ccs;
+	private List<String> bccs;
+	private String    subject;
+	private String    content;
+	private Locale     locale;
+	private Date    timestamp;
 
-	public EmailDto(String from,String to ,String subject, String content,Locale locale) {
+	public EmailDto(String from,String to ,String subject, String content,Locale locale,List<String>  ccs,List<String>  bccs) {
 		super();
 		this.from = from;
 		this.to = to;
@@ -20,6 +24,8 @@ class EmailDto {
 		this.content = content;
 		this.timestamp = new Date();
 		this.locale = locale!= null ? locale : new Locale("en", "AU");
+		this.ccs  = ccs  != null ?  ccs : new ArrayList<>();
+		this.bccs = bccs != null ? bccs : new ArrayList<>();
 	}
 	
 	public String getFrom() {
@@ -64,6 +70,22 @@ class EmailDto {
 
 	public void setLocale(Locale locale) {
 		this.locale = locale;
+	}
+
+	public List<String> getCcs() {
+		return ccs;
+	}
+
+	public List<String> getBccs() {
+		return bccs;
+	}
+
+	public void setCcs(List<String> ccs) {
+		this.ccs = ccs;
+	}
+
+	public void setBccs(List<String> bccs) {
+		this.bccs = bccs;
 	}
 
 	

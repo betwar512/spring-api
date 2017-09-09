@@ -1,7 +1,6 @@
 package net.endpoint.emailtemplate.dto;
 
 import java.util.Date;
-import java.util.Locale;
 
 public class RecivedEmailDto extends EmailDto{
 
@@ -10,7 +9,7 @@ public class RecivedEmailDto extends EmailDto{
 
 	
 	public RecivedEmailDto(String from, String to, String subject, String content,Date recivedDate) {
-		super(from, to, subject, content, null);
+		super(from, to, subject, content, null,null,null);
 		this.recivedDate = recivedDate;
 	}
 

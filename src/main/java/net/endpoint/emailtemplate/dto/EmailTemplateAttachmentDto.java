@@ -10,10 +10,10 @@ public class EmailTemplateAttachmentDto {
 
 	public EmailTemplateAttachmentDto(String name, String htmlFiledId, String fileType, byte[] attachedFile) {
 		super();
-		this.name = name;
-		this.htmlFiledId = htmlFiledId;
+		this.name         = name;
+		this.htmlFiledId  = htmlFiledId;
 		this.attachedFile = attachedFile;
-		this.fileType = fileType;
+		this.fileType     = fileType;
 	}
 
 	public String getName() {

@@ -45,7 +45,7 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
 	 public void sendEmail(SendEmailDto emailDto) {
 		
 		 if(this.mailSender != null){
-				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessage      message = mailSender.createMimeMessage();
 				MimeMessageHelper helper = new MimeMessageHelper(message);
 				
 			   try {
