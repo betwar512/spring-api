@@ -1,11 +1,11 @@
-package net.endpoint.test;
+package endpoint;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import net.endpoint.util.AESCipherHelper;
-import net.endpoint.util.CustomEncoder;
+import net.endpoint.utils.AESCipherHelper;
+import net.endpoint.utils.CustomEncoder;
 
 public class EncoderTester {
 

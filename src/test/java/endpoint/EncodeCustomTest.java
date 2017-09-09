@@ -1,6 +1,7 @@
-package net.endpoint.test;
+package endpoint;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.security.spec.KeySpec;
 import java.util.Base64;
@@ -12,8 +13,8 @@ import javax.crypto.spec.DESedeKeySpec;
 
 import org.junit.Test;
 
-import net.endpoint.util.CustomEncoder;
-import net.endpoint.util.HelpUtil;
+import net.endpoint.utils.CustomEncoder;
+import net.endpoint.utils.HelpUtil;
 
 public class EncodeCustomTest {
 

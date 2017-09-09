@@ -60,12 +60,14 @@ compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.7.RELEA
         exclude(module: 'jackson-mapper-asl') // We already have a more recent jackson via Spring Boot
     }
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
-    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
-compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.7.RELEASE'
-    // https://mvnrepository.com/artifact/commons-io/commons-io
-compile group: 'commons-io', name: 'commons-io', version: '2.5'
-    
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
+	    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
+	compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.7.RELEASE'
+	    // https://mvnrepository.com/artifact/commons-io/commons-io
+	compile group: 'commons-io', name: 'commons-io', version: '2.5'
+	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+	   testCompile("org.springframework.boot:spring-boot-starter-test")
+	    
 
 
     

@@ -7,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,13 +17,34 @@ public class EmailTemplateContent {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	protected long id;
 	@Column
-	private String name;
+	protected String name;
 	@Column(name="html_field_id")
-	private String htmlFieldId;
-	@ManyToOne
-	@JoinColumn(name="em_template_id",nullable=false)
-	private EmailTemplate template;
+	protected String htmlFieldId;
+	
+	
+	
+	
+	public long getId() {
+		return id;
+	}
+	public String getName() {
+		return name;
+	}
+	public String getHtmlFieldId() {
+		return htmlFieldId;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setHtmlFieldId(String htmlFieldId) {
+		this.htmlFieldId = htmlFieldId;
+	}
 
+
+	
 }

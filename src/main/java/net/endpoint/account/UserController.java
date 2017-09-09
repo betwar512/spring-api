@@ -1,24 +1,18 @@
 package net.endpoint.account;
 
 
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
-import java.util.stream.Stream;
 import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import net.endpoint.account.dto.AccountRequestDto;
 import net.endpoint.account.dto.AddressDto;
 import net.endpoint.account.dto.ProfileDto;
-import net.endpoint.account.model.SecurityRole;
-import net.endpoint.account.model.User;
 import net.endpoint.account.service.UserService;
 import net.endpoint.emailtemplate.service.EmailService;
 import net.endpoint.emailtemplate.service.EmailTemplateServiceImpl;
@@ -45,30 +39,23 @@ public class UserController extends MainController {
 		public ProfileDto get(){	
     	 ProfileDto dto = loadProfile();
     	 logger.debug(dto.toString());
-    	 try {
+   	 try {
   
-			this.etp.sendEditableMail("abbas", "betwar512@gmail.com","",new Locale("en"));
-		} catch (MessagingException | IOException e) {
-			e.printStackTrace();
+			this.etp.sendMailWithAttachment("abbas", "betwar512@gmail.com","","",new Locale("en"));
+		} catch (MessagingException e) {
+			logger.error(e);
 		}
     	 return dto;
 		}
 		
 		@RequestMapping(value="/all",method = RequestMethod.GET)
 		public List<ProfileDto> getAll(){
-		  boolean isAuth = true;
-		  List<ProfileDto> profiles = this.userService.getAllProfileDtos();
-		  return profiles;
+		  return  this.isAdmin() ?this.userService.getAllProfileDtos() : new ArrayList<>();
 		}
 		
 		@RequestMapping(value="/create",method = RequestMethod.POST)
 		public AccountRequestDto create(@RequestBody AccountRequestDto accountRequestDto){	
-			   User user = this.loadUser();
-			   
-			   Set<SecurityRole> roles = user.getRolse();
-			   Stream<SecurityRole> result = roles.stream().filter(t-> t.getLevel() > 4);
-			   
-		 if(result.count() > 0){  
+		 if(this.isAdmin()){  
 			   try {
 				this.userService.createAccount(accountRequestDto);
 			} catch (Exception e) {

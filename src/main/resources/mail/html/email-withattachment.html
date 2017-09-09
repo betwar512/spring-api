@@ -1,33 +1,222 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title th:remove="all">Template for HTML email with attachment</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </head>
-    <body>
-        <p th:text="#{greeting(${name})}">
-            Hello, Peter Static!
-        </p>
-        <p th:if="${name.length() gt 10}">
-            Wow! You've got a long name (more than 10 chars)! <br />
-        </p>
-        <p>
-            You have been successfully subscribed to the <b>Fake newsletter</b> on
-            <span th:text="${#dates.format(subscriptionDate)}">28-12-2012</span>
-        </p>
-        <p>Your hobbies are:</p>
-        <ul th:remove="all-but-first">
-            <li th:each="hobby : ${hobbies}"
-                th:text="${hobby}">Reading</li>
-            <li>Writing</li>
-            <li>Bowling</li>
-        </ul>
-        <p>
-            You can find <b>your uploaded attachment</b> attached to this message.
-        </p>
-        <p>
-            Regards, <br />
-            &emsp; <em>The Thymeleaf Team</em>
-        </p>
-    </body>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+    <!-- NAME: 1 COLUMN - BANDED -->
+    <!--[if gte mso 15]>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:AllowPNG/>
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+    <![endif]-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SpiritJS - Welcome on board</title>
+    <style type="text/css">
+        /* body {
+            background: #70bbd9;
+            padding-top: 50px;
+            margin: 0 auto;
+            align-self: center;
+        } */
+
+        body {
+            background: #70bbd9;
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+
+ /* MOBILE STYLES */
+ @media screen and (max-width: 525px) {
+    .main-center {
+            margin: 0 auto;
+            width: 100% !important;
+        	max-width: 100% !important;
+            padding: 30%;
+        }
+ }
+        .main-center {
+            margin: 0 auto;
+            width: 80%;
+            padding: 10px;
+        }
+
+        .envelope {
+            position: relative;
+            margin: 50px auto 0;
+            width: 98px;
+            height: 66px;
+            background: #c94548;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 0 1px #c94548 inset;
+        }
+
+        .envelope:before,
+        .envelope:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 0 solid transparent;
+            border-width: 33px 49px;
+        }
+
+        .envelope:before {
+            border-bottom-color: #c94548;
+            top: -100%;
+            left: 0px;
+        }
+
+        .envelope:after {
+            border-right-color: #ed4c50;
+            border-left-color: #fa565a;
+            border-bottom-color: #fa565a;
+            top: 0;
+            border-radius: 0 0 5px 5px;
+            transform: rotate(360deg);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+        }
+
+        .paper {
+            background: #fff;
+            width: 87px;
+            height: 66px;
+            margin: 0 auto;
+            border-radius: 5px;
+            position: absolute;
+            left: 6px;
+            top: -33px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+        }
+
+        .paper:before,
+        .paper:after {
+            content: '';
+            position: absolute;
+            left: 12px;
+            background: #e3f1fc;
+            height: 4px;
+            border-radius: 5px;
+        }
+
+        .paper:before {
+            top: 14px;
+            width: 31px;
+        }
+
+        .paper:after {
+            right: 12px;
+            top: 28px;
+            box-shadow: 0 8px 0 #e3f1fc,
+            0 16px 0 #e3f1fc,
+            0 24px 0 #e3f1fc,
+            0 40px 0 #e3f1fc;
+        }
+
+        .email {
+            padding: 20px 0 20px 0;
+            background-color: #f0f0f0;
+            font-family: Ubuntu, sans-serif;
+        }
+
+        .email img {
+            width: 209px;
+            height: auto;
+            display: block;
+            margin: 30px auto 30px auto;
+        }
+
+        .email .container {
+            /* width: 580px; */
+            background-color: white;
+            color: #565656;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 40px 30px 40px 30px;
+        }
+
+        .email .container h1 {
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .email .container .content {
+            font-size: 16px;
+            text-align: center;
+            line-height: 24px;
+            color: #787778;
+        }
+
+        .email .container a {
+            text-decoration: none;
+        }
+
+        .email .container button {
+            margin: 30px auto 0 auto;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            display: block;
+            width: 160px;
+            height: 48px;
+            background-color: #8757d3;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .email .about-mail {
+            font-size: 12px;
+            color: #bdbdbd;
+            width: 600px;
+            margin: 35px auto 35px auto;
+            line-height: 19px;
+        }
+
+        div[style*="margin: 16px 0;"] {
+            margin: 0 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-center">
+        <div class="envelope">
+            <div class="paper"></div>
+        </div>
+        <div style="padding-bottom:50px;"></div>
+
+
+        <div class="email">
+            <!-- <img src="https://i1.createsend1.com/ei/d/9C/5DC/924/182822/csfinal/annot-logo_basic.png" /> -->
+
+            <div>
+                <div class="container" style="margin-left:20px;margin-right:20px;">
+                    <div>
+                        <h1>Welcome <b data-th-text="${name}"></b> to EndPoint.</h1>
+              <div class="content">Thank you for joining us! Please click the button below to verify your account.
+                 After verify you will be able to use your new email account by using private clients such as MS-outlook
+                    Mac Email client or such .
+              </div>
+              <div class="user-email" data-th-text="${email}"></div>
+              <a href=""><button>Verify Account</button></a>
+            </div>
+          </div>
+        </div>
+      
+        <div>
+          <div class="about-mail">
+            EndPoint.<br> Endpoint.net<br><br> You are receiving this email because you've signed up to Endpoint.net :)<br>
+          </div>
+        </div>
+      </div>
+</div>
+</body>
+
 </html>

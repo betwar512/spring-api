@@ -53,5 +53,9 @@ public abstract class MainController {
 		return	authenticationFacade.getAuthentication().getName();
 	}
 
+	protected boolean isAdmin() {
+		User user =   this.loadUser();
+		return user.getRolse().stream().anyMatch(t->t.getLevel() > 3);
+	}
 	
 }

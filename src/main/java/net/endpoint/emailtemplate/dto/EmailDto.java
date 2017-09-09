@@ -1,20 +1,31 @@
 package net.endpoint.emailtemplate.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
-public class EmailDto {
+class EmailDto {
 	
-	private String from;
-	private String subject;
-	private String content;
-	private Date date;
+	private String       from;
+	private String         to;
+	private List<String>  ccs;
+	private List<String> bccs;
+	private String    subject;
+	private String    content;
+	private Locale     locale;
+	private Date    timestamp;
 
-	public EmailDto(String from, String subject, String content,Date date) {
+	public EmailDto(String from,String to ,String subject, String content,Locale locale,List<String>  ccs,List<String>  bccs) {
 		super();
 		this.from = from;
+		this.to = to;
 		this.subject = subject;
 		this.content = content;
-		this.date = date;
+		this.timestamp = new Date();
+		this.locale = locale!= null ? locale : new Locale("en", "AU");
+		this.ccs  = ccs  != null ?  ccs : new ArrayList<>();
+		this.bccs = bccs != null ? bccs : new ArrayList<>();
 	}
 	
 	public String getFrom() {
@@ -35,11 +46,46 @@ public class EmailDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getDate() {
-		return date;
+
+
+	public Date getTimestamp() {
+		return timestamp;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
+	}
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+
+	public List<String> getCcs() {
+		return ccs;
+	}
+
+	public List<String> getBccs() {
+		return bccs;
+	}
+
+	public void setCcs(List<String> ccs) {
+		this.ccs = ccs;
+	}
+
+	public void setBccs(List<String> bccs) {
+		this.bccs = bccs;
 	}
 
 	
