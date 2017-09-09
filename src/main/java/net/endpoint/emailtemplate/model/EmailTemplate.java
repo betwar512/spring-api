@@ -41,5 +41,69 @@ public class EmailTemplate {
 			}
 			return etd;
 		}
+
+
+		public long getId() {
+			return id;
+		}
+
+
+		public String getName() {
+			return name;
+		}
+
+
+		public String getHtmlTemplateContent() {
+			return htmlTemplateContent;
+		}
+
+
+		public List<EmailTemplateField> getFildsContents() {
+			return fildsContents;
+		}
+
+
+		public List<EmailTemplateAttachment> getAttachments() {
+			return attachments;
+		}
+
+
+		public Date getCreatedAt() {
+			return createdAt;
+		}
+
+
+		public void setId(long id) {
+			this.id = id;
+		}
+
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+
+		public void setHtmlTemplateContent(String htmlTemplateContent) {
+			this.htmlTemplateContent = htmlTemplateContent;
+		}
+
+
+		public void setFildsContents(List<EmailTemplateField> fildsContents) {
+			this.fildsContents = fildsContents;
+		}
+
+
+		public void setAttachments(List<EmailTemplateAttachment> attachments) {
+			this.attachments = attachments;
+		}
+
+
+		public void setCreatedAt(Date createdAt) {
+			this.createdAt = createdAt;
+		}
+		
+	
+		
+		
 		
 }

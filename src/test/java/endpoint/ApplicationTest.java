@@ -8,7 +8,7 @@ import net.endpoint.config.SpringApp;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringApp.class)
-public class ApplicationTest {
+public abstract class ApplicationTest {
 
 	  @Test
 	    public void contextLoads() throws Exception {

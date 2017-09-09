@@ -19,9 +19,10 @@ public class EmailTemplateDaoImpl extends BaseDao implements EmailTemplateDao {
 	public List<EmailTemplate> findByName(String name) {
 	@SuppressWarnings("unchecked")
 	List<EmailTemplate> list = this.getSession()
-													.createQuery("from EmailTemplate where name=:name")
-													.setParameter("name", name)
-													.list();
+								   .createQuery("from EmailTemplate where name=:name")
+								   .setParameter("name", name)
+								   .list();
+	
 	    	return list != null  ? list : new ArrayList<>();
      	}
 

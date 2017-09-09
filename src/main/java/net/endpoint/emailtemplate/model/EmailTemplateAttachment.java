@@ -23,4 +23,34 @@ public class EmailTemplateAttachment extends EmailTemplateContent {
 	public EmailTemplateAttachmentDto pars() {	
 		return new EmailTemplateAttachmentDto(this.name,this.htmlFieldId,this.fileType,attachmentDocument);
 	}
+	
+	
+
+	public byte[] getAttachmentDocument() {
+		return attachmentDocument;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public EmailTemplate getTemplate() {
+		return template;
+	}
+
+	public void setAttachmentDocument(byte[] attachmentDocument) {
+		this.attachmentDocument = attachmentDocument;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public void setTemplate(EmailTemplate template) {
+		this.template = template;
+	}
+	
+	
+	
+	
 }

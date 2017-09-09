@@ -22,4 +22,23 @@ public class EmailTemplateField  extends EmailTemplateContent {
 	return  new EmailTemplateFieldDto(this.name,this.htmlFieldId,this.fieldContent);
 	}
 
+	public String getFieldContent() {
+		return fieldContent;
+	}
+
+	public EmailTemplate getTemplate() {
+		return template;
+	}
+
+	public void setFieldContent(String fieldContent) {
+		this.fieldContent = fieldContent;
+	}
+
+	public void setTemplate(EmailTemplate template) {
+		this.template = template;
+	}
+
+	
+	
+	
 }
