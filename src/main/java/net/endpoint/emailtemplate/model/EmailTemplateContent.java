@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -16,7 +17,8 @@ import javax.persistence.Table;
 public class EmailTemplateContent {
 
 	@Id
-	@GeneratedValue
+	@Column(name="em_template_field_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	protected long id;
 	@Column
 	protected String name;

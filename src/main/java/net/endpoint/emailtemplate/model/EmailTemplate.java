@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,11 +18,12 @@ import net.endpoint.emailtemplate.dto.EmailTemplateDto;
 public class EmailTemplate {
 	
 		@Id
-		@GeneratedValue
+		@Column(name="em_template_id")
+		@GeneratedValue(strategy=GenerationType.IDENTITY) 
 		private long id;
 		@Column
 		private String name;
-		@Column
+		@Column(name="html_base_content")
 		private String htmlTemplateContent;	
 		@OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
 		private List<EmailTemplateField> fildsContents;

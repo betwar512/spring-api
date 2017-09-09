@@ -73,6 +73,7 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        final String output = stringTemplateEngine.process(etd.getHtmlContent(), ctx);
 	        message.setText(output, true /* isHtml */);
 	        //Attach Files here 
+	      if(  etd.getAttachments() != null){ 
 	        etd.getAttachments().forEach(m->{ 	
 	        	   // Add the inline image, referenced from the HTML code as "cid:${imageResourceName}"  
 			 try {			 
@@ -82,7 +83,7 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 					logger.error(e);
 				}	
 	        });
- 
+	       }
 	        // Send mail
 	      this.mailSender.send(mimeMessage);
 
@@ -128,6 +129,12 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        // Send mail
 	      this.mailSender.send(mimeMessage);
 	 }
+		
+		
+		public void generateWelcomeEmail(){
+			
+		}
+		
 
 		@Override
 		@Transactional
@@ -256,6 +263,10 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 		        this.mailSender.send(mimeMessage);
 		    }
 
+		    
+		    
+		    
+		    
 
 		    /* 
 		     * Send HTML mail with inline image
