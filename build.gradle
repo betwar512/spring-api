@@ -65,7 +65,8 @@ compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.7.RELEA
 	compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.7.RELEASE'
 	    // https://mvnrepository.com/artifact/commons-io/commons-io
 	compile group: 'commons-io', name: 'commons-io', version: '2.5'
-	//compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+	   testCompile("org.springframework.boot:spring-boot-starter-test")
 	    
 
 
