@@ -1,6 +1,7 @@
 package net.endpoint.emailtemplate.model;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -26,9 +27,9 @@ public class EmailTemplate {
 		@Column(name="html_base_content")
 		private String htmlTemplateContent;	
 		@OneToMany(fetch = FetchType.LAZY, mappedBy = "template" ,targetEntity = EmailTemplateField.class)
-		private List<EmailTemplateField> fildsContents;
+		private List<EmailTemplateField> fildsContents  = new ArrayList<>();
 		@OneToMany(fetch = FetchType.LAZY, mappedBy = "template" ,targetEntity = EmailTemplateAttachment.class)
-		private List<EmailTemplateAttachment> attachments;
+		private List<EmailTemplateAttachment> attachments = new ArrayList<>();
 		@Column(name="created_at")
 		private Date createdAt;
 		

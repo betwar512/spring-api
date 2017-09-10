@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javassist.NotFoundException;
 import net.endpoint.emailtemplate.dto.EmailTemplateDto;
 import net.endpoint.emailtemplate.dto.RecivedEmailDto;
 import net.endpoint.emailtemplate.dto.SendEmailDto;
 import net.endpoint.emailtemplate.service.EmailService;
 import net.endpoint.emailtemplate.service.EmailTemplateServiceImpl;
 import net.endpoint.main.MainController;
+import net.endpoint.utils.enums.EmailVariables;
 
 
 @RestController
@@ -51,4 +54,17 @@ public class EmailController extends MainController {
 		}
 		
 	}
+	
+	@RequestMapping(path="/sendWelcomeEmail",method = RequestMethod.POST)
+	public void sendWelcomeEmail(SendEmailDto emailDto){
+	if(this.isAdmin()){
+	   try {
+		   EmailTemplateDto myTemplate =  etp.getTemplate(EmailVariables.EmailTemplatesUrls.WELCOME_EMAIL.getKey());
+		   this.etp.sendEditableTemplateEmail(myTemplate, emailDto); 
+	        } catch (NotFoundException | MessagingException | IOException e) {
+		   e.printStackTrace();
+	     }
+	   }
+	 }
+	
 }

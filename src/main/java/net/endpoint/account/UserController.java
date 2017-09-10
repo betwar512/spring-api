@@ -39,12 +39,6 @@ public class UserController extends MainController {
 		public ProfileDto get(){	
     	 ProfileDto dto = loadProfile();
     	 logger.debug(dto.toString());
-   	 try {
-  
-			this.etp.sendMailWithAttachment("abbas", "betwar512@gmail.com","","",new Locale("en"));
-		} catch (MessagingException e) {
-			logger.error(e);
-		}
     	 return dto;
 		}
 		

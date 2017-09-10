@@ -60,6 +60,9 @@ public class ProfileDto {
 	}
 	
 	
+	public String getFullName() {
+		return this.firstname + " " + this.lastname;
+	}
 	
 	
 	public Date getTimestamp() {

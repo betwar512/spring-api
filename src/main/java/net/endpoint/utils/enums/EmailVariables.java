@@ -26,15 +26,15 @@ public interface EmailVariables {
  
  
  public enum EmailTemplatesUrls {
-	TEMPLATE_NAME("url");
-	private final String url;
+	WELCOME_EMAIL("WELCOME_EMAIL");
+	private final String key;
 
-	private EmailTemplatesUrls(String url) {
-		this.url = url;
+	private EmailTemplatesUrls(String key) {
+		this.key = key;
 	  }
 	
-	  public String getUrl() {
-		return this.url;
+	  public String getKey() {
+		return this.key;
 	  }
    }
 
