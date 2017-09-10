@@ -20,7 +20,6 @@ import net.endpoint.utils.enums.EmailVariables.EmailContentProperties;
 
 
 @Configuration
-@PropertySource("classpath:emailconfig.properties")
 public class SpringMailConfig  implements ApplicationContextAware, EnvironmentAware {
 
 	    private ApplicationContext applicationContext;

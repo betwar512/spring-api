@@ -63,7 +63,7 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        
 
 	        // Prepare the evaluation context
-	        final Context ctx = new Context(null);
+	        final Context ctx = new Context(emailDto.getLocale());
 	         //Attach filed contents to context       
 	        etd.getFields().forEach(f->{
 	        	    ctx.setVariable(f.getFiledId(), f.getContent());   	

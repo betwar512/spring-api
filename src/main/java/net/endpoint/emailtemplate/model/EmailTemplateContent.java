@@ -10,10 +10,13 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DiscriminatorOptions;
+
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="itype")
 @Table(name = "em_template_field")
+@DiscriminatorOptions(force=true)
 public class EmailTemplateContent {
 
 	@Id

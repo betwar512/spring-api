@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
@@ -39,9 +40,10 @@ public class EmailTemplateTest extends DatabaseTest {
 
 	@Test
 	public void test() {
-	EmailTemplate et=this.sessionFactory.getCurrentSession().load(EmailTemplate.class, 1l);
+	EmailTemplate et = this.sessionFactory.getCurrentSession().load(EmailTemplate.class, 1l);
 		EmailTemplateDto edto=et.pars();
-		SendEmailDto emailDto = new SendEmailDto("admin@skinqualitycare.com.au","betwar512@gmail.com","Welcome To System",null, null, new Date(),null,null);
+		SendEmailDto emailDto = new SendEmailDto("admin@skinqualitycare.com.au","betwar512@gmail.com",
+												 "Welcome To System","", null, new Date(),null,null);
 		try {
 			emts.sendEditableTemplateEmail(edto, emailDto);
 		} catch (MessagingException | IOException e) {

@@ -25,9 +25,9 @@ public class EmailTemplate {
 		private String name;
 		@Column(name="html_base_content")
 		private String htmlTemplateContent;	
-		@OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
+		@OneToMany(fetch = FetchType.LAZY, mappedBy = "template" ,targetEntity = EmailTemplateField.class)
 		private List<EmailTemplateField> fildsContents;
-		@OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
+		@OneToMany(fetch = FetchType.LAZY, mappedBy = "template" ,targetEntity = EmailTemplateAttachment.class)
 		private List<EmailTemplateAttachment> attachments;
 		@Column(name="created_at")
 		private Date createdAt;
