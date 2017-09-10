@@ -1,5 +1,6 @@
 package net.endpoint.emailtemplate.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmailTemplateDto  {
@@ -14,8 +15,8 @@ public class EmailTemplateDto  {
 		super();
 		this.htmlContent = htmlContet;
 		this.name = name;
-		this.attachments = attachments;
-		this.fields = fields;
+		this.attachments = attachments != null ? attachments : new ArrayList<>();
+		this.fields = fields != null ? fields : new ArrayList<>();
 	}
 	
 	

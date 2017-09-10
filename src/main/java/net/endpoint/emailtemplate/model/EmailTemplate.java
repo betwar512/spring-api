@@ -27,7 +27,7 @@ public class EmailTemplate {
 		private String htmlTemplateContent;	
 		@OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
 		private List<EmailTemplateField> fildsContents;
-		@OneToMany(fetch = FetchType.EAGER, mappedBy = "template")
+		@OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
 		private List<EmailTemplateAttachment> attachments;
 		@Column(name="created_at")
 		private Date createdAt;
@@ -35,10 +35,10 @@ public class EmailTemplate {
 		
 		public EmailTemplateDto pars() {
 			EmailTemplateDto etd = new EmailTemplateDto(this.name,this.htmlTemplateContent,null,null);
-			if(!this.fildsContents.isEmpty()) {
+			if(this.fildsContents != null) {
 				this.fildsContents.forEach(t->etd.getFields().add(t.pars()));
 			}		
-			if(!this.attachments.isEmpty()) {
+			if(this.attachments != null) {
 				this.attachments.forEach(t->etd.getAttachments().add(t.pars()));
 			}
 			return etd;

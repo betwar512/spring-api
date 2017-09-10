@@ -27,7 +27,7 @@ public class DatabaseTest extends ApplicationTest {
     private ApplicationContext applicationContext;
 	
 	@Autowired
-	private SessionFactory sessionFactory;
+	public SessionFactory sessionFactory;
     
     
 	@Test
