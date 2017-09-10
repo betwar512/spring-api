@@ -34,7 +34,7 @@ public class EmailTemplate {
 		
 		
 		public EmailTemplateDto pars() {
-			EmailTemplateDto etd = new EmailTemplateDto(this.name,this.htmlTemplateContent,null,null);
+			EmailTemplateDto etd = new EmailTemplateDto(this.htmlTemplateContent,this.name,null,null);
 			if(this.fildsContents != null) {
 				this.fildsContents.forEach(t->etd.getFields().add(t.pars()));
 			}		

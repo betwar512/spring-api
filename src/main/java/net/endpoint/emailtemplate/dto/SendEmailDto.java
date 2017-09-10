@@ -8,10 +8,10 @@ public class SendEmailDto extends EmailDto {
     private Date sendingDate;
 	
 	public SendEmailDto(String from, String to,
-			String subject, String content, 
+			String subject, String content,String userName, 
 			Locale locale,Date sendingDate,
 			List<String>  ccs,List<String>  bccs) {
-		super(from, to, subject, content, locale,ccs,bccs);
+		super(from, to, subject, content,userName, locale,ccs,bccs);
 			this.sendingDate = sendingDate;
 	}
 

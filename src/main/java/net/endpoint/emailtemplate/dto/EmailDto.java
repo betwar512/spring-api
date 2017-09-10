@@ -15,8 +15,9 @@ class EmailDto {
 	private String    content;
 	private Locale     locale;
 	private Date    timestamp;
+	private String   userName;
 
-	public EmailDto(String from,String to ,String subject, String content,Locale locale,List<String>  ccs,List<String>  bccs) {
+	public EmailDto(String from,String to ,String subject, String content,String userName,Locale locale,List<String>  ccs,List<String>  bccs) {
 		super();
 		this.from = from;
 		this.to = to;
@@ -26,6 +27,7 @@ class EmailDto {
 		this.locale = locale!= null ? locale : new Locale("en", "AU");
 		this.ccs  = ccs  != null ?  ccs : new ArrayList<>();
 		this.bccs = bccs != null ? bccs : new ArrayList<>();
+		this.userName = userName;
 	}
 	
 	public String getFrom() {
@@ -86,6 +88,14 @@ class EmailDto {
 
 	public void setBccs(List<String> bccs) {
 		this.bccs = bccs;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	

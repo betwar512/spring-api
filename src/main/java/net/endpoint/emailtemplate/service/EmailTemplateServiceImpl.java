@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.stream.Collectors;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -18,6 +19,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
@@ -33,7 +35,7 @@ import net.endpoint.utils.enums.EmailVariables.EmailContentProperties;
 public class EmailTemplateServiceImpl  implements EmailTemplateService{
 
 	  Logger logger = Logger.getLogger(EmailTemplateServiceImpl.class);
-	   
+
 	    @Autowired
 	    private JavaMailSender mailSender;
 	    @Autowired
@@ -64,13 +66,16 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 
 	        // Prepare the evaluation context
 	        final Context ctx = new Context(emailDto.getLocale());
+	        ctx.setVariable("email", emailDto.getTo());  
+	        ctx.setVariable("username", emailDto.getUserName());
+	        
 	         //Attach filed contents to context       
 	        etd.getFields().forEach(f->{
 	        	    ctx.setVariable(f.getFiledId(), f.getContent());   	
 	        });
 
 	        // Create the HTML body using Thymeleaf
-	        final String output = stringTemplateEngine.process(etd.getHtmlContent(), ctx);
+	        final String output = htmlTemplateEngine.process(etd.getHtmlContent(), ctx);
 	        message.setText(output, true /* isHtml */);
 	        //Attach Files here 
 	      if(  etd.getAttachments() != null){ 
@@ -98,9 +103,10 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 
 		    // Prepare the evaluation context
 	        final Context ctx = new Context(emailDto.getLocale());
-	        ctx.setVariable("name", emailDto.toString());
 	        // so that we can reference it from HTML  	
-	        eto.getAttachments().forEach(t->ctx.setVariable(t.getHtmlFiledId() , t.getName()));
+	        if(eto.getFields() != null ){        
+	             eto.getFields().forEach(t-> ctx.setVariable(t.getFiledId() ,t.getContent()));
+	           }
 	        // Prepare message using a Spring helper
 	        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
 	        final MimeMessageHelper message
@@ -110,8 +116,8 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        message.setTo(emailDto.getTo());
 
 	        // Create the HTML body using Thymeleaf
-	        final String htmlContent = this.stringTemplateEngine.process(eto.getHtmlContent(), ctx);
-	        message.setText(htmlContent, true /* isHtml */);
+	        final String htmlContent = this.htmlTemplateEngine.process(eto.getHtmlContent(), ctx);
+	        message.setText(htmlContent, true);
 
 	        eto.getAttachments().forEach(m->{ 	
 	        	   // Add the in-line image, referenced from the HTML code as "cid:${imageResourceName}"
@@ -133,6 +139,24 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 		
 		public void generateWelcomeEmail(){
 			
+		}
+		
+		
+	
+	 public JavaMailSender getJavaMailSender(String email,String password) {
+			JavaMailSenderImpl mailSender = new JavaMailSenderImpl();	 
+		    mailSender.setHost("smtp.skinqualitycare.com.au");
+		    mailSender.setPort(25);	     
+		    mailSender.setUsername(email);
+		    mailSender.setPassword(password);
+		     
+		    Properties props = mailSender.getJavaMailProperties();
+		    props.put("mail.transport.protocol", "smtp");
+		    props.put("mail.smtp.auth", "true");
+//		    props.put("mail.smtp.starttls.enable", "true");
+		    props.put("mail.debug", "true");
+		     
+		    return mailSender;
 		}
 		
 

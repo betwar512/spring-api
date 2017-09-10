@@ -5,7 +5,7 @@ import java.util.List;
 
 public class EmailTemplateDto  {
 
-	private String htmlContent;
+	private String  htmlContent;
 	private String         name;
 	private List<EmailTemplateAttachmentDto>   attachments;
 	private List<EmailTemplateFieldDto>  fields;

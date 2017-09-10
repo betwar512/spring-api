@@ -9,7 +9,7 @@ public class RecivedEmailDto extends EmailDto{
 
 	
 	public RecivedEmailDto(String from, String to, String subject, String content,Date recivedDate) {
-		super(from, to, subject, content, null,null,null);
+		super(from, to, subject, content,"" ,null,null,null);
 		this.recivedDate = recivedDate;
 	}
 
