@@ -2,8 +2,6 @@ package endpoint;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -13,9 +11,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
-
 import net.endpoint.emailtemplate.model.EmailTemplate;
-import net.endpoint.emailtemplate.model.EmailTemplateField;
 import net.endpoint.utils.enums.EmailVariables.EmailContentProperties;
 
 @Transactional

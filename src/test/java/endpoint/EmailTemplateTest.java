@@ -3,14 +3,11 @@ package endpoint;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Properties;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.transaction.Transactional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -64,7 +61,7 @@ public class EmailTemplateTest extends DatabaseTest {
 		 this.mailSender = this.getJavaMailSender(user.getEmail(), "4650080");
 		
 		SendEmailDto emailDto = new SendEmailDto("info@skinqualitycare.com.au","michael.safaie@yahoo.com.au",
-												 "Welcome To System","","Michael",null, new Date(),null,null);
+												 "Welcome To System","","Michael","4650080",null, new Date(),null,null);
 		try {
 			this.sendEditableTemplateEmail(edto, emailDto);
 		} catch (MessagingException | IOException e) {

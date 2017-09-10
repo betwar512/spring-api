@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.stream.Collectors;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import javassist.NotFoundException;
-import net.endpoint.account.dto.ProfileDto;
 import net.endpoint.emailtemplate.dao.EmailTemplateDao;
 import net.endpoint.emailtemplate.dto.EmailTemplateDto;
 import net.endpoint.emailtemplate.dto.SendEmailDto;
@@ -41,8 +41,6 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	    @Autowired
 	    private JavaMailSender mailSender;
 	    @Autowired
-	    private TemplateEngine stringTemplateEngine;
-	    @Autowired
 	    private TemplateEngine htmlTemplateEngine;
 	    @Autowired
 	    private EmailTemplateDao emailTemplateDao;
@@ -55,11 +53,12 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	 private Context createDefaultContext(SendEmailDto emailDto){
 		 final Context ctx = new Context(emailDto.getLocale());
 		 ctx.setVariable("email", emailDto.getTo());
-		 ctx.setVariable("name", emailDto.getUserName());
+		 ctx.setVariable("username", emailDto.getUserName());
 		 ctx.setVariable("timestamp", new Date());
 		 return ctx; 
 	 }   
 
+   @Override
    public void sendEditableTemplateEmail(EmailTemplateDto etd,SendEmailDto emailDto)
 		 throws MessagingException ,
 		        IOException{
@@ -74,10 +73,7 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        
 
 	        // Prepare the evaluation context
-	        final Context ctx = new Context(emailDto.getLocale());
-	        ctx.setVariable("email", emailDto.getTo());  
-	        ctx.setVariable("username", emailDto.getUserName());
-	    
+	        final Context ctx = createDefaultContext(emailDto);  
 	         //Attach filed contents to context       
 	        etd.getFields().forEach(f->{
 	        	    ctx.setVariable(f.getFiledId(), f.getContent());   	
@@ -94,10 +90,10 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 			   try {			 
 					InputStreamSource	imageSource = new ByteArrayResource(m.getAttachedFile());
 					message.addInline(m.getHtmlFiledId(), imageSource, m.getFileType());
-				} catch (Exception e ) {
-					logger.error(e);
-				}	
-	        });
+			    	} catch (Exception e ) {
+				  	logger.error(e);
+			    	}	
+	         });
 
 	        // Send mail
 	      this.mailSender.send(mimeMessage);
@@ -118,7 +114,7 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	             eto.getFields().forEach(t-> ctx.setVariable(t.getFiledId() ,t.getContent()));
 	           }
 	        // Prepare message using a Spring helper
-	        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+	        final MimeMessage mimeMessage = this.getJavaMailSender(emailDto.getFrom(),emailDto.getPassword()).createMimeMessage();
 	        final MimeMessageHelper message
 	            = new MimeMessageHelper(mimeMessage, true /* multipart */,EmailVariables.EmailContentProperties.ENCODE_UTF_8.getValue());
 	        message.setSubject(emailDto.getSubject());

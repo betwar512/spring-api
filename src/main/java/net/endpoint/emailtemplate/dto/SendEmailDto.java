@@ -6,13 +6,15 @@ import java.util.Locale;
 
 public class SendEmailDto extends EmailDto {
     private Date sendingDate;
+    private String password;
 	
 	public SendEmailDto(String from, String to,
-			String subject, String content,String userName, 
+			String subject, String content,String userName,String password, 
 			Locale locale,Date sendingDate,
 			List<String>  ccs,List<String>  bccs) {
 		super(from, to, subject, content,userName, locale,ccs,bccs);
 			this.sendingDate = sendingDate;
+			this.password = password;
 	}
 
 	public Date getSendingDate() {
@@ -23,5 +25,14 @@ public class SendEmailDto extends EmailDto {
 		this.sendingDate = sendingDate;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
 	
 }

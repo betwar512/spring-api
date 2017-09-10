@@ -3,13 +3,13 @@ package net.endpoint.account;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import net.endpoint.account.dto.AccountRequestDto;
 import net.endpoint.account.dto.AddressDto;
 import net.endpoint.account.dto.ProfileDto;
