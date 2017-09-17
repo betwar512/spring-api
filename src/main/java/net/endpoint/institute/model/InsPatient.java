@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import net.endpoint.account.model.Person;
@@ -27,20 +28,22 @@ public class InsPatient implements Serializable {
 	@GeneratedValue
 	@Column(name="ins_patient_id")
 	private long id;
+	
+	@OneToMany(fetch=FetchType.EAGER , mappedBy="patient")
+	private Set<InsAnatomy> anatomies = new HashSet<>();
+	
 	@ManyToOne
 	@JoinColumn(name="person_id",nullable=false)
 	private Person person;
 	
-	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinTable(name="ins_practitioner_patient" , joinColumns={
 	@JoinColumn(name="ins_patient_id",nullable=false,updatable=false)},
 	inverseJoinColumns={
 	@JoinColumn(name="ins_practitioner_id",nullable=false,updatable=false)})
 	private Set<InsPractitioner> practitioners = new HashSet<>();
 	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 	public long getId() {
 		return id;
 	}
@@ -53,6 +56,19 @@ public class InsPatient implements Serializable {
 	public void setPerson(Person person) {
 		this.person = person;
 	}
+	public Set<InsAnatomy> getAnatomies() {
+		return anatomies;
+	}
+	public Set<InsPractitioner> getPractitioners() {
+		return practitioners;
+	}
+	public void setAnatomies(Set<InsAnatomy> anatomies) {
+		this.anatomies = anatomies;
+	}
+	public void setPractitioners(Set<InsPractitioner> practitioners) {
+		this.practitioners = practitioners;
+	}
+	
 	
 	
 }

@@ -2,15 +2,10 @@ package net.endpoint.filesystem.model;
 
 import java.util.Date;
 
-import javax.persistence.Id;
-
-import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Document
 public class FsProfile {
 
-	@Id
 	private String profileId;
 	private String userId;
 	private String name;
@@ -18,13 +13,8 @@ public class FsProfile {
 	
 	
 	
-
-
 	public String getProfileId() {
 		return profileId;
-	}
-	public void setProfileId(String profileId) {
-		this.profileId = profileId;
 	}
 	public String getUserId() {
 		return userId;
@@ -35,7 +25,9 @@ public class FsProfile {
 	public Date getTimestamp() {
 		return timestamp;
 	}
-
+	public void setProfileId(String profileId) {
+		this.profileId = profileId;
+	}
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
