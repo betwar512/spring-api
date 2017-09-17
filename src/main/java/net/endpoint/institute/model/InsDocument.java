@@ -1,5 +1,6 @@
 package net.endpoint.institute.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,8 +14,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ins_document")
-public class InsDocument {
+public class InsDocument implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	@Column(name="ins_document_id")
