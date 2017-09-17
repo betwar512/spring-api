@@ -28,7 +28,7 @@ public class FsConfig extends AbstractMongoConfiguration{
 	@Override
 	public Mongo mongo() throws Exception {
 
-		return new MongoClient("127.0.0.1");
+		return new MongoClient("10.0.0.84");
 	}
 
 }
