@@ -10,5 +10,5 @@ public interface FsProfileDocumentRepsitory extends MongoRepository<FsProfileDoc
 
 	public FsProfileDocument findByName(String name);
 	public List<FsProfileDocument> findByOwnerProfile(String ownerProfile);
-
+	
 }
