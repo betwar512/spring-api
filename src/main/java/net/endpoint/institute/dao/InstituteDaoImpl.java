@@ -6,6 +6,8 @@ import javax.transaction.Transactional;
 
 import org.hibernate.criterion.Restrictions;
 
+import net.endpoint.account.dto.ProfileDto;
+import net.endpoint.account.model.Person;
 import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPatientAnatomy;
 import net.endpoint.institute.model.InsPractitioner;
@@ -38,6 +40,15 @@ public class InstituteDaoImpl extends BaseDao implements InstituteDao {
 			.add(Restrictions.eq("practitioner", practitioner)).list();
 			
 		return list!=null && !list.isEmpty() ? list.get(0) : null;
+	}
+
+	@Override
+	public InsPractitioner findByPerson(Person person) {
+			@SuppressWarnings("unchecked")
+			List<InsPractitioner> list = this.getSession().createCriteria(InsPractitioner.class)	
+															.add(Restrictions.eq("person", person))
+															.list();										
+		return list != null && !list.isEmpty() ? list.get(0)  : null;
 	}
 	
 

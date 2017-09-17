@@ -21,6 +21,12 @@ import javax.persistence.Table;
 @Table(name="ins_body_part")
 public class InsBodyPart  implements Serializable{
 
+	public enum BODY_PART_TYPE{
+		HAND,
+		LEG;
+	}
+	
+	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue

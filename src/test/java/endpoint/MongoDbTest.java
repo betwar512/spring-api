@@ -29,7 +29,7 @@ import net.endpoint.filesystem.repository.FsProfileRepository;
 import net.endpoint.filesystem.service.FsService;
 
 public class MongoDbTest extends ApplicationTest {
-	//@Autowired
+//	@Autowired
 	public MongoClient mongoClient;
 
 	public MongoDatabase database ;
@@ -145,6 +145,7 @@ public class MongoDbTest extends ApplicationTest {
 		}
 		
 		private void createDateBase(){
+			this.connectDb();
 	        MongoIterable<String> list = this.mongoClient.listDatabaseNames();
 	        list.iterator().forEachRemaining(t->System.out.println("DBNAME:"+t.toString()));
 			this.database = mongoClient.getDatabase("test");
@@ -157,12 +158,12 @@ public class MongoDbTest extends ApplicationTest {
 		
 		
 		private void connectDb(){	
-//		this.mongoClient = this.mongoClient != null ? this.mongoClient : new MongoClient();		
-//		if(mongoClient != null){
-//			System.out.println("ConnectionDetail"+	mongoClient.getConnectPoint());
-//			System.out.println("------------------------------------------------------------");
-//		   }
-//
+		this.mongoClient = this.mongoClient != null ? this.mongoClient : new MongoClient();		
+		if(mongoClient != null){
+			System.out.println("ConnectionDetail"+	mongoClient.getConnectPoint());
+			System.out.println("------------------------------------------------------------");
+		   }
+
 	}
 		
 	}
