@@ -21,18 +21,13 @@ public class InsAnatomy {
 	@GeneratedValue
 	@Column(name="ins_anatomy_id")
 	private long id;
-	@ManyToOne
-	@JoinColumn(name="ins_patient_id")
-	private InsPatient patient;
+
 	@OneToMany(fetch=FetchType.EAGER , mappedBy="anatomy")
 	private Set<InsBodyPart> bodyParts = new HashSet<>();
 	@Column(name="created_at")
 	private Date timestamp;
 	
-	
-	
-	
-	
+
 	public Set<InsBodyPart> getBodyParts() {
 		return bodyParts;
 	}
@@ -42,17 +37,11 @@ public class InsAnatomy {
 	public long getId() {
 		return id;
 	}
-	public InsPatient getPatient() {
-		return patient;
-	}
 	public Date getTimestamp() {
 		return timestamp;
 	}
 	public void setId(long id) {
 		this.id = id;
-	}
-	public void setPatient(InsPatient patient) {
-		this.patient = patient;
 	}
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;

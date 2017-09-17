@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import net.endpoint.account.model.User;
@@ -30,13 +31,15 @@ public class InsPractitioner  implements Serializable {
 	@OneToOne
 	@JoinColumn(name="user_id",nullable=false)
 	private User user;
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="practitioner")
+	private Set<InsPatientAnatomy> patieAnotomies = new HashSet<>();
+//	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+//	@JoinTable(name="ins_practitioner_patient" , joinColumns={
+//	@JoinColumn(name="ins_practitioner_id",nullable=false,updatable=false)},
+//	inverseJoinColumns={
+//	@JoinColumn(name="ins_patient_id",nullable=false,updatable=false)})
+//	private Set<InsPatient> patients = new HashSet<>();
 	
-	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	@JoinTable(name="ins_practitioner_patient" , joinColumns={
-	@JoinColumn(name="ins_practitioner_id",nullable=false,updatable=false)},
-	inverseJoinColumns={
-	@JoinColumn(name="ins_patient_id",nullable=false,updatable=false)})
-	private Set<InsPatient> patients = new HashSet<>();
 	@Column(name="iactive")
 	private boolean active;
 	@Column(name="created_at")
@@ -50,9 +53,7 @@ public class InsPractitioner  implements Serializable {
 	public User getUser() {
 		return user;
 	}
-	public Set<InsPatient> getPatients() {
-		return patients;
-	}
+
 	public boolean isActive() {
 		return active;
 	}
@@ -65,14 +66,18 @@ public class InsPractitioner  implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public void setPatients(Set<InsPatient> patients) {
-		this.patients = patients;
-	}
+
 	public void setActive(boolean active) {
 		this.active = active;
 	}
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
+	}
+	public Set<InsPatientAnatomy> getPatieAnotomies() {
+		return patieAnotomies;
+	}
+	public void setPatieAnotomies(Set<InsPatientAnatomy> patieAnotomies) {
+		this.patieAnotomies = patieAnotomies;
 	}
 	
 	

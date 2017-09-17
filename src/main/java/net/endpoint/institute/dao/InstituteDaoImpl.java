@@ -1,7 +1,13 @@
 package net.endpoint.institute.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
+
+import org.hibernate.criterion.Restrictions;
+
 import net.endpoint.institute.model.InsPatient;
+import net.endpoint.institute.model.InsPatientAnatomy;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.main.dao.BaseDao;
 
@@ -22,6 +28,16 @@ public class InstituteDaoImpl extends BaseDao implements InstituteDao {
 	@Override
 	public InsPatient loadPatient(long id) {
 		return this.getSession().load(InsPatient.class, id);
+	}
+
+	@Override
+	public InsPatientAnatomy loadAnatomy(InsPractitioner practitioner, InsPatient patient) {
+		@SuppressWarnings("unchecked")
+		List<InsPatientAnatomy> list=	  this.getSession().createCriteria(InsPatientAnatomy.class)
+			.add(Restrictions.eq("patient",patient))
+			.add(Restrictions.eq("practitioner", practitioner)).list();
+			
+		return list!=null && !list.isEmpty() ? list.get(0) : null;
 	}
 	
 
