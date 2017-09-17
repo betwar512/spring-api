@@ -19,13 +19,13 @@ public class InsPatientAnatomy implements Serializable {
 	@Column(name="ins_patient_anatomy_id")
 	private long id;
 	@ManyToOne
-	@JoinColumn(name="ins_antamy_id",nullable=false)
+	@JoinColumn(name="ins_anatomy",nullable=false)
 	private InsAnatomy anatomy;
 	@ManyToOne
 	@JoinColumn(name="ins_patient_id",nullable=false)
 	private InsPatient patient;
 	@ManyToOne
-	@JoinColumn(name="inst_practitioner_id",nullable=false)
+	@JoinColumn(name="ins_practitioner_id",nullable=false)
 	private InsPractitioner practitioner;
 	public long getId() {
 		return id;

@@ -8,7 +8,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
 
 @Configuration
-@EntityScan({"net.endpoint.main.model" ,"net.endpoint.account.model" , "net.endpoint.emailtemplate.model" })
+@EntityScan({"net.endpoint.main.model" ,"net.endpoint.account.model" , "net.endpoint.emailtemplate.model" ,
+	"net.endpoint.institute.model" })
 public class DatabaseConfig {
 
 

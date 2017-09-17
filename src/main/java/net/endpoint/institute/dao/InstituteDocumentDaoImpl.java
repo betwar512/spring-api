@@ -1,9 +1,11 @@
 package net.endpoint.institute.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
 
+import net.endpoint.institute.model.InsAnatomy;
 import net.endpoint.institute.model.InsDocument;
 import net.endpoint.institute.model.InsPartType;
 import net.endpoint.institute.model.InsPatient;
@@ -20,16 +22,32 @@ public class InstituteDocumentDaoImpl extends BaseDao implements InstituteDocume
 			.add(Restrictions.eq("patient", patien))
 			.add(Restrictions.eq("practitioner", practitioner));
 			this.getSession().createQuery("from InsDocument ");
-			
-			
-			
+
 		return null;
 	}
+
 
 	@Override
-	public List<InsDocument> getPartDocuments(InsPractitioner practitioner, InsPatient patien, InsPartType type) {
-	
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<InsDocument> getPartDocuments(InsPractitioner practitioner, InsPatient patient, InsPartType type) {
+	String hql ="select doc from InsDocument doc , InsPatientAnatomy pa where doc.part.type =:type "
+            + " and pa.patient=:patient and pa.practitioner=:practitioner"
+            + "and doc.part.anatomy = pa.anatomy order by doc.timestamp desc";
+       List<InsDocument> list =	this.getSession()
+    		   .createQuery(hql)
+    		   .setEntity("practitioner", practitioner)
+           	  .setEntity("patient", patient)
+	          .setEntity("type", type)
+	          .list();
+		return list!=null ? list : new ArrayList<>();
 	}
 
+	public InsDocument findLastDocumentForBodytype(InsAnatomy anatomy,InsPartType type) {
+	final	String hql = "from InsDocument doc where doc.part.type =:type "
+				             + "and doc.part.anatomy =:anatomy order by doc.timestamp desc";
+	return    (InsDocument) this.getSession().createQuery(hql).setEntity("type", type)
+                                                 .setEntity("anatomy", anatomy).setMaxResults(1);
+	}
+	
+	
 }
