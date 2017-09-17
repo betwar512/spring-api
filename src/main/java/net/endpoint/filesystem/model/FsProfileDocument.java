@@ -1,63 +1,55 @@
 package net.endpoint.filesystem.model;
 
-import java.io.File;
 import java.util.Date;
-
 import javax.persistence.Id;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class FsProfileDocument {
 	@Id
-	private String id;
-	private String ownerProfile;
-    private	File file;	
+	private Long id;
+	private Long ownerProfile;
+   // private	File file;	
 	private Date timestamp;
 	private String name;
 	private String description;
-	
-	
-	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public File getFile() {
-		return file;
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getOwnerProfile() {
+		return ownerProfile;
+	}
+	public void setOwnerProfile(Long ownerProfile) {
+		this.ownerProfile = ownerProfile;
 	}
 	public Date getTimestamp() {
 		return timestamp;
 	}
-	public String getName() {
-		return name;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public void setFile(File file) {
-		this.file = file;
-	}
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
+	}
+	public String getName() {
+		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getDescription() {
+		return description;
+	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public String getOwnerProfile() {
-		return ownerProfile;
-	}
-	public void setOwnerProfile(String ownerProfile) {
-		this.ownerProfile = ownerProfile;
 	}
 	
 	@Override
 	public String toString() {
-		return "FsProfileDocument [id=" + id + ", ownerProfile=" + ownerProfile + ", file=" + file + ", timestamp="
-				+ timestamp + ", name=" + name + ", description=" + description + "]";
+		return "FsProfileDocument [id=" + id + ", ownerProfile=" + ownerProfile + ", timestamp=" + timestamp + ", name="
+				+ name + ", description=" + description + "]";
 	}
+	
 
 }

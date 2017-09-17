@@ -1,10 +1,13 @@
 package endpoint;
 import static org.junit.Assert.*;
 
+import java.util.Date;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.bson.Document;
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
@@ -12,11 +15,19 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
 
-public class MongoDbTest {
+import net.endpoint.filesystem.model.FsProfile;
+import net.endpoint.filesystem.repository.FsProfileDocumentRepsitory;
+import net.endpoint.filesystem.repository.FsProfileRepository;
+import net.endpoint.filesystem.service.FsService;
+
+public class MongoDbTest extends ApplicationTest {
 
 
 	private MongoClient mongoClient;
 	private MongoDatabase database ;
+	
+	@Autowired
+	FsService fsService;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -31,6 +42,27 @@ public class MongoDbTest {
 	public void test() {
 		//fail("Not yet implemented");
 	}
+	
+	
+	@Test
+	public void testREpo(){
+	
+		
+		FsProfile pro = new FsProfile();	
+		pro.setName("test-doc");
+		pro.setTimestamp(new Date());
+		pro.setUserId("profileUserId");
+		fsService.addNewProfile(pro);
+		
+		
+		
+		fsService.getAll().forEach(t->System.out.println(t.toString()));
+		
+		System.out.println(pro.toString());
+		
+	}
+	
+	
 	
 	Block<Document> printBlock = new Block<Document>() {
 		       @Override
