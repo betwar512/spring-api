@@ -51,14 +51,14 @@ public class DatabaseTest extends ApplicationTest {
 //		this.sessionFactory.getCurrentSession().save(emp2);
 //		this.sessionFactory.getCurrentSession().save(em);
 		
-		try {
-			em.setHtmlTemplateContent(getEditableMailTemplate());
-		} catch (IOException e) {
+	//	try {
+//			em.setHtmlTemplateContent(getEditableMailTemplate());
+		//} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.sessionFactory.getCurrentSession().saveOrUpdate(em);
-		this.sessionFactory.getCurrentSession().flush();
+		//	e.printStackTrace();
+		//}
+//		this.sessionFactory.getCurrentSession().saveOrUpdate(em);
+//		this.sessionFactory.getCurrentSession().flush();
 	
 	}
 	

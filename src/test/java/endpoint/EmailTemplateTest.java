@@ -133,7 +133,7 @@ public class EmailTemplateTest extends DatabaseTest {
 		        });
 		       }
 		        // Send mail
-		      this.mailSender.send(mimeMessage);
+		     // this.mailSender.send(mimeMessage);
 
 		    }
 	

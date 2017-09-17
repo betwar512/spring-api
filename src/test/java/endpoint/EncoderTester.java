@@ -9,7 +9,7 @@ import net.endpoint.utils.CustomEncoder;
 
 public class EncoderTester {
 
-	@Test
+	//@Test
 	public void test() {
 			CustomEncoder encoder = new CustomEncoder();
 		String encoded = 	encoder.encode("Solmaz662M");
@@ -20,7 +20,7 @@ public class EncoderTester {
 	
 	
 	
-	@Test
+	//@Test
 	public void testEncoder(){
 		final String pass= "123456Abbas";
 		
@@ -36,7 +36,7 @@ public class EncoderTester {
 		}
 		
 	}
-	@Test
+	//@Test
 	public void decode(){
 		String encripter = "Ln9DnPnikP6eaiyv2j+ksw==";
 		String str;

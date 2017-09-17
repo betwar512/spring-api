@@ -20,16 +20,16 @@ public class MongoDbTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		 connectDb();
+		// connectDb();
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+//	@Test
 	public void test() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 	
 	Block<Document> printBlock = new Block<Document>() {
