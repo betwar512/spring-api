@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class FsProfile {
 
 	@Id
-	private Long profileId;
+	private String profileId;
 	private String userId;
 	private String name;
 	private Date timestamp;
@@ -19,10 +19,11 @@ public class FsProfile {
 	
 	
 
-	public Long getProfileId() {
+
+	public String getProfileId() {
 		return profileId;
 	}
-	public void setProfileId(Long profileId) {
+	public void setProfileId(String profileId) {
 		this.profileId = profileId;
 	}
 	public String getUserId() {
