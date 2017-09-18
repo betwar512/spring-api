@@ -53,9 +53,11 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 		
     List<ProfileDto> profiles = new ArrayList<>();		  
 		  this.getAll().forEach(t->{
+			  if(t.getPerson() != null) {
 			 ProfileDto pr =   new ProfileDto();
 			 pr.pars(t.getPerson());
 			  profiles.add(pr);		  
+			  }
 		  });
 		return profiles;
 	}
