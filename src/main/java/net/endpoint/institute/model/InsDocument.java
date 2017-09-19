@@ -4,18 +4,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import net.endpoint.institute.model.anatomy.InsBodyPart;
+import org.hibernate.annotations.DiscriminatorOptions;
 
 
 @Entity
 @Table(name="ins_document")
+@DiscriminatorColumn(name="document_type")
+@DiscriminatorOptions(force=true)
 public class InsDocument implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -23,27 +23,24 @@ public class InsDocument implements Serializable {
 	@GeneratedValue
 	@Column(name="ins_document_id")
 	private long id;
-	@ManyToOne
-	@JoinColumn(name="ins_body_part_id")
-	private InsBodyPart part;
-	@Column(name="created_at")
-	private Date  createdAt;
-	@Column(name="updated_at")
-	private Date  updatedAt;
+
 	@Column(name="file_name")
 	private String fileName;
 	@Column(name="file_type")
 	private String fileType;
+	@Column(name="file_size")
+	private Long fileSize;
 	@Column
 	private String refrence;
+	@Column(name="created_at")
+	private Date  createdAt;
+	@Column(name="updated_at")
+	private Date  updatedAt;
 	
 	
 	
 	public long getId() {
 		return id;
-	}
-	public InsBodyPart getPart() {
-		return part;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
@@ -62,9 +59,6 @@ public class InsDocument implements Serializable {
 	}
 	public void setId(long id) {
 		this.id = id;
-	}
-	public void setPart(InsBodyPart part) {
-		this.part = part;
 	}
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;

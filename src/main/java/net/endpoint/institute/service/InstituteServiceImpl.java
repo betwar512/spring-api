@@ -32,15 +32,15 @@ public class InstituteServiceImpl implements InstituteService {
 	@Override
 	public InsDocument loadLastDocumentByPart(InsPatientAnatomy anatomyPation , InsPartType type) {
 				
-	   Optional<InsBodyPart> bodyPart =  anatomyPation.getAnatomy().getBodyParts().stream().filter(t->t.getType().equals(type)).findFirst();
-	   if(bodyPart.isPresent()) {
-		Optional<InsDocument> doc = bodyPart.get().getDocuments().stream().sorted(
-					  (o1,o2)->o2.getCreatedAt().compareTo(o1.getCreatedAt()))
-					  .findFirst();
-			if(doc.isPresent()) {
-				return doc.get();
-			}
-	   }
+//	   Optional<InsBodyPart> bodyPart =  anatomyPation.getAnatomy().getBodyParts().stream().filter(t->t.getType().equals(type)).findFirst();
+//	   if(bodyPart.isPresent()) {
+//		Optional<InsDocument> doc = bodyPart.get().getDocuments().stream().sorted(
+//					  (o1,o2)->o2.getCreatedAt().compareTo(o1.getCreatedAt()))
+//					  .findFirst();
+//			if(doc.isPresent()) {
+//				return doc.get();
+//			}
+//	   }
 		return null;
 	}
 
@@ -48,13 +48,13 @@ public class InstituteServiceImpl implements InstituteService {
 	public Map<InsPartType,InsDocument> loadLastDocuemtnForAllTypes(InsPractitioner practitioner,InsPatient patient) {
     	InsPatientAnatomy anatomyPation = this.loadForPractitioner(practitioner, patient);
     	Map<InsPartType,InsDocument> map = new HashMap<>();
-		anatomyPation.getAnatomy().getBodyParts().forEach(t->{	
-		  Optional<InsDocument> doc = t.getDocuments().stream().sorted(
-				  (o1,o2)->o2.getCreatedAt().compareTo(o1.getCreatedAt()))
-				  .findFirst();
-		if(doc.isPresent())
-		 	 map.put(t.getType(), doc.get());
-		});
+//		anatomyPation.getAnatomy().getBodyParts().forEach(t->{	
+//		  Optional<InsDocument> doc = t.getDocuments().stream().sorted(
+//				  (o1,o2)->o2.getCreatedAt().compareTo(o1.getCreatedAt()))
+//				  .findFirst();
+//		if(doc.isPresent())
+//		 	 map.put(t.getType(), doc.get());
+//		});
 	 return map;
 	}
 
@@ -94,7 +94,7 @@ public class InstituteServiceImpl implements InstituteService {
 		 if(insAnt == null) {
 			 throw new NoSuchElementException("Anatomy for this ptation not exist.");
 		 }
-		 List<InsBodyPart> streamPromis = insAnt.getAnatomy().getBodyParts().stream().filter(t->t.getType().equals(type)).collect(Collectors.toList());
+		 List<InsBodyPart> streamPromis =null;// insAnt.getAnatomy().getBodyParts().stream().filter(t->t.getType().equals(type)).collect(Collectors.toList());
 		   InsBodyPart item = !streamPromis.isEmpty() ? streamPromis.get(0) : null;
 		   if(item == null) {
 				 throw new NoSuchElementException("Body part dont exist for pation " + type);
@@ -111,11 +111,11 @@ public class InstituteServiceImpl implements InstituteService {
 	@Override
 	public void createAnatomy(InsPractitioner practitioner, InsPatient patient) {
 			InsAnatomy anatomy =  	this.createNewAnatomy();
-			InsPatientAnatomy ips = new InsPatientAnatomy();
-			ips.setAnatomy(anatomy);
-			ips.setPatient(patient);
-			ips.setPractitioner(practitioner);
-			this.instituteDao.save(ips);
+//			InsPatientAnatomy ips = new InsPatientAnatomy();
+//			ips.setAnatomy(anatomy);
+//			ips.setPatient(patient);
+//			ips.setPractitioner(practitioner);
+//			this.instituteDao.save(ips);
 	}
 	
 	
