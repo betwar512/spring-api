@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
 import javassist.NotFoundException;
 import net.endpoint.account.model.Person;
 import net.endpoint.institute.dao.InstituteDao;
-import net.endpoint.institute.model.InsAnatomy;
-import net.endpoint.institute.model.InsBodyPart;
-import net.endpoint.institute.model.InsBodyPart.BODY_PART_TYPE;
 import net.endpoint.institute.model.InsDocument;
-import net.endpoint.institute.model.InsPartType;
 import net.endpoint.institute.model.InsPatient;
-import net.endpoint.institute.model.InsPatientAnatomy;
 import net.endpoint.institute.model.InsPractitioner;
+import net.endpoint.institute.model.anatomy.InsAnatomy;
+import net.endpoint.institute.model.anatomy.InsBodyPart;
+import net.endpoint.institute.model.anatomy.InsPartType;
+import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
+import net.endpoint.institute.model.anatomy.InsBodyPart.BODY_PART_TYPE;
 
 @Service
 public class InstituteServiceImpl implements InstituteService {

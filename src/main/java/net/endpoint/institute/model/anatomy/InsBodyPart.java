@@ -1,4 +1,4 @@
-package net.endpoint.institute.model;
+package net.endpoint.institute.model.anatomy;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import net.endpoint.institute.model.InsDocument;
 
 
 @Entity

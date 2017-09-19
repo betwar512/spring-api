@@ -1,5 +1,6 @@
-package net.endpoint.institute.model;
+package net.endpoint.institute.model.anatomy;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ins_anatomy")
-public class InsAnatomy {
+public class InsAnatomy implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	@Column(name="ins_anatomy_id")

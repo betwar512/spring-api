@@ -1,4 +1,4 @@
-package net.endpoint.institute.model;
+package net.endpoint.institute.model.anatomy;
 
 import java.io.Serializable;
 
@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import net.endpoint.institute.model.InsPatient;
+import net.endpoint.institute.model.InsPractitioner;
 
 @Entity
 @Table(name="ins_patient_anatomy")

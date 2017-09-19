@@ -1,4 +1,4 @@
-package net.endpoint.institute.model;
+package net.endpoint.institute.model.anatomy;
 
 import java.io.Serializable;
 import java.util.Date;

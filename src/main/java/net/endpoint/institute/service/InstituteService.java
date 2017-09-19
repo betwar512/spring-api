@@ -6,10 +6,10 @@ import java.util.Set;
 import javassist.NotFoundException;
 import net.endpoint.account.model.Person;
 import net.endpoint.institute.model.InsDocument;
-import net.endpoint.institute.model.InsPartType;
 import net.endpoint.institute.model.InsPatient;
-import net.endpoint.institute.model.InsPatientAnatomy;
 import net.endpoint.institute.model.InsPractitioner;
+import net.endpoint.institute.model.anatomy.InsPartType;
+import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
 
 public interface InstituteService {
 

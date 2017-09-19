@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import net.endpoint.account.model.User;
+import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
 
 @Entity
 @Table(name="ins_practitioner")

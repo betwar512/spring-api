@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import net.endpoint.institute.model.anatomy.InsBodyPart;
+
 
 @Entity
 @Table(name="ins_document")

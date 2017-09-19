@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import net.endpoint.account.dto.ProfileDto;
 import net.endpoint.account.model.Person;
 import net.endpoint.institute.model.InsPatient;
-import net.endpoint.institute.model.InsPatientAnatomy;
 import net.endpoint.institute.model.InsPractitioner;
+import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
 import net.endpoint.main.dao.BaseDao;
 
 @Transactional
