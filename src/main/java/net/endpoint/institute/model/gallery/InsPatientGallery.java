@@ -1,12 +1,10 @@
 package net.endpoint.institute.model.gallery;
 
 import java.util.List;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import net.endpoint.institute.model.InsPatientProfile;
 
 @Entity
@@ -15,8 +13,7 @@ public class InsPatientGallery extends InsPatientProfile {
 
 
 	private static final long serialVersionUID = 1L;
-	@ManyToOne
-	@JoinColumn(name="ins_document_id")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="gallery" ,targetEntity=InsGalleryDocument.class)
 	private List<InsGalleryDocument> documents;
 	
 	

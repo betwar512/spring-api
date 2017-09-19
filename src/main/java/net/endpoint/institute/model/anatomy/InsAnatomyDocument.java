@@ -15,5 +15,21 @@ public class InsAnatomyDocument extends InsDocument{
 	@ManyToOne
 	@JoinColumn(name="ins_body_part_id")
 	private InsBodyPart part;
+	@ManyToOne
+	@JoinColumn(name="ins_patient_profile_id")
+	private InsPatientAnatomy anatomy;
+	
+	public InsBodyPart getPart() {
+		return part;
+	}
+	public void setPart(InsBodyPart part) {
+		this.part = part;
+	}
+	public InsPatientAnatomy getAnatomy() {
+		return anatomy;
+	}
+	public void setAnatomy(InsPatientAnatomy anatomy) {
+		this.anatomy = anatomy;
+	}
 	
 }

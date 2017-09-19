@@ -26,9 +26,6 @@ public class InsPatient implements Serializable {
 	@Column(name="ins_patient_id")
 	private long id;
 	
-	@OneToMany(fetch=FetchType.EAGER , mappedBy="patient")
-	private Set<InsPatientAnatomy> anatomies = new HashSet<>();
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="person_id",nullable=false)
 	private Person person;
