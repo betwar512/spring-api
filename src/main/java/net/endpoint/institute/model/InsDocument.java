@@ -32,6 +32,8 @@ public class InsDocument implements Serializable {
 	private Long fileSize;
 	@Column
 	private String refrence;
+	@Column(name="server_status",nullable=false)
+	private String serverStatus;
 	@Column(name="created_at")
 	private Date  createdAt;
 	@Column(name="updated_at")

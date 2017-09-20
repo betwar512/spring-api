@@ -67,7 +67,9 @@ public class ProfileDaoImpl extends BaseDao implements ProfileDao {
 			   person  = new Person();
 				person.setCreatedAt(new Date());
 				User user = getUser(profiledto.getEmail());
-				person.setUser(user);
+				if(user!=null){
+					person.setUser(user);
+				}
 				this.getSession().save(person);
 		       }
 			if(!profiledto.getFirstname().isEmpty()){

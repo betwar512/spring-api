@@ -1,8 +1,6 @@
 package net.endpoint.institute.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import net.endpoint.account.model.Person;
-import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
 
 @Entity
 @Table(name="ins_patient")
@@ -29,6 +25,9 @@ public class InsPatient implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="person_id",nullable=false)
 	private Person person;
+	@Column(name="refrence_uid")
+	private String uid;
+	
 	
 	public long getId() {
 		return id;
@@ -42,7 +41,14 @@ public class InsPatient implements Serializable {
 	public void setPerson(Person person) {
 		this.person = person;
 	}
+	public String getUid() {
+		return uid;
+	}
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 
+	
 
 	
 	
