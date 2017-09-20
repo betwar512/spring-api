@@ -1,15 +1,11 @@
 package net.endpoint.institute.service;
 
-
-import java.util.Set;
 import javassist.NotFoundException;
 import net.endpoint.account.dto.ProfileDto;
 import net.endpoint.account.model.Person;
 import net.endpoint.account.model.User;
-import net.endpoint.institute.model.InsDocument;
 import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
-import net.endpoint.institute.model.anatomy.InsPartType;
 
 public interface InstituteService {
 
@@ -26,7 +22,7 @@ public interface InstituteService {
 	 * @return
 	 */
 	public InsPractitioner createPractitioner(User user);
-	public Set<InsDocument> loadHistoryByPart(InsPractitioner practitioner,InsPatient  patient, InsPartType type);
+
 	public InsPractitioner loadPractition(long id);
 	public InsPractitioner findByPerson(Person person)  throws NotFoundException;
 }
