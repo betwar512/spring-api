@@ -13,6 +13,7 @@ import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
 
 public interface InstituteService {
 
+	public InsPractitioner findByEmail(String email);
 	public Set<InsDocument> loadHistoryByPart(InsPractitioner practitioner,InsPatient  patient, InsPartType type);
 	public InsDocument loadLastDocumentByPart(InsPatientAnatomy anatomyPation , InsPartType type);
 	public Map<InsPartType,InsDocument> loadLastDocuemtnForAllTypes(InsPractitioner practitioner,InsPatient patient);

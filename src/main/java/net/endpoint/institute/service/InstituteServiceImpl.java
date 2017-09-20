@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javassist.NotFoundException;
 import net.endpoint.account.model.Person;
 import net.endpoint.institute.dao.InstituteDao;
@@ -18,9 +18,9 @@ import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.anatomy.InsAnatomy;
 import net.endpoint.institute.model.anatomy.InsBodyPart;
+import net.endpoint.institute.model.anatomy.InsBodyPart.BODY_PART_TYPE;
 import net.endpoint.institute.model.anatomy.InsPartType;
 import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
-import net.endpoint.institute.model.anatomy.InsBodyPart.BODY_PART_TYPE;
 
 @Service
 public class InstituteServiceImpl implements InstituteService {
@@ -131,6 +131,11 @@ public class InstituteServiceImpl implements InstituteService {
 		this.instituteDao.save(part);
      	}
 		return anatomy;
+	}
+
+	@Override
+	public InsPractitioner findByEmail(String email) {
+		return this.instituteDao.findByEmail(email);
 	}
 	
 	

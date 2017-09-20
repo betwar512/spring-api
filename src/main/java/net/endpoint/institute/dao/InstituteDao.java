@@ -9,6 +9,7 @@ public interface InstituteDao {
 
 	public void save(Object o);
 	public InsPractitioner loadPractitioner(long id);
+	public InsPractitioner findByEmail(String email);
 	public InsPractitioner findByPerson(Person person);
 	public InsPatient loadPatient(long id);
 	public InsPatientAnatomy loadAnatomy(InsPractitioner practitioner , InsPatient patient);

@@ -44,13 +44,26 @@ public class InstituteDaoImpl extends BaseDao implements InstituteDao {
 		return list!=null && !list.isEmpty() ? list.get(0) : null;
 	}
 
+	
+	
+	
+	
 	@Override
 	public InsPractitioner findByPerson(Person person) {
 			@SuppressWarnings("unchecked")
-			List<InsPractitioner> list = this.getSession().createCriteria(InsPractitioner.class)	
-															.add(Restrictions.eq("person", person))
-															.list();										
+			List<InsPractitioner> list = this.getSession()
+			.createCriteria(InsPractitioner.class)	
+			.add(Restrictions.eq("person", person))
+            .list();										
 		return list != null && !list.isEmpty() ? list.get(0)  : null;
+	}
+
+	@Override
+	public InsPractitioner findByEmail(String email) {
+			return	   (InsPractitioner) this.getSession()
+				.createQuery("from InsPractitioner ins where ins.person.user.email =:email")
+				.setEntity("email", email)
+				.uniqueResult();
 	}
 	
 
