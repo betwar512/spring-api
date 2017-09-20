@@ -1,6 +1,5 @@
 package net.endpoint.institute.service;
 
-import net.endpoint.account.model.User;
 import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 

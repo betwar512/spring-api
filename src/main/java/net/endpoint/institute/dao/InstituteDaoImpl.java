@@ -1,13 +1,9 @@
 package net.endpoint.institute.dao;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-
-import net.endpoint.account.dto.ProfileDto;
 import net.endpoint.account.model.Person;
 import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
@@ -18,11 +14,6 @@ import net.endpoint.main.dao.BaseDao;
 @Repository
 public class InstituteDaoImpl extends BaseDao implements InstituteDao {
 
-
-	@Override
-	public void save(Object o) {
-		this.getSession().saveOrUpdate(o);
-	}
 
 	@Override
 	public InsPractitioner loadPractitioner(long id) {

@@ -2,6 +2,8 @@ package net.endpoint.main.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -11,7 +13,9 @@ import org.springframework.stereotype.Repository;
 import net.endpoint.account.model.SecurityRole;
 import net.endpoint.utils.enums.EnumTypes.SECURITY_ROLE;
 
+
 @Repository
+@Transactional
 public abstract class BaseDao {
 	
 	@Autowired
@@ -36,5 +40,8 @@ public abstract class BaseDao {
 		return list != null && !list.isEmpty() ? list.get(0) : null;
 	}
 	
-	
+
+	public void save(Object o) {
+		this.getSession().saveOrUpdate(o);
+	}
 }

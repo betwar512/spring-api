@@ -49,5 +49,9 @@ public class InstituteDocumentDaoImpl extends BaseDao implements InstituteDocume
                                                  .setEntity("anatomy", anatomy).setMaxResults(1);
 	}
 	
+
+	
+	
+	
 	
 }

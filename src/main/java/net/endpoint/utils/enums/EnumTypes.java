@@ -41,6 +41,27 @@ public interface EnumTypes {
 		}
 	}
 	
+	/**
+	 * User name for table
+	 * @author Betwar-mac
+	 *
+	 */
+	public enum SERVER_STATUS{
+		NEW(""),
+		PENDING(""),
+		COMPLETED("");
+		private String key;
+		SERVER_STATUS(String key){
+			this.key = key;
+		}
+		public String getKey(){
+			return this.key;
+		}
+		
+		
+		
+		
+	}
 	
 	
 	/**
