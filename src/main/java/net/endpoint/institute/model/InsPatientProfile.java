@@ -38,6 +38,8 @@ public class InsPatientProfile implements Serializable {
 	private Date createdAt;
 	@Column
 	private Date updatedAt;
+	@Column
+	private boolean active;
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -71,6 +73,12 @@ public class InsPatientProfile implements Serializable {
 	}
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 	

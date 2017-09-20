@@ -1,79 +1,61 @@
 package net.endpoint.institute.service;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javassist.NotFoundException;
+import net.endpoint.account.dto.ProfileDto;
 import net.endpoint.account.model.Person;
+import net.endpoint.account.model.User;
 import net.endpoint.institute.dao.InstituteDao;
 import net.endpoint.institute.model.InsDocument;
 import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
-import net.endpoint.institute.model.anatomy.InsAnatomy;
 import net.endpoint.institute.model.anatomy.InsBodyPart;
-import net.endpoint.institute.model.anatomy.InsBodyPart.BODY_PART_TYPE;
 import net.endpoint.institute.model.anatomy.InsPartType;
 import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
 
 @Service
+@Transactional
 public class InstituteServiceImpl implements InstituteService {
 	
 	@Autowired
 	private InstituteDao instituteDao;
 	
 
-	@Override
-	public InsDocument loadLastDocumentByPart(InsPatientAnatomy anatomyPation , InsPartType type) {
-				
-//	   Optional<InsBodyPart> bodyPart =  anatomyPation.getAnatomy().getBodyParts().stream().filter(t->t.getType().equals(type)).findFirst();
-//	   if(bodyPart.isPresent()) {
-//		Optional<InsDocument> doc = bodyPart.get().getDocuments().stream().sorted(
-//					  (o1,o2)->o2.getCreatedAt().compareTo(o1.getCreatedAt()))
-//					  .findFirst();
-//			if(doc.isPresent()) {
-//				return doc.get();
-//			}
-//	   }
-		return null;
-	}
 
+	/**
+	 * <p> Create Patient </p>
+	 * @param profileDto
+	 * @param practitioner
+	 */
 	@Override
-	public Map<InsPartType,InsDocument> loadLastDocuemtnForAllTypes(InsPractitioner practitioner,InsPatient patient) {
-    	InsPatientAnatomy anatomyPation = this.loadForPractitioner(practitioner, patient);
-    	Map<InsPartType,InsDocument> map = new HashMap<>();
-//		anatomyPation.getAnatomy().getBodyParts().forEach(t->{	
-//		  Optional<InsDocument> doc = t.getDocuments().stream().sorted(
-//				  (o1,o2)->o2.getCreatedAt().compareTo(o1.getCreatedAt()))
-//				  .findFirst();
-//		if(doc.isPresent())
-//		 	 map.put(t.getType(), doc.get());
-//		});
-	 return map;
-	}
-
+	public InsPatient createPatient(ProfileDto profileDto){
+		//Create person 
+			Person person = new Person();
+			person.setCreatedAt(new Date());
+			person.setDateOfBirth(profileDto.getDob());
+			person.setFirstName(profileDto.getFirstname());
+			person.setLastName(profileDto.getLastname());
+			this.instituteDao.save(person);
+		//Save patient 	
+			InsPatient patient = new InsPatient();
+			patient.setPerson(person);
+			this.instituteDao.save(patient);
+			return patient;
+	    }
+	
+	
 	@Override
 	public InsPractitioner loadPractition(long id) {
 		return this.instituteDao.loadPractitioner(id);
-	}
-
-
-
-	public void setInstituteDao(InstituteDao instituteDao) {
-		this.instituteDao = instituteDao;
-	}
-
-	@Override
-	public InsPatientAnatomy loadForPation(Person person, InsPatient patients) throws NotFoundException {
-		InsPractitioner practitioner =    this.findByPerson(person); 
-		return   this.instituteDao.loadAnatomy(practitioner, patients);
-
 	}
 
 	@Override
@@ -102,44 +84,33 @@ public class InstituteServiceImpl implements InstituteService {
 		return item.getDocuments() ;
 	}
 
-	@Override
-	public InsPatientAnatomy loadForPractitioner(InsPractitioner practitioner, InsPatient patients)  {
-		    return   this.instituteDao.loadAnatomy(practitioner, patients);
-	}
 
-	
-	@Override
-	public void createAnatomy(InsPractitioner practitioner, InsPatient patient) {
-			InsAnatomy anatomy =  	this.createNewAnatomy();
-//			InsPatientAnatomy ips = new InsPatientAnatomy();
-//			ips.setAnatomy(anatomy);
-//			ips.setPatient(patient);
-//			ips.setPractitioner(practitioner);
-//			this.instituteDao.save(ips);
-	}
-	
-	
-	private InsAnatomy createNewAnatomy() {
-		InsAnatomy anatomy = new InsAnatomy();
-		this.instituteDao.save(anatomy);
-	for	(BODY_PART_TYPE   val : BODY_PART_TYPE.values()) {
-		InsBodyPart part = new InsBodyPart();
-		part.setAnatomy(anatomy);
-		part.setTimestamp(new Date());
-		//TODO types 
-		//part.setType("");
-		this.instituteDao.save(part);
-     	}
-		return anatomy;
-	}
 
 	@Override
 	public InsPractitioner findByEmail(String email) {
 		return this.instituteDao.findByEmail(email);
 	}
+
+	@Override
+	public InsPractitioner createPractitioner(User user) {		
+	InsPractitioner practitioner = 	this.instituteDao.findByEmail(user.getEmail());
+	 if(practitioner == null){
+		practitioner = new InsPractitioner();
+		practitioner.setActive(true);
+		practitioner.setUser(user);
+		practitioner.setTimestamp(new Date());
+		this.instituteDao.save(practitioner);
+	   }
+	return practitioner;
+	}
 	
 	
-	
+
+
+
+	public void setInstituteDao(InstituteDao instituteDao) {
+		this.instituteDao = instituteDao;
+	}
 	
 	
 }

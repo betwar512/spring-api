@@ -2,7 +2,9 @@ package net.endpoint.institute.dao;
 
 import java.util.List;
 import net.endpoint.institute.model.InsPatient;
+import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.gallery.InsGalleryDocument;
+import net.endpoint.institute.model.gallery.InsPatientGallery;
 import net.endpoint.main.dao.BaseDao;
 
 public class InsGalleryDaoImpl extends BaseDao implements InsGalleryDao {
@@ -22,6 +24,21 @@ public class InsGalleryDaoImpl extends BaseDao implements InsGalleryDao {
 	public List<InsGalleryDocument> getAllDocuments() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public InsPatientGallery findGallery(InsPatient patient, InsPractitioner practitioner) {
+			String hql = "from InsPatientGallery ins where "
+					+ "ins.patient = :=patient "
+					+ "and ins.practitioner =:practitioner "
+					+ "and ins.active = true ";
+		@SuppressWarnings("unchecked")
+		List<InsPatientGallery> galleries = 
+		this.getSession().createQuery(hql)
+			.setEntity("patient", patient)
+			.setEntity("practitioner",practitioner)
+			.list();
+		return galleries != null && !galleries.isEmpty() ? galleries.get(0) : null;
 	}
 
 }
