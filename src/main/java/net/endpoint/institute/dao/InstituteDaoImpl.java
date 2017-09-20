@@ -59,6 +59,11 @@ public class InstituteDaoImpl extends BaseDao implements InstituteDao {
 				.setEntity("email", email)
 				.uniqueResult();
 	}
+
+	public void setProfileDao(ProfileDao profileDao) {
+		this.profileDao = profileDao;
+	}
 	
 
+	
 }

@@ -1,12 +1,19 @@
 package net.endpoint.institute.dao;
 
 import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
 import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.gallery.InsGalleryDocument;
 import net.endpoint.institute.model.gallery.InsPatientGallery;
 import net.endpoint.main.dao.BaseDao;
 
+@Repository
+@Transactional
 public class InsGalleryDaoImpl extends BaseDao implements InsGalleryDao {
 
 	@Override
@@ -22,7 +29,7 @@ public class InsGalleryDaoImpl extends BaseDao implements InsGalleryDao {
 
 	@Override
 	public List<InsGalleryDocument> getAllDocuments() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
