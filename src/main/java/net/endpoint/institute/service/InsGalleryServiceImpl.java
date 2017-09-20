@@ -3,13 +3,8 @@ package net.endpoint.institute.service;
 import java.util.Date;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
 import org.springframework.stereotype.Service;
 import net.endpoint.institute.dao.InsGalleryDao;
-import net.endpoint.institute.dao.InstituteDao;
-=======
-import net.endpoint.institute.dao.InsGalleryDao;
->>>>>>> ba77f103c2a11e7e16002996c14c58f7193c3b8b
 import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.gallery.InsPatientGallery;

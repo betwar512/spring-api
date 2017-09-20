@@ -9,10 +9,6 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
-
-=======
->>>>>>> ba77f103c2a11e7e16002996c14c58f7193c3b8b
 import javassist.NotFoundException;
 import net.endpoint.account.model.Person;
 import net.endpoint.institute.dao.InstituteDao;
