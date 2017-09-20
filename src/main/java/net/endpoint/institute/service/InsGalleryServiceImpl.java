@@ -1,25 +1,16 @@
 package net.endpoint.institute.service;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.util.Date;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import net.endpoint.institute.dao.InsGalleryDao;
-import net.endpoint.institute.dao.InsGalleryDaoImpl;
-import net.endpoint.institute.dao.InstituteDao;
 import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.gallery.InsPatientGallery;
 
 public class InsGalleryServiceImpl implements InsGalleryService{
 
-	
-	@Autowired
-	private InstituteDao insDao;
+
 	@Autowired
 	private InsGalleryDao galleryDao;
 	

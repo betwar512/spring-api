@@ -29,6 +29,8 @@ public class Person implements Serializable {
 	private String    lastName;
 	@Column(name="date_of_birth")
 	private Date   dateOfBirth;
+	@Column(name="personal_email")
+	private String personalEmail;
 	@Column(name="created_at")
 	private Date     createdAt;
 	@Column(name="updated_at")
@@ -96,6 +98,12 @@ public class Person implements Serializable {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public String getPersonalEmail() {
+		return personalEmail;
+	}
+	public void setPersonalEmail(String personalEmail) {
+		this.personalEmail = personalEmail;
 	}
 
 	

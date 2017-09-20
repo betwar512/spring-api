@@ -1,11 +1,14 @@
 package net.endpoint.institute.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 import javassist.NotFoundException;
 import net.endpoint.account.model.Person;
 import net.endpoint.institute.dao.InstituteDao;
@@ -13,11 +16,13 @@ import net.endpoint.institute.model.InsDocument;
 import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.anatomy.InsAnatomy;
+import net.endpoint.institute.model.anatomy.InsAnatomyDocument;
 import net.endpoint.institute.model.anatomy.InsBodyPart;
 import net.endpoint.institute.model.anatomy.InsPartType;
 import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
 import net.endpoint.institute.model.anatomy.InsBodyPart.BODY_PART_TYPE;
 
+@Service
 public class InsAnatomyServiceImpl implements InsAnatomyService {
 
 	
@@ -33,12 +38,7 @@ public class InsAnatomyServiceImpl implements InsAnatomyService {
 	
 	@Override
 	public void createAnatomy(InsPractitioner practitioner, InsPatient patient) {
-			InsAnatomy anatomy =  	this.createNewAnatomy();
-//			InsPatientAnatomy ips = new InsPatientAnatomy();
-//			ips.setAnatomy(anatomy);
-//			ips.setPatient(patient);
-//			ips.setPractitioner(practitioner);
-//			this.instituteDao.save(ips);
+		
 	}
 	
 
@@ -53,16 +53,8 @@ public class InsAnatomyServiceImpl implements InsAnatomyService {
 	
 	@Override
 	public Map<InsPartType,InsDocument> loadLastDocuemtnForAllTypes(InsPractitioner practitioner,InsPatient patient) {
-    	InsPatientAnatomy anatomyPation = this.loadForPractitioner(practitioner, patient);
-    	Map<InsPartType,InsDocument> map = new HashMap<>();
-//		anatomyPation.getAnatomy().getBodyParts().forEach(t->{	
-//		  Optional<InsDocument> doc = t.getDocuments().stream().sorted(
-//				  (o1,o2)->o2.getCreatedAt().compareTo(o1.getCreatedAt()))
-//				  .findFirst();
-//		if(doc.isPresent())
-//		 	 map.put(t.getType(), doc.get());
-//		});
-	 return map;
+
+	 return null;
 	}
 	
 	private InsAnatomy createNewAnatomy() {
@@ -78,5 +70,22 @@ public class InsAnatomyServiceImpl implements InsAnatomyService {
      	}
 		return anatomy;
 	}
+
+
+	@Override
+	public List<InsAnatomyDocument> loadHistoryByPart(InsPractitioner practitioner, InsPatient patient, InsPartType type) {
+		 InsPatientAnatomy                insAnt  =  this.instituteDao.loadAnatomy(practitioner, patient);
+		 if(insAnt == null) {
+			 throw new NoSuchElementException("Anatomy for this ptation not exist.");
+		 }
+		 List<InsAnatomyDocument> list = insAnt.getDocuments().stream()
+				 .filter(t->t.getPart().getType().equals(type)).collect(Collectors.toList());
+		   if(list == null) {
+				 throw new NoSuchElementException("Body part dont exist for pation " + type);
+		   }
+		return list != null ? list : new ArrayList<>();
+	}
+
+
 
 }

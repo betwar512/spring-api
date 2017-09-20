@@ -71,22 +71,6 @@ public class InstituteServiceImpl implements InstituteService {
 	}
 
 	@Override
-	public Set<InsDocument> loadHistoryByPart(InsPractitioner practitioner, InsPatient patient, InsPartType type) {
-		 InsPatientAnatomy                insAnt  =  this.instituteDao.loadAnatomy(practitioner, patient);
-		 if(insAnt == null) {
-			 throw new NoSuchElementException("Anatomy for this ptation not exist.");
-		 }
-		 List<InsBodyPart> streamPromis =null;// insAnt.getAnatomy().getBodyParts().stream().filter(t->t.getType().equals(type)).collect(Collectors.toList());
-		   InsBodyPart item = !streamPromis.isEmpty() ? streamPromis.get(0) : null;
-		   if(item == null) {
-				 throw new NoSuchElementException("Body part dont exist for pation " + type);
-		   }
-		return item.getDocuments() ;
-	}
-
-
-
-	@Override
 	public InsPractitioner findByEmail(String email) {
 		return this.instituteDao.findByEmail(email);
 	}
