@@ -1,14 +1,10 @@
 package net.endpoint.institute.dao;
 
+
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import net.endpoint.account.dao.ProfileDao;
 import net.endpoint.account.model.Person;
 import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
@@ -18,9 +14,6 @@ import net.endpoint.main.dao.BaseDao;
 @Transactional
 @Repository
 public class InstituteDaoImpl extends BaseDao implements InstituteDao {
-
-	@Autowired
-	private ProfileDao profileDao;
 
 	@Override
 	public InsPractitioner loadPractitioner(long id) {
@@ -60,10 +53,11 @@ public class InstituteDaoImpl extends BaseDao implements InstituteDao {
 				.uniqueResult();
 	}
 
-	public void setProfileDao(ProfileDao profileDao) {
-		this.profileDao = profileDao;
+	public void createPractition(String email){
+		
+		
+		
 	}
-	
 
 	
 }

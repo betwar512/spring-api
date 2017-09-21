@@ -13,14 +13,15 @@ public class InstitudeController extends InsMainController {
 	
 	
 	@RequestMapping(path="/createprac")
-	public void createPractition(ProfileDto profileDto){
-		    profileDto.getEmail();
-		
+	public InsPractitioner createPractition(ProfileDto profileDto){
+		   String email =  profileDto.getEmail();
+		   if(this.isAdmin()){
 	InsPractitioner practitioner = this.insService
 									.findByEmail(profileDto.getEmail());
+		return practitioner;
+		   }
 		
-		
-		
+		   return null;
 	}
 	
 	

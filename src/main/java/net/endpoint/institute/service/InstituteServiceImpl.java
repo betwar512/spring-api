@@ -1,26 +1,16 @@
 package net.endpoint.institute.service;
 
 import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javassist.NotFoundException;
 import net.endpoint.account.dto.ProfileDto;
 import net.endpoint.account.model.Person;
 import net.endpoint.account.model.User;
 import net.endpoint.institute.dao.InstituteDao;
-import net.endpoint.institute.model.InsDocument;
 import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
-import net.endpoint.institute.model.anatomy.InsBodyPart;
-import net.endpoint.institute.model.anatomy.InsPartType;
-import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
 
 @Service
 @Transactional

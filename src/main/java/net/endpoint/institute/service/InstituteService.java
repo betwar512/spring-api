@@ -22,7 +22,18 @@ public interface InstituteService {
 	 * @return
 	 */
 	public InsPractitioner createPractitioner(User user);
-
+/**
+ * <p>Load proxy object by Id </p>
+ * @param id
+ * @return
+ */
 	public InsPractitioner loadPractition(long id);
+	
+	/**
+	 * Load person from Account package </p>
+	 * @param person
+	 * @return 
+	 * @throws NotFoundException
+	 */
 	public InsPractitioner findByPerson(Person person)  throws NotFoundException;
 }
