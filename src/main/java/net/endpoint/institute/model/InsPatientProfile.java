@@ -38,7 +38,7 @@ public class InsPatientProfile implements Serializable {
 	private Date createdAt;
 	@Column
 	private Date updatedAt;
-	@Column
+	@Column(name="i_active",nullable=false)
 	private boolean active;
 	
 	public static long getSerialversionuid() {
