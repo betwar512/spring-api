@@ -27,7 +27,7 @@ public class OAuth2ResourceServerConfig  extends ResourceServerConfigurerAdapter
 	        .anonymous()
 	       // .and().cors()
 	        .and().requestMatchers().antMatchers("/api/**")
-	        .and().authorizeRequests().antMatchers("/api/**").access("permitAll()")
+	        .and().authorizeRequests().antMatchers("/api/**").authenticated()
 	        .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	    }
 	

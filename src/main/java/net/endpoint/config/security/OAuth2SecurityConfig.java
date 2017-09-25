@@ -12,7 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
+import net.endpoint.config.filter.CORSFilter;
 import net.endpoint.utils.CustomEncoder;
 
 /**
@@ -48,11 +50,11 @@ public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter {
 	    }
 	  
 	
-	  
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	    	   http
 	           .csrf().disable()
+	           .cors().and()
 	          // .anonymous().disable()
 	           .authorizeRequests()
 	           .antMatchers(HttpMethod.OPTIONS,"/oauth/token").permitAll()

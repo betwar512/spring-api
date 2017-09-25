@@ -21,7 +21,8 @@ public class FsServiceImpl implements FsService {
 	
 	@Override
 	public void addNewProfile(FsProfile profile) {
-	profile.setProfileId(""+nextSeq.getNextSequence("profiles"));
+		
+	profile.setProfileId(Long.toString(nextSeq.getNextSequence("profiles")));
 	profileReposetory.save(profile);
 	}
 
@@ -40,15 +41,12 @@ public class FsServiceImpl implements FsService {
 
 	@Override
 	public List<FsProfileDocument> getAllDocuments() {
-		// TODO Auto-generated method stub
 		return this.fsdm.findAll();
 	}
 
 	@Override
 	public List<FsProfileDocument> findProfileDocuments(String profileId) {
-
 		return	this.fsdm.findByOwnerProfile(profileId);
-		
 	}
 
 
