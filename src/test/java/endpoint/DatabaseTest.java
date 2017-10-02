@@ -26,7 +26,7 @@ public class DatabaseTest extends ApplicationTest {
 	public SessionFactory sessionFactory;
     
     
-	@Test
+//	@Test
 	public void saveEmailTemplateINtoDb(){
 		EmailTemplate em = (EmailTemplate)this.sessionFactory.getCurrentSession().load(EmailTemplate.class, 1l);
 	//	this.sessionFactory.getCurrentSession().flush();

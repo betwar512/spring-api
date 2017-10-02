@@ -56,13 +56,13 @@ public class MongoDbTest extends ApplicationTest {
 	@Autowired
 	public GridFsTemplate grFs;
     
-	@Test
+//	@Test
     public void finedDocTest(){
 	
     	this.fsService.findProfileDocuments("1").forEach(t->System.out.println(t.toString()));
     }
 	
-	@Test
+//	@Test
 	public void testFileSave(){
 		
         final Resource templateResource = this.applicationContext.getResource("classpath:welcome-email.html");
@@ -84,7 +84,7 @@ public class MongoDbTest extends ApplicationTest {
 	}
 	
 	
-	@Test
+//	@Test
 	public void testREpo(){
 	
 		
@@ -110,7 +110,7 @@ public class MongoDbTest extends ApplicationTest {
 		           System.out.println(document.toJson());
 		       }
 		};
-		@Test
+	//	@Test
 		public void testDb(){
 			createDateBase();
 	//		MongoCollection<Document> collection = getTable("testDocument");

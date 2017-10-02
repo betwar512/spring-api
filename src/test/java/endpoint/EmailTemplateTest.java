@@ -52,7 +52,7 @@ public class EmailTemplateTest extends DatabaseTest {
     @Autowired
     private TemplateEngine htmlTemplateEngine;
 	
-	@Test
+//	@Test
 	public void test() {
 	EmailTemplate et = this.sessionFactory.getCurrentSession().load(EmailTemplate.class, 1l);
 		EmailTemplateDto edto=et.pars();

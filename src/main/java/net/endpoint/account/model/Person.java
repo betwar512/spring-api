@@ -44,7 +44,7 @@ public class Person implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
 	private Set<Address> addresses = new HashSet<>();
 	
-	
+
 	public long getId() {
 		return id;
 	}

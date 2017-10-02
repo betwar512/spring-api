@@ -37,7 +37,7 @@ public class EncodeCustomTest {
 		
 	}
 	
-	@Test
+//	@Test
 	public void test() {
 		
 		Long id = new Long(1234567);
