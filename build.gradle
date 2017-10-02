@@ -4,12 +4,12 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+         classpath('se.transmode.gradle:gradle-docker:1.2')
         
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
@@ -17,10 +17,6 @@ apply plugin: 'org.springframework.boot'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
- war {
-	archiveName 'endpoint-spring.war'
-	 version =  '0.6.0'
-    }
 
 jar {
     baseName = 'endpoint-spring'
@@ -51,8 +47,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
     testCompile("junit:junit")
-    
-   providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
     compile(group: 'mysql', name: 'mysql-connector-java')																																																																																											
     compile(group: 'org.springframework.integration', name: 'spring-integration-core')
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa')
@@ -73,12 +68,18 @@ compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.7.RELEA
 	compile group: 'commons-io', name: 'commons-io', version: '2.5'
 	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
 	   testCompile("org.springframework.boot:spring-boot-starter-test")
-	    
 
-
-    
-   
-   
-    
-    
 }
+group = 'springio'
+apply plugin: 'docker'
+task buildDocker(type: Docker, dependsOn: build) {
+  applicationName = jar.baseName
+  dockerfile = file('Dockerfile')
+  doFirst {
+    copy {
+      from jar
+      into "${stageDir}/target"
+    }
+  }
+}
+
