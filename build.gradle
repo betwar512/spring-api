@@ -70,7 +70,7 @@ compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.7.RELEA
 	   testCompile("org.springframework.boot:spring-boot-starter-test")
 
 }
-group = 'springio'
+group = "${System.env.USER}"
 apply plugin: 'docker'
 task buildDocker(type: Docker, dependsOn: build) {
   applicationName = jar.baseName
