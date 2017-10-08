@@ -77,7 +77,9 @@ public class UserController extends MainController {
 		
 		@RequestMapping(value="/update/phone",method = RequestMethod.POST)
 		public PhoneDto createOrUpdatePhone(@RequestBody PhoneDto phone){
+			System.out.println(getUserName());
 			 userService.createOrUpdatePhone(phone , getUserName());
+			 
 			 return phone;
 		}
 	

@@ -19,12 +19,12 @@ targetCompatibility = 1.8
 
  war {
 	archiveName 'endpoint-spring.war'
-	 version =  '0.6.0'
+	 version =  '0.6.1'
     }
 
 jar {
     baseName = 'endpoint-spring'
-    version =  '0.6.0'
+    version =  '0.6.1'
 }
 
 repositories {

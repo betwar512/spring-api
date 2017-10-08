@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,14 +23,15 @@ public class Phone implements Serializable{
 	}
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long            id;
-	
+	@Column
 	private String        type;
 	@Column(name="phone_number")
 	private String      number;
 	@Column(name="country_code")
 	private String countryCode;
-	
+	@Column
 	private Date     timestamp;
 	@ManyToOne
 	@JoinColumn(name="person_id",nullable=false)

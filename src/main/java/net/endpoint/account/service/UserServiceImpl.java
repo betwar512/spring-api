@@ -129,9 +129,9 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 					ad =  address.convertTo(null);
 					ad.setPerson(p);
 				 }
-				   this.profileDao.updateAddress(ad);
-				   return true;
 			 }
+		   this.profileDao.updateAddress(ad);
+		   return true;
 		  }
 	  return false;
 	}
@@ -146,6 +146,7 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 			 result = phonedto.convertTo(result);	
 		      }	else {
 			  Person p = this.profileDao.findByUserName(userName);
+			  System.out.println("Person:" + p.toString());
 			    result =  phonedto.convertTo(null);
 			    result.setPerson(p);
 		  }
