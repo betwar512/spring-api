@@ -1,7 +1,6 @@
 package net.endpoint.config.filter;
 
 import java.io.IOException;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -19,12 +18,20 @@ import org.springframework.stereotype.Component;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter {
 
+	private String getUrl(ServletRequest request) {
+	String result = ((HttpServletRequest)request).getHeader("Referer");
+		return result != null && !result.isEmpty() ? result.substring(0, result.length() -1) : "http://localhost:3003";	 
+	}
+	
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		System.out.println("Filtering on...........................................................");
+		
+		String string = getUrl(req);
+		System.out.println(string);
 		HttpServletResponse response = (HttpServletResponse) res;
 		  HttpServletRequest request = (HttpServletRequest) req;
-        response.setHeader("Access-Control-Allow-Origin", "http://betwarendpoint.net");
+        response.setHeader("Access-Control-Allow-Origin",string);
         response.setHeader("Access-Control-Allow-Credentials", "true");
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
 		response.setHeader("Access-Control-Max-Age", "3600");

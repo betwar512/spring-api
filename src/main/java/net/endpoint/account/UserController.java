@@ -52,9 +52,9 @@ public class UserController extends MainController {
 		 if(this.isAdmin()){  
 			   try {
 				this.userService.createAccount(accountRequestDto);
-			} catch (Exception e) {
+			     } catch (Exception e) {
 				logger.error(e);
-			}
+			   }
 			}
 			return new AccountRequestDto();
 		}
@@ -70,7 +70,7 @@ public class UserController extends MainController {
 		
 		@RequestMapping(value="/update/address",method = RequestMethod.POST)
 		public AddressDto createOrUpdateAddress(@RequestBody AddressDto address){
-			 userService.createOrUpdateAddress(address);
+			 userService.createOrUpdateAddress(address, getUserName());
 			 return address;
 		}
 		
