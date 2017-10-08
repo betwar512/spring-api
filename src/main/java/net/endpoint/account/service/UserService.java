@@ -16,8 +16,8 @@ public interface UserService {
 	public ProfileDto findByUserName(String name);
 	public boolean    createAccount(AccountRequestDto accountRequestDto) throws Exception;
 	public void       updateProfile(ProfileDto profileDto);
-	public boolean    createOrUpdateAddress(AddressDto address);
-	public boolean    createOrUpdatePhone(PhoneDto phonedto);
+	public boolean    createOrUpdateAddress(AddressDto address, String userName);
+	public boolean    createOrUpdatePhone(PhoneDto phonedto, String userName);
 	public boolean    updatePassword(User user, String password);
 	public List<ProfileDto> getAllProfileDtos();
 }

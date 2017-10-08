@@ -117,27 +117,43 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 
 	@Override
 	@Transactional
-	public boolean createOrUpdateAddress(AddressDto address) {
+	public boolean createOrUpdateAddress(AddressDto address, String userName) {
 		Address ad  = null;
-		if(address!=null && address.id!= null ){
+	if(address!=null) {	
+		if(address.id!= null ){
 			 ad  =  this.profileDao.loadAddress(Long.parseLong(address.id));
 		      ad =  address.convertTo(ad);
-		      this.profileDao.updateAddress(ad);
-		      return true;
+			 } else {
+				 Person p = this.profileDao.findByUserName(userName);
+				 if(p.getAddresses().size() < 3) {
+					ad =  address.convertTo(null);
+					ad.setPerson(p);
+				 }
 			 }
+		   this.profileDao.updateAddress(ad);
+		   return true;
+		  }
 	  return false;
 	}
 
 	@Override
 	@Transactional
-	public boolean createOrUpdatePhone(PhoneDto phonedto) {
+	public boolean createOrUpdatePhone(PhoneDto phonedto,String userName) {
 		Phone result = null;
-		if(phonedto!=null && phonedto.serverid!=null){
+		if(phonedto!=null){ 
+			if( phonedto.serverid!=null){
 			 result = this.profileDao.loadPhone(Long.parseLong(phonedto.serverid));
 			 result = phonedto.convertTo(result);	
-			 this.profileDao.updatePhone(result);
-			 return true;
-		}	
+		      }	else {
+			  Person p = this.profileDao.findByUserName(userName);
+			  System.out.println("Person:" + p.toString());
+			    result =  phonedto.convertTo(null);
+			    result.setPerson(p);
+		  }
+		
+		 this.profileDao.updatePhone(result);
+		 return true;
+		}
 		 return false;
 	}
 

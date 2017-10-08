@@ -39,6 +39,7 @@ public class AddressDto {
 		ad.setUnit(this.unit);
 		ad.setAddressLine2(this.addressline2);
 		ad.setCity(this.city);
+		ad.setState(this.state);
 		ad.setPostCode(this.postCode);
 		ad.setCountry(this.country);
 		return ad;

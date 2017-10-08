@@ -22,8 +22,11 @@ public class Address implements Serializable {
 	private String unit;
 	@Column(name="address_line_2")
 	private String addressLine2;
+	@Column
 	private String city;
+	@Column
 	private String state;
+	@Column
 	private String country;
 	@Column(name="postcode")
 	private Integer postCode;

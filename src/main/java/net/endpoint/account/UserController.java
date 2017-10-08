@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.endpoint.account.dto.AccountRequestDto;
 import net.endpoint.account.dto.AddressDto;
+import net.endpoint.account.dto.PhoneDto;
 import net.endpoint.account.dto.ProfileDto;
 import net.endpoint.account.service.UserService;
 import net.endpoint.emailtemplate.service.EmailService;
@@ -52,9 +53,9 @@ public class UserController extends MainController {
 		 if(this.isAdmin()){  
 			   try {
 				this.userService.createAccount(accountRequestDto);
-			} catch (Exception e) {
+			     } catch (Exception e) {
 				logger.error(e);
-			}
+			   }
 			}
 			return new AccountRequestDto();
 		}
@@ -70,10 +71,17 @@ public class UserController extends MainController {
 		
 		@RequestMapping(value="/update/address",method = RequestMethod.POST)
 		public AddressDto createOrUpdateAddress(@RequestBody AddressDto address){
-			 userService.createOrUpdateAddress(address);
+			 userService.createOrUpdateAddress(address, getUserName());
 			 return address;
 		}
 		
+		@RequestMapping(value="/update/phone",method = RequestMethod.POST)
+		public PhoneDto createOrUpdatePhone(@RequestBody PhoneDto phone){
+			System.out.println(getUserName());
+			 userService.createOrUpdatePhone(phone , getUserName());
+			 
+			 return phone;
+		}
 	
 		public void delete(){}
 	
