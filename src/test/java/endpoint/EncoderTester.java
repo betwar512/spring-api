@@ -2,8 +2,6 @@ package endpoint;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
-
 import net.endpoint.utils.AESCipherHelper;
 import net.endpoint.utils.CustomEncoder;
 

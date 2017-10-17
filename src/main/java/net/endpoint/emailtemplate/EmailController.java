@@ -13,7 +13,7 @@ import net.endpoint.emailtemplate.dto.EmailTemplateDto;
 import net.endpoint.emailtemplate.dto.RecivedEmailDto;
 import net.endpoint.emailtemplate.dto.SendEmailDto;
 import net.endpoint.emailtemplate.service.EmailService;
-import net.endpoint.emailtemplate.service.EmailTemplateServiceImpl;
+import net.endpoint.emailtemplate.service.EmailTemplateService;
 import net.endpoint.main.MainController;
 import net.endpoint.utils.enums.EmailVariables;
 
@@ -26,7 +26,7 @@ public class EmailController extends MainController {
 	@Autowired
 	EmailService emailService;
 	@Autowired
-	EmailTemplateServiceImpl etp;
+	EmailTemplateService etp;
 	
 	@RequestMapping(path="/getEmails",method = RequestMethod.GET)
 	public List<RecivedEmailDto> getAll(){

@@ -3,13 +3,9 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
@@ -24,8 +20,6 @@ import com.mongodb.client.MongoIterable;
 
 import net.endpoint.filesystem.model.FsProfile;
 import net.endpoint.filesystem.model.FsProfileDocument;
-import net.endpoint.filesystem.repository.FsProfileDocumentRepsitory;
-import net.endpoint.filesystem.repository.FsProfileRepository;
 import net.endpoint.filesystem.service.FsService;
 
 public class MongoDbTest extends ApplicationTest {

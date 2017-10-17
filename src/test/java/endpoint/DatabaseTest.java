@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.io.IOUtils;
 import org.hibernate.SessionFactory;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
