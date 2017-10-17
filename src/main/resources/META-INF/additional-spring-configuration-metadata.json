@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "oath2.checktoken.url",
+    "type": "java.lang.String",
+    "description": "A description for 'oath2.checktoken.url'"
+  },
+  {
+    "name": "SMTP.Username",
+    "type": "java.lang.String",
+    "description": "A description for 'SMTP.Username'"
+  },
+  {
+    "name": "SMTP.Password",
+    "type": "java.lang.String",
+    "description": "A description for 'SMTP.Password'"
+  },
+  {
+    "name": "oath2.resource_id",
+    "type": "java.lang.String",
+    "description": "A description for 'oath2.resource_id'"
+  }
+]}

@@ -1,7 +1,6 @@
 package net.endpoint.config.filter;
 
 import java.io.IOException;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -10,18 +9,26 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
 
 @Component(value="CORSFilter")
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter {
 
+	private String getUrl(ServletRequest request) {
+	String result = ((HttpServletRequest)request).getHeader("Referer");
+		return result != null && !result.isEmpty() ? result.substring(0, result.length() -1) : "http://localhost:3003";	 
+	}
+	
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		System.out.println("Filtering on...........................................................");
+		
+		String string = getUrl(req);
+		System.out.println(string);
 		HttpServletResponse response = (HttpServletResponse) res;
 		  HttpServletRequest request = (HttpServletRequest) req;
         response.setHeader("Access-Control-Allow-Origin", "http://betwarendpoint.net");
