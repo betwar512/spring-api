@@ -99,7 +99,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	    @Bean
 	    public RemoteTokenServices tokenService() {
 	        RemoteTokenServices tokenService = new RemoteTokenServices();
-
 	        tokenService.setCheckTokenEndpointUrl(oathTokenUrl);
 	        tokenService.setClientId("client-app");
 	        tokenService.setClientSecret("testsecret");
