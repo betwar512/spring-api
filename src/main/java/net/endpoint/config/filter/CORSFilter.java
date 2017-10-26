@@ -20,7 +20,7 @@ public class CORSFilter implements Filter {
 
 	private String getUrl(ServletRequest request) {
 	String result = ((HttpServletRequest)request).getHeader("Referer");
-		return result != null && !result.isEmpty() ? result.substring(0, result.length() -1) : "http://localhost:3003";	 
+		return result != null && !result.isEmpty() ? result.substring(0, result.length() -1) : "https://www.betwarendpoint.net";	 
 	}
 	
 	@Override
@@ -31,7 +31,7 @@ public class CORSFilter implements Filter {
 		System.out.println(string);
 		HttpServletResponse response = (HttpServletResponse) res;
 		  HttpServletRequest request = (HttpServletRequest) req;
-        response.setHeader("Access-Control-Allow-Origin", "https://www.betwarendpoint.net");
+        response.setHeader("Access-Control-Allow-Origin", string );
         response.setHeader("Access-Control-Allow-Credentials", "true");
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
 		response.setHeader("Access-Control-Max-Age", "3600");

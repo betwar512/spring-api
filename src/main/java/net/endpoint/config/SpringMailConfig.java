@@ -17,22 +17,7 @@ import net.endpoint.utils.enums.EmailVariables.EmailContentProperties;
 
 
 @Configuration
-public class SpringMailConfig  /*implements ApplicationContextAware, EnvironmentAware*/ {
-
-//	    private ApplicationContext applicationContext;
-//	    private Environment environment;
-//
-//
-//
-//	    @Override
-//	    public void setApplicationContext(final ApplicationContext applicationContext)  {
-//	        this.applicationContext = applicationContext;
-//	    }
-//
-//	    @Override
-//	    public void setEnvironment(final Environment environment) {
-//	        this.environment = environment;
-//	    }
+public class SpringMailConfig {
 
 
 	    /*
