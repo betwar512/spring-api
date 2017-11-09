@@ -14,7 +14,8 @@ Spring boot project ,using hibernate with mysql v 5.6 , gradle , oath 2, themele
 gradle v >= 3.0
 
  > gradle build
- > gralde bootRun 
+ 
+ > gradle bootRun 
  
 ### Build Docker image
  Docker file included in root of project , to build valid docker image , have to keep version number in
