@@ -19,7 +19,7 @@ gradle v >= 3.0
  
 ### Build Docker image
  Docker file included in root of project , to build valid docker image , have to keep version number in
- gradle and docker file are a same.
+ gradle and docker file as a same.
  
  > gradle buildDocker
  
