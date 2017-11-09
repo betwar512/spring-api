@@ -10,7 +10,7 @@ Spring boot project ,using hibernate with mysql v 5.6 , gradle , oath 2, themele
 
 ### How do I get set up? ###
 
- Eclise Java EE spring tools plugin + gradle buildship v 2 
+ Eclise Java EE spring tools plugin + gradle build-ship v 2 
 gradle v >= 3.0
 
  > gradle build
@@ -45,14 +45,14 @@ Micro Service system
 Each packages included it own Model , Dao , Dto and service and one controller
  api/* url is protected globoly by oath .
  
- * You can access to user cridicional by extnding MainController
+ * You can access to user cridicional by extending MainController
  
 Controller is directly talks to service class or classes included in package .
-service access Datatabase by making call to dao classes . 
-dao classes will return model result that will pars to one of dto classes and will return to controller.
+service access Database by making call to DAO classes . 
+dao classes will return model result that will pars to one of DTO classes and will return to controller.
 
 ## Packages 
-** accounts --> package setup to handle user information , Used by config and main package . 
+** accounts --> package setup to handle user information , Used by Config and main package . 
 
 ** config  - config file email config + themeleaf themplate configuration . 
 -- this package included 
