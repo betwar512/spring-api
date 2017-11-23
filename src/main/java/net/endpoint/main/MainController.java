@@ -39,7 +39,7 @@ public abstract class MainController {
 		  return  globleService.loadProfile(getUserName());
 	}
 	/**
-	 * <p>Loaf a current user </p>
+	 * <p>Load a current user </p>
 	 * @return User
 	 */
 	protected User loadUser(){

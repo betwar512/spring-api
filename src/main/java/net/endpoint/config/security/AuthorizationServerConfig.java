@@ -55,6 +55,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		 @Override
 		 public void configure(ClientDetailsServiceConfigurer clients) 
 		      throws Exception {
+
 		           clients.jdbc(dataSource);
 //		          .withClient("client-app")
 //		          .authorizedGrantTypes("password", "authorization_code", "client_credentials","refresh_token", "implicit")
@@ -63,6 +64,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //		          .secret("testsecret")
 //	              .autoApprove(true)
 //	              .accessTokenValiditySeconds(600000);
+
 
 		    }
 	 

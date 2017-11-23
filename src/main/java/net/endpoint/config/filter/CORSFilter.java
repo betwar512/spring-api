@@ -20,18 +20,18 @@ public class CORSFilter implements Filter {
 
 	private String getUrl(ServletRequest request) {
 	String result = ((HttpServletRequest)request).getHeader("Referer");
-		return result != null && !result.isEmpty() ? result.substring(0, result.length() -1) : "https://www.betwarendpoint.net";	 
+		return result != null && !result.isEmpty() ? result.substring(0, result.length() -1) : "http://localhost:4200";	 
 	}
 	
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-		System.out.println("Filtering on...........................................................");
+	//System.out.println("Filtering on...........................................................");
 		
 		String string = getUrl(req);
-		System.out.println(string);
+	//System.out.println(string);
 		HttpServletResponse response = (HttpServletResponse) res;
 		  HttpServletRequest request = (HttpServletRequest) req;
-        response.setHeader("Access-Control-Allow-Origin", string );
+        response.setHeader("Access-Control-Allow-Origin", string);
         response.setHeader("Access-Control-Allow-Credentials", "true");
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
 		response.setHeader("Access-Control-Max-Age", "3600");
@@ -47,8 +47,12 @@ public class CORSFilter implements Filter {
 
 
 	 @Override
-	public void init(FilterConfig filterConfig) {}
+	public void init(FilterConfig filterConfig) {
+		 //  want it 
+	 }
 	 @Override
-	public void destroy() {}
+	public void destroy() {
+		 // want it 
+	 }
 
 }

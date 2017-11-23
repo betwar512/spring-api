@@ -1,5 +1,6 @@
 package net.endpoint.config.security;
 
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,7 +26,7 @@ public class OAuth2ResourceServerConfig  extends ResourceServerConfigurerAdapter
 	    	
 	        http
 	        .anonymous()
-	       // .and().cors()
+	       // .and().cors(CrossOriginFilter.class)
 	        .and().requestMatchers().antMatchers("/api/**")
 	        .and().authorizeRequests().antMatchers("/api/**").authenticated()
 	        .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
