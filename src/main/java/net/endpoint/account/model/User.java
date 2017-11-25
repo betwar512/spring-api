@@ -143,7 +143,10 @@ public class User implements UserDetails {
 		public void setPerson(Person person) {
 			this.person = person;
 		}
-		
+		/**
+		 * <p>To check user email need a not encrypted password</p>
+		 * @return not encrypted pass
+		 */
 		public String getEmailPassword() {
 			return emailPassword;
 		}

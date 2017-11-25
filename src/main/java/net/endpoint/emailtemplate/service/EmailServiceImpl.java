@@ -81,7 +81,7 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
 		    	  Properties  props  = new Properties();
 		    	  String       host  = "mail.skinqualitycare.com.au";
 		    	  String   username  = user.getEmail();
-		    	  String   password  =  user.getPassword();
+		    	  String   password  = user.getEmailPassword();// user.getPassword();
 		    	  String       port  = "993";
 		    	  String   provider  = "imap";
 		    	    props.put("mail.imap.host", host);
