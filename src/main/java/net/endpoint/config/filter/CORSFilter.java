@@ -20,7 +20,7 @@ public class CORSFilter implements Filter {
 
 	private String getUrl(ServletRequest request) {
 	String result = ((HttpServletRequest)request).getHeader("Referer");
-		return result != null && !result.isEmpty() ? result.substring(0, result.length() -1) : "http://localhost:4200";	 
+		return result != null && !result.isEmpty() ? result.substring(0, result.length() -1) : "https://www.betwarendpoint.net";	 
 	}
 	
 	@Override
