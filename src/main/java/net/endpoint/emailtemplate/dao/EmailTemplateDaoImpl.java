@@ -37,5 +37,4 @@ public class EmailTemplateDaoImpl extends BaseDao implements EmailTemplateDao {
 
 	
 	
-	
 }

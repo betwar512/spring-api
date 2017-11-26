@@ -7,16 +7,19 @@ import java.util.Locale;
 
 class EmailDto {
 	
-	private String       from;
-	private String         to;
-	private List<String>  ccs;
-	private List<String> bccs;
-	private String    subject;
-	private String    content;
-	private Locale     locale;
-	private Date    timestamp;
-	private String   userName;
+	protected String       from;
+	protected String         to;
+	protected List<String>  ccs;
+	protected List<String> bccs;
+	protected String    subject;
+	protected String    content;
+	protected Locale     locale;
+	protected Date    timestamp;
+	protected String   userName;
 
+	
+	public EmailDto() {}
+	
 	public EmailDto(String from,String to ,String subject, String content,String userName,Locale locale,List<String>  ccs,List<String>  bccs) {
 		super();
 		this.from = from;

@@ -7,10 +7,13 @@ public class EmailTemplateDto  {
 
 	private String  htmlContent;
 	private String         name;
+	private String        style;
+	private String  description;
+	
 	private List<EmailTemplateAttachmentDto>   attachments;
 	private List<EmailTemplateFieldDto>  fields;
 
-	public EmailTemplateDto(String htmlContet, String name, List<EmailTemplateAttachmentDto> attachments,
+	public EmailTemplateDto(String htmlContet, String name , String description, String style, List<EmailTemplateAttachmentDto> attachments,
 			List<EmailTemplateFieldDto> fields) {
 		super();
 		this.htmlContent = htmlContet;
@@ -19,8 +22,7 @@ public class EmailTemplateDto  {
 		this.fields = fields != null ? fields : new ArrayList<>();
 	}
 	
-	
-	
+
 	public String getHtmlContent() {
 		return htmlContent;
 	}
@@ -46,5 +48,32 @@ public class EmailTemplateDto  {
 	public void setFields(List<EmailTemplateFieldDto> fields) {
 		this.fields = fields;
 	}
+
+
+
+	public String getStyle() {
+		return style;
+	}
+
+
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
+	
 	
  }

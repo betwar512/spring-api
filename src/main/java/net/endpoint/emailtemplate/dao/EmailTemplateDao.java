@@ -10,6 +10,5 @@ public interface EmailTemplateDao {
 	public EmailTemplate loadById(long id);
 	public List<EmailTemplate> findByName(String name);
 	
-	
-	
+	public void save(Object object);
 }

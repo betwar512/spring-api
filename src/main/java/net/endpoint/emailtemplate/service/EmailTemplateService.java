@@ -16,7 +16,17 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
 public interface EmailTemplateService {
 
 	public List<EmailTemplateDto> getAllTemplates();
+	/**
+	 * Shorter Json , attachment and fileds not included in TemplateDto object 
+	 * @return
+	 */
+	public List<EmailTemplateDto> getAllListDetail();
+	
+	public void createTemplate(EmailTemplateDto emailDto);
+	
 	public void generateEmail(EmailTemplateDto eto,SendEmailDto emailDto) throws MessagingException;
 	public void sendEditableTemplateEmail(EmailTemplateDto etd,SendEmailDto emailDto) throws MessagingException, IOException;
 	public EmailTemplateDto getTemplate(String templateName) throws NotFoundException;
+	
+	
 }

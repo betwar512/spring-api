@@ -33,6 +33,11 @@ public class EmailController extends MainController {
 	return emailService.checkEmails(this.loadUser());
 	}
 	
+	@RequestMapping(path="/createTemplate",method = RequestMethod.POST)
+	public void createTemplate(EmailTemplateDto emailTemlpate) {
+		// TODO 
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public void sendEmail(SendEmailDto emailDto) {	
 		 this.emailService.sendEmail(emailDto);
@@ -40,7 +45,7 @@ public class EmailController extends MainController {
 	
 	@RequestMapping(path="/getTemplates",method = RequestMethod.GET)
 	public List<EmailTemplateDto> getTemplates(){
-			 return this.etp.getAllTemplates();
+			 return this.etp.getAllListDetail();
 	}
 	
 	@RequestMapping(path="/sendEmailTemplate",method = RequestMethod.POST)

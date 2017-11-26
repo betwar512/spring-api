@@ -1,6 +1,5 @@
 package net.endpoint.emailtemplate.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -18,6 +17,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -32,7 +32,7 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
  @Component
  public class EmailServiceImpl implements EmailService {
 
-	 
+	  public static final Logger logger = Logger.getLogger(EmailService.class);
 	@Autowired
     private	JavaMailSender mailSender;
 
@@ -56,12 +56,14 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
 					helper.setSentDate(emailDto.getSendingDate());
 					mailSender.send(message);
 				  } catch (MessagingException e) {
-					e.printStackTrace();
+					  logger.error(e);
 				}
-			  }else
-					System.out.println("Its null ");
+			  }else {
+				  logger.debug( "NULL");
+			  }
+					
 		
-	};
+	}
 	
 
 	@Override
@@ -81,7 +83,7 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
 		    	  Properties  props  = new Properties();
 		    	  String       host  = "mail.skinqualitycare.com.au";
 		    	  String   username  = user.getEmail();
-		    	  String   password  =  user.getPassword();
+		    	  String   password  =  user.getEmailPassword();
 		    	  String       port  = "993";
 		    	  String   provider  = "imap";
 		    	    props.put("mail.imap.host", host);
@@ -104,31 +106,20 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
 		
 		      for (int i = 0, n = messages.length; i < n; i++) {
 		         Message message = messages[i];
-		         System.out.println("---------------------------------");
-		         System.out.println("Email Number " + (i + 1));
-		         System.out.println("Subject: " + message.getSubject());
-		         System.out.println("From: " + message.getFrom()[0]);
-		         System.out.println("Text: " + message.getContent().toString());
-
-		         emails.add(new RecivedEmailDto(message.getFrom()[0].toString(),""
-							        		 ,message.getSubject()
-							        		 ,message.getContent().toString()
-							        		 ,message.getSentDate()));
-		         
+		         emails.add(new RecivedEmailDto(message));	         
 		      }
 
 		        //close the store and folder objects
 		        emailFolder.close(false);
 		        store.close();
 		    	return emails;
-			    } catch (MessagingException | IOException e) {
-				e.printStackTrace();
+			    } catch (MessagingException e) {
+			    	  logger.error(e);
 				return emails;
 			}
-		   
-
 		}
-	
+
+
 	@Override
 	public void sendHtmlEmailWithAttachment(User user,String subject,String to,String htmlText) throws MessagingException{
 		

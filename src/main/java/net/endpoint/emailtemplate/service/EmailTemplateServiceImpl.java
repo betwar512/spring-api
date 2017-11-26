@@ -204,6 +204,20 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 			 return template.pars();
 			}
 
+			@Override
+			public List<EmailTemplateDto> getAllListDetail() {
+				List<EmailTemplate> templates = this.emailTemplateDao.getAll();
+				 return templates.stream().map(EmailTemplate::parsGeneral).collect(Collectors.toList());
+			}
+
+			
+			@Override
+			public void createTemplate(EmailTemplateDto emailDto) {
+					EmailTemplate template = new EmailTemplate();
+					template.formate(emailDto);
+					this.emailTemplateDao.save(template);
+			}
+
 
 		
 		
