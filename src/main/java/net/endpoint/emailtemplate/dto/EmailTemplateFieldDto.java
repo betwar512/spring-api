@@ -7,6 +7,7 @@ public class EmailTemplateFieldDto {
 	private String content;
 	
 	
+	public EmailTemplateFieldDto() {}
 	
 	public EmailTemplateFieldDto(String name, String filedId, String content) {
 		super();

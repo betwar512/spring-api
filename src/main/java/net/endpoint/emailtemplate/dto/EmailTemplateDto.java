@@ -13,6 +13,8 @@ public class EmailTemplateDto  {
 	private List<EmailTemplateAttachmentDto>   attachments;
 	private List<EmailTemplateFieldDto>  fields;
 
+	public EmailTemplateDto() {}
+	
 	public EmailTemplateDto(String htmlContet, String name , String description, String style, List<EmailTemplateAttachmentDto> attachments,
 			List<EmailTemplateFieldDto> fields) {
 		super();

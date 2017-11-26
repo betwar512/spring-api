@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,8 +35,8 @@ public class EmailController extends MainController {
 	}
 	
 	@RequestMapping(path="/createTemplate",method = RequestMethod.POST)
-	public void createTemplate(EmailTemplateDto emailTemlpate) {
-		// TODO 
+	public void createTemplate(@RequestBody EmailTemplateDto emailTemlpate) {
+			this.etp.createTemplate(emailTemlpate);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

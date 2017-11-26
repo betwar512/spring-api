@@ -8,6 +8,8 @@ public class EmailTemplateAttachmentDto {
 	private byte[] attachedFile;
 	private String fileType;
 
+	public EmailTemplateAttachmentDto() {}
+	
 	public EmailTemplateAttachmentDto(String name, String htmlFiledId, String fileType, byte[] attachedFile) {
 		super();
 		this.name         = name;
