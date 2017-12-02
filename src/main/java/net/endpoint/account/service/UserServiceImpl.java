@@ -177,7 +177,7 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 		 String userName = accountRequestDto.userName + accountRequestDto.domainName ;
 		            user = this.userDao.findbyName(userName);
 		     
-	if(	 user == null){
+	if(user == null){
 			    user = new User();
 				user.setUserName(accountRequestDto.userName);
 				Domain domain = this.userDao.getDomainByName(accountRequestDto.domainName);		
@@ -197,7 +197,7 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 				SECURITY_ROLE role = SECURITY_ROLE.valueOf(accountRequestDto.role.toUpperCase());
 				SecurityRole    sr = this.userDao.loadSecurityRole(role);
 				user.getRolse().add(sr);		
-				user.setEmailPassword(AESCipherHelper.encrypt(accountRequestDto.password));
+				user.setEmailPassword(accountRequestDto.password);
 				this.userDao.update(user);
 				
 				Person person = new Person();
