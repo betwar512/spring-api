@@ -12,14 +12,14 @@ import javassist.NotFoundException;
 import net.endpoint.account.model.Person;
 import net.endpoint.institute.dao.InstituteDao;
 import net.endpoint.institute.model.InsDocument;
-import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.anatomy.InsAnatomy;
 import net.endpoint.institute.model.anatomy.InsAnatomyDocument;
 import net.endpoint.institute.model.anatomy.InsBodyPart;
 import net.endpoint.institute.model.anatomy.InsPartType;
-import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
 import net.endpoint.institute.model.anatomy.InsBodyPart.BODY_PART_TYPE;
+import net.endpoint.institute.model.patient.InsPatient;
+import net.endpoint.institute.model.patient.InsPatientAnatomy;
 
 @Service
 public class InsAnatomyServiceImpl implements InsAnatomyService {

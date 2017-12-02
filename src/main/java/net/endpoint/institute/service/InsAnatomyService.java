@@ -5,11 +5,11 @@ import java.util.Map;
 import javassist.NotFoundException;
 import net.endpoint.account.model.Person;
 import net.endpoint.institute.model.InsDocument;
-import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.anatomy.InsAnatomyDocument;
 import net.endpoint.institute.model.anatomy.InsPartType;
-import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
+import net.endpoint.institute.model.patient.InsPatient;
+import net.endpoint.institute.model.patient.InsPatientAnatomy;
 
 public interface InsAnatomyService {
 

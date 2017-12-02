@@ -9,8 +9,8 @@ import net.endpoint.account.dto.ProfileDto;
 import net.endpoint.account.model.Person;
 import net.endpoint.account.model.User;
 import net.endpoint.institute.dao.InstituteDao;
-import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
+import net.endpoint.institute.model.patient.InsPatient;
 
 @Service
 @Transactional

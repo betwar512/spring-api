@@ -1,4 +1,4 @@
-package net.endpoint.institute.model;
+package net.endpoint.institute.model.patient;
 
 import java.io.Serializable;
 

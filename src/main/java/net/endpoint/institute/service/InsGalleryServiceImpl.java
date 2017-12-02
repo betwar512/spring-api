@@ -5,9 +5,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import net.endpoint.institute.dao.InsGalleryDao;
-import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.gallery.InsPatientGallery;
+import net.endpoint.institute.model.patient.InsPatient;
 
 @Service
 public class InsGalleryServiceImpl implements InsGalleryService{

@@ -6,10 +6,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.gallery.InsGalleryDocument;
 import net.endpoint.institute.model.gallery.InsPatientGallery;
+import net.endpoint.institute.model.patient.InsPatient;
 import net.endpoint.main.dao.BaseDao;
 
 @Repository

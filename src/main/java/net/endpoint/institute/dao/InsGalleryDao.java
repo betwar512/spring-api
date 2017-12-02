@@ -2,10 +2,10 @@ package net.endpoint.institute.dao;
 
 import java.util.List;
 
-import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.gallery.InsGalleryDocument;
 import net.endpoint.institute.model.gallery.InsPatientGallery;
+import net.endpoint.institute.model.patient.InsPatient;
 
 public interface InsGalleryDao {
 

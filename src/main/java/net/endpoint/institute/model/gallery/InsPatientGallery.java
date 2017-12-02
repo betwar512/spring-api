@@ -6,7 +6,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import net.endpoint.institute.model.InsPatientProfile;
+
+import net.endpoint.institute.model.patient.InsPatientProfile;
 
 @Entity
 @DiscriminatorValue("G")

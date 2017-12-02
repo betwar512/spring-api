@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import net.endpoint.account.dto.ProfileDto;
 import net.endpoint.account.model.User;
-import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
+import net.endpoint.institute.model.patient.InsPatient;
 
 @RestController
 @RequestMapping(path="/api/ins")

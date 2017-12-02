@@ -6,11 +6,11 @@ import java.util.List;
 import org.hibernate.criterion.Restrictions;
 
 import net.endpoint.institute.model.InsDocument;
-import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.anatomy.InsAnatomy;
 import net.endpoint.institute.model.anatomy.InsPartType;
-import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
+import net.endpoint.institute.model.patient.InsPatient;
+import net.endpoint.institute.model.patient.InsPatientAnatomy;
 import net.endpoint.main.dao.BaseDao;
 
 public class InstituteDocumentDaoImpl extends BaseDao implements InstituteDocumentDao {

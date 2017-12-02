@@ -6,6 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import net.endpoint.institute.model.InsDocument;
+import net.endpoint.institute.model.patient.InsPatientAnatomy;
 
 @Entity
 @DiscriminatorValue("A")

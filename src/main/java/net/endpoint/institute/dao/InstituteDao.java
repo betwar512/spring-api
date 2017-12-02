@@ -1,9 +1,9 @@
 package net.endpoint.institute.dao;
 
 import net.endpoint.account.model.Person;
-import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
-import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
+import net.endpoint.institute.model.patient.InsPatient;
+import net.endpoint.institute.model.patient.InsPatientAnatomy;
 
 public interface InstituteDao {
 

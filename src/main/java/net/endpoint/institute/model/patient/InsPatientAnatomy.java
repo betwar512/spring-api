@@ -1,4 +1,4 @@
-package net.endpoint.institute.model.anatomy;
+package net.endpoint.institute.model.patient;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-import net.endpoint.institute.model.InsPatientProfile;
+import net.endpoint.institute.model.anatomy.InsAnatomyDocument;
 
 @Entity
 @DiscriminatorValue("A")

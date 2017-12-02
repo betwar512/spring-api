@@ -1,4 +1,4 @@
-package net.endpoint.institute.model;
+package net.endpoint.institute.model.patient;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DiscriminatorOptions;
+
+import net.endpoint.institute.model.InsPractitioner;
 
 @Entity
 @Table(name="ins_patient_profile")

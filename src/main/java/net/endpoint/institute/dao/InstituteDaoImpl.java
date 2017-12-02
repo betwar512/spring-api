@@ -6,9 +6,9 @@ import javax.transaction.Transactional;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import net.endpoint.account.model.Person;
-import net.endpoint.institute.model.InsPatient;
 import net.endpoint.institute.model.InsPractitioner;
-import net.endpoint.institute.model.anatomy.InsPatientAnatomy;
+import net.endpoint.institute.model.patient.InsPatient;
+import net.endpoint.institute.model.patient.InsPatientAnatomy;
 import net.endpoint.main.dao.BaseDao;
 
 @Transactional
