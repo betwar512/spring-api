@@ -7,6 +7,7 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -17,6 +18,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.search.FlagTerm;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -32,7 +34,7 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
  @Component
  public class EmailServiceImpl implements EmailService {
 
-	  public static final Logger logger = Logger.getLogger(EmailService.class);
+	public static final Logger logger = Logger.getLogger(EmailService.class);
 	@Autowired
     private	JavaMailSender mailSender;
 
@@ -77,7 +79,7 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
 	
 
 	@Override
-	public List<RecivedEmailDto> checkEmails(User user)  {
+	public List<RecivedEmailDto> checkEmails(User user,boolean all)  {
 	      List<RecivedEmailDto> emails = new ArrayList<>();
 		try {  
 		    	  Properties  props  = new Properties();
@@ -98,17 +100,20 @@ import net.endpoint.emailtemplate.dto.SendEmailDto;
 		      //create the folder object and open it
 		      Folder emailFolder = store.getFolder("INBOX");
 		      emailFolder.open(Folder.READ_ONLY);
-
+		      
+		      Message[] messages = emailFolder.search(new FlagTerm(new Flags(Flags.Flag.SEEN), all));
 		      // retrieve the messages from the folder in an array and print it
-		      Message[] messages = emailFolder.getMessages();
-		
+		  //    Message[] messages = emailFolder.getMessages();
+	
 		      System.out.println("messages.length---" + messages.length);
 		
 		      for (int i = 0, n = messages.length; i < n; i++) {
 		         Message message = messages[i];
-		         emails.add(new RecivedEmailDto(message));	         
+		         emails.add(new RecivedEmailDto(message));	      
+		   
+		         
 		      }
-
+		      
 		        //close the store and folder objects
 		        emailFolder.close(false);
 		        store.close();

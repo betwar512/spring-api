@@ -75,6 +75,20 @@ public class EmailTemplate {
 			return new EmailTemplateDto(this.htmlTemplateContent,this.name,this.description,this.style,null,null);
 		}
 
+		public String buildContent() {
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append("<html xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:w=\"urn:schemas-microsoft-com:office:word\" xmlns:m=\"http://schemas.microsoft.com/office/2004/12/omml\" xmlns=\"http://www.w3.org/TR/REC-html40\">\r\n" + 
+					"<head>\r\n" + 
+					"  <META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; charset=us-ascii\">\r\n" + 
+					"  <meta name=Generator content=\"Microsoft Word 15 (filtered medium)\">");
+			stringBuilder.append(this.style);
+			stringBuilder.append("</head>");
+			
+			stringBuilder.append(this.htmlTemplateContent);
+			stringBuilder.append("</html>");
+			
+			return stringBuilder.toString();
+		}
 		
 
 		public long getId() {

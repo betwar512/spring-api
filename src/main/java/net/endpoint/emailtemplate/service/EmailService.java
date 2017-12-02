@@ -31,7 +31,7 @@ public interface EmailService {
 	 * @param user
 	 * @return  List<EmailDto>
 	 */
-	public List<RecivedEmailDto> checkEmails(User user);
+	public List<RecivedEmailDto> checkEmails(User user , boolean all);
 	/**
 	 * <p>Send Html email include attachments </p>
 	 * @param user

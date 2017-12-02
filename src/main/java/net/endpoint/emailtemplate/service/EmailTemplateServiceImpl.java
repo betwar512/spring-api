@@ -125,7 +125,8 @@ public class EmailTemplateServiceImpl  implements EmailTemplateService{
 	        final String htmlContent = this.htmlTemplateEngine.process(eto.getHtmlContent(), ctx);
 	        message.setText(htmlContent, true);
 
-	        eto.getAttachments().forEach(m->{ 	
+	        eto.getAttachments()
+	            .forEach(m->{ 	
 	        	   // Add the in-line image, referenced from the HTML code as "cid:${imageResourceName}"
 		        
 				try {

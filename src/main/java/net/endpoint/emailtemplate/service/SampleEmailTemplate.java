@@ -138,8 +138,7 @@ public class SampleEmailTemplate {
 
         // Add the attachment
         final InputStreamSource attachmentSource = new ByteArrayResource(attachmentBytes);
-        message.addAttachment(
-            attachmentFileName, attachmentSource, attachmentContentType);
+        message.addAttachment(attachmentFileName, attachmentSource, attachmentContentType);
 
         // Send mail
         this.mailSender.send(mimeMessage);

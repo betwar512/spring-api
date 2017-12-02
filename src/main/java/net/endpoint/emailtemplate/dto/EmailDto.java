@@ -5,14 +5,20 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Nullable;
+
+
 class EmailDto {
 	
 	protected String       from;
 	protected String         to;
+	@Nullable
 	protected List<String>  ccs;
+	@Nullable
 	protected List<String> bccs;
 	protected String    subject;
 	protected String    content;
+	@Nullable
 	protected Locale     locale;
 	protected Date    timestamp;
 	protected String   userName;

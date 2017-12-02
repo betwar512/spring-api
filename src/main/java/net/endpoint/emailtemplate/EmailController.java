@@ -31,8 +31,15 @@ public class EmailController extends MainController {
 	
 	@RequestMapping(path="/getEmails",method = RequestMethod.GET)
 	public List<RecivedEmailDto> getAll(){
-	return emailService.checkEmails(this.loadUser());
+	return emailService.checkEmails(this.loadUser(),true);
 	}
+	
+	@RequestMapping(path="/getNewEmails",method = RequestMethod.GET)
+	public List<RecivedEmailDto> getUnSeenEmails(){
+	return emailService.checkEmails(this.loadUser(),false);
+	}
+	
+	
 	
 	@RequestMapping(path="/createTemplate",method = RequestMethod.POST)
 	public void createTemplate(@RequestBody EmailTemplateDto emailTemlpate) {
@@ -55,8 +62,7 @@ public class EmailController extends MainController {
 		try {
 			this.etp.sendEditableTemplateEmail(etDto, emailDto);
 		} catch (MessagingException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		}
 		
 	}
@@ -68,7 +74,7 @@ public class EmailController extends MainController {
 		   EmailTemplateDto myTemplate =  etp.getTemplate(EmailVariables.EmailTemplatesUrls.WELCOME_EMAIL.getKey());
 		   this.etp.sendEditableTemplateEmail(myTemplate, emailDto); 
 	        } catch (NotFoundException | MessagingException | IOException e) {
-		   e.printStackTrace();
+	        	logger.error(e);
 	     }
 	   }
 	 }

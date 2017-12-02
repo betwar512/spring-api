@@ -52,8 +52,11 @@ dependencies {
     compile(group: 'org.springframework.integration', name: 'spring-integration-core')
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa')
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-mail')
-
-compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.7.RELEASE'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-email
+    
+	    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
+	compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.7.RELEASE'
+    compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.7.RELEASE'
    
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-security')
     compile(group: 'org.springframework.security', name: 'spring-security-jwt')
@@ -62,10 +65,14 @@ compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.7.RELEA
     }
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
-	    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
-	compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.7.RELEASE'
 	    // https://mvnrepository.com/artifact/commons-io/commons-io
 	compile group: 'commons-io', name: 'commons-io', version: '2.5'
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-email	
+   compile group: 'org.apache.commons', name: 'commons-email', version: '1.5'
+   // https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305
+   compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+   
+
 	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
 	   testCompile("org.springframework.boot:spring-boot-starter-test")
 

@@ -7,6 +7,8 @@ import java.util.Locale;
 public class SendEmailDto extends EmailDto {
     private Date sendingDate;
     private String password;
+    
+    public SendEmailDto() {}
 	
 	public SendEmailDto(String from, String to,
 			String subject, String content,String userName,String password, 
