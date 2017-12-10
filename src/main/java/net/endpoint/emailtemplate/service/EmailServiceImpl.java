@@ -25,13 +25,14 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import 	org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import net.endpoint.account.model.User;
 import net.endpoint.emailtemplate.dto.RecivedEmailDto;
 import net.endpoint.emailtemplate.dto.SendEmailDto;
 
 
- @Component
+ @Service
  public class EmailServiceImpl implements EmailService {
 
 	public static final Logger logger = Logger.getLogger(EmailService.class);

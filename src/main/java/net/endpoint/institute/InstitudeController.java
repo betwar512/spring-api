@@ -1,5 +1,6 @@
 package net.endpoint.institute;
 
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import net.endpoint.account.dto.ProfileDto;
@@ -12,9 +13,6 @@ import net.endpoint.institute.model.patient.InsPatient;
 public class InstitudeController extends InsMainController {
 
 	
-	
-	
-
 	@RequestMapping(path="/create/prac")
 	public InsPractitioner createPractition(ProfileDto profileDto){
 	InsPractitioner practitioner = this.insService.findByEmail(profileDto.getEmail());
@@ -28,7 +26,7 @@ public class InstitudeController extends InsMainController {
 	
 	@RequestMapping(path="/create/patient")
 	public InsPatient createPatient(ProfileDto profileDto){
-		return 	this.insService.createPatient(profileDto);
+	return 	this.insService.createPatient(profileDto);
 	}
 	
 	

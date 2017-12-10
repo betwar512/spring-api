@@ -11,6 +11,8 @@ public class DocumentDto  {
 
 
 
+	public DocumentDto() {
+	}
 	public String getFileName() {
 		return fileName;
 	}
