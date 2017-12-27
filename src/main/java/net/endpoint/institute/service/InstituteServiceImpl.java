@@ -11,6 +11,7 @@ import net.endpoint.account.model.User;
 import net.endpoint.institute.dao.InstituteDao;
 import net.endpoint.institute.model.InsPractitioner;
 import net.endpoint.institute.model.patient.InsPatient;
+import net.endpoint.utils.enums.EnumTypes.SERVER_STATUS;
 
 @Service
 @Transactional
@@ -38,6 +39,7 @@ public class InstituteServiceImpl implements InstituteService {
 		//Save patient 	
 			InsPatient patient = new InsPatient();
 			patient.setPerson(person);
+			patient.setStatus(SERVER_STATUS.PENDING);
 			this.instituteDao.save(patient);
 			return patient;
 	    }

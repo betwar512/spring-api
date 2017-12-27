@@ -42,6 +42,10 @@ public class InsPatientProfile implements Serializable {
 	private Date updatedAt;
 	@Column(name="i_active",nullable=false)
 	private boolean active;
+	@Column
+	private String status;
+	
+	
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;

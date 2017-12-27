@@ -47,8 +47,11 @@ public interface EnumTypes {
 	 *
 	 */
 	public enum SERVER_STATUS{
-		NEW(""),
 		PENDING(""),
+		NEW(""),
+		APPROVED(""),
+		REJECTED(""),
+		DELETED(""),
 		COMPLETED("");
 		private String key;
 		SERVER_STATUS(String key){

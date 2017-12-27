@@ -27,7 +27,7 @@ public class InsPatientVisit {
 	private InsPatientProfile patientProfile;
 	@Column(nullable=false)
 	private String note;
-	@Column
+	@Column(name="status")
 	@Enumerated(EnumType.STRING)
 	private SERVER_STATUS status;
 	@Column

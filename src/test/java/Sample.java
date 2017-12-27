@@ -61,8 +61,8 @@ public class Sample {
     	      //Connect to the server
     	  Session session = Session.getDefaultInstance(props);
     	  Store      store = session.getStore(provider);     
-    	                store.connect(host, username, password);
-    	                String string = "";
+    	  store.connect(host, username, password);
+    	  String string = "";
     	             
 
       //create the folder object and open it

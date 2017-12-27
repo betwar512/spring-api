@@ -36,7 +36,7 @@ public class Person implements Serializable {
 	@Column(name="updated_at")
 	private Date     updatedAt;
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id",nullable=false)
+	@JoinColumn(name="user_id",nullable=true)
 	//	@PrimaryKeyJoinColumn
 	private User user;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
