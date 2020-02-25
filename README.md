@@ -1,6 +1,7 @@
 # README #
 
 Welcone to Endpoint Spring Hibernate project 
+## This Project not maintained in passed 3 years and only moved here from private repo for presentation
 
 ### What is this repository for? ###
 
